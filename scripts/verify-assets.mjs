@@ -18,7 +18,7 @@ for(const asset of manifest.files){
   // The original source hash remains in source-assets.json for provenance.
   // Pin the intentionally patched bundle by its Git blob SHA instead.
   const blobSha=createHash('sha1').update('blob '+data.length).update(Buffer.from([0])).update(data).digest('hex');
-  assert.equal(blobSha,'374e2a73a88c48b4ccd4656140396ba132815b07','Unexpected changes to reviewed performance hotfix bundle');
+  assert.equal(blobSha,'d321b84c10196f0095434adfd4ddd8bc222f9c25','Unexpected changes to reviewed performance hotfix bundle');
  }else if(asset.path!=='index.html')assert.equal(createHash('sha256').update(original).digest('hex'),asset.sha256,`Unexpected change to original asset: ${asset.path}`);
  assert(data.length>0,`Empty asset: ${asset.path}`);
  if(extname(asset.path)==='.glb'){

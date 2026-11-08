@@ -26,7 +26,8 @@ jobs:
       - run: npm run test:backend
       - name: Measure Shop long tasks and check mobile
         env:
-          TEST_FILTER: 'Shop:|Mobile:'
+          TEST_FILTER: 'Shop:|Mobile'
+          SHOP_LONGTASK_MAX_TOTAL_MS: '30000'
         run: npm run test:frontend
       - name: Upload browser perf artifacts
         if: always()

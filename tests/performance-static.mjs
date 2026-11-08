@@ -16,6 +16,12 @@ test('Shop uses 256px async WebP thumbnails instead of synchronous PNG',()=>{
   assert.match(shop,/shopCaptureQueue/);
   assert.match(shop,/await sD\(/);
   assert.match(shop,/URL\.revokeObjectURL/);
+  assert.match(shop,/function useLazyShopThumbnail\(/);
+  assert.match(shop,/new IntersectionObserver\(/);
+  assert.match(shop,/rootMargin:"80px 0px"/);
+  assert.doesNotMatch(shop,/B\.useState\(\(\)=>s9\(/);
+  assert.doesNotMatch(shop,/B\.useState\(\(\)=>a9\(/);
+  assert.doesNotMatch(shop,/B\.useState\(\(\)=>r9\(/);
 });
 
 test('Application screenshot encoding does not call toDataURL',()=>{

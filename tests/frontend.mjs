@@ -365,6 +365,7 @@ async function run(){
     await modal.locator('.tabs .tab').filter({hasText:/Fish & shrimp/}).click();
     await modal.locator('.shop-name').first().waitFor({state:'visible'});
     assert.ok(await modal.locator('.shop-name').count()>=40,'Fish catalog is incomplete');
+    assert.ok(await modal.locator('.shop-art.thumb > img').count()<await modal.locator('.shop-card').count(),'Shop must lazy-load only visible thumbnail images');
     await modal.locator('.tabs .tab').filter({hasText:'Equipment'}).click();
     assert.ok(await modal.locator('.shop-card').count()>=5,'Equipment catalog is incomplete');
     await modal.locator('.tabs .tab').filter({hasText:'Tank designs'}).click();
@@ -389,6 +390,8 @@ async function run(){
     assert.ok(longTaskReport.supported,'Long Tasks API unavailable in Chromium test browser');
     const budget=Number(process.env.SHOP_LONGTASK_MAX_MS||0);
     if(budget>0)assert.ok(longTaskReport.maxMs<=budget,`Shop max long task ${longTaskReport.maxMs}ms exceeds ${budget}ms budget`);
+    const totalBudget=Number(process.env.SHOP_LONGTASK_MAX_TOTAL_MS||0);
+    if(totalBudget>0)assert.ok(longTaskReport.totalBlockingMs<=totalBudget,`Shop total blocking ${longTaskReport.totalBlockingMs}ms exceeds ${totalBudget}ms budget`);
     await closeModal(page);
     page.setDefaultTimeout(60000);
   });
