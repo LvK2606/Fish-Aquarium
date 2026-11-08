@@ -53,6 +53,22 @@ Các biến server cần thiết trong Vercel → Project → Settings → Envir
 
 Không đưa giá trị khóa vào Git hoặc chat. Với thay đổi biến môi trường, chọn môi trường production/preview cần dùng rồi redeploy.
 
+## Tối ưu tốc độ tải mà không giảm chất lượng ảnh
+
+Bản nguồn trong `public/` tiếp tục giữ nguyên asset gốc và SHA-256. Lệnh `npm run build` kiểm chứng 588 asset gốc trước, sau đó sao chép sang `dist/` và thử nén lại **chỉ dữ liệu IDAT của PNG** bằng zlib mức cao. Bản nén chỉ được dùng khi thực sự nhỏ hơn. Các scanline giải nén (tương đương pixel, cả kênh alpha) và tất cả chunk metadata PNG còn lại không đổi; GLB, geometry, vật liệu, bundle mô phỏng và animation không bị chỉnh sửa.
+
+Vercel phục vụ `dist/`; chính sách cache dành cho các bundle đã gắn hash dài hạn, còn texture/model/font không gắn hash có thời hạn ngắn hơn để vẫn nhận cập nhật nội dung. Không cache các phản hồi tài khoản/cloud API (backend đã đặt `Cache-Control: no-store`).
+
+```sh
+npm ci
+npm run build                        # Hiện số PNG giảm được và tổng MiB tiết kiệm
+npm run test:backend                 # Bao gồm test PNG giữ nguyên dữ liệu ảnh
+npx playwright install chromium
+CHROMIUM_PATH="$(node -p 'require("playwright").chromium.executablePath()')" npm run test:frontend:deploy
+```
+
+Kiểm thử giao diện trên `dist/` vẫn dùng backend bộ nhớ riêng và kiểm tra mô hình/animation, không ghi sang tài khoản thật. Có thể kiểm tra bản deploy ngay trên máy bằng `SERVE_DEPLOY_OUTPUT=1 npm run dev` sau khi build. `dist/` là sản phẩm build, không đưa vào Git. Nếu file PNG đã được nén tốt, mức tiết kiệm có thể rất nhỏ hoặc bằng không; không nên tuyên bố giảm phần trăm khi chưa có log build thực tế.
+
 ## Bật email sau
 
 Theo lựa chọn hiện tại, mã xác minh email và khôi phục mật khẩu được chuẩn bị nhưng chưa cấu hình gửi thư thật.
