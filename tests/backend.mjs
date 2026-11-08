@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
 import { randomUUID } from 'node:crypto';
 import { createHandler } from '../server/handler.js';
-import { createMemoryStore, createBlobStore, StorageUnavailable } from '../server/storage.js';
+import { createMemoryStore, createBlobStore, StorageConflict, StorageUnavailable } from '../server/storage.js';
 
 const secret = 'test-only-auth-secret-32-characters-at-least';
 async function fixture(options = {}) {
@@ -186,3 +186,19 @@ test('guest showcase reads and repeated telemetry do not rewrite persistent stat
   assert.equal((await f.request('/play/beat', { method: 'POST', body: { ...heartbeat, milestones: ['first_feed', 'quest_3'] } })).status, 204);
   assert.equal(writes, first + 1);
 });
+
+test('Blob conditional-write errors from provider map to StorageConflict', async () => {
+  const store = createBlobStore({
+    token: 'mock-token',
+    pathname: 'isolated/check.json',
+    sdk: {
+      async put() {
+        const error = new Error('Vercel Blob: The conditional request cannot succeed due to a conflicting operation against this resource.');
+        error.name = 'BlobError';
+        throw error;
+      },
+    },
+  });
+  await assert.rejects(store.write({ probe: true }, 'stale-etag'), StorageConflict);
+});
+

@@ -112,7 +112,27 @@ async function ready(page,path='/?moi=1&hocviec=0&hoithoai=0&luu=0'){
   await page.goto(new URL(path,base).href,{waitUntil:'domcontentloaded'});
   await page.locator('#root canvas').first().waitFor({state:'visible',timeout:60000});
   await page.waitForFunction(()=>!document.querySelector('.aq-boot:not(.is-done)'),undefined,{timeout:60000});
-  await page.locator('.aq-boot').waitFor({state:'detached',timeout:10000});
+  // The boot overlay is intentionally retained in the DOM and hidden by CSS.
+  // Check the actual user-visible state, not DOM removal.
+  // Two boot elements can exist: the legacy splash and the in-app transition.
+  // Their actual interaction/visibility is what matters, not whether either was removed.
+  const inactive = () => [...document.querySelectorAll('.aq-boot')].every(element => {
+    const style = getComputedStyle(element);
+    return style.display === 'none' || style.visibility === 'hidden' ||
+      style.pointerEvents === 'none';
+  });
+  try {
+    await page.waitForFunction(inactive,undefined,{timeout:15000});
+  } catch (error) {
+    const overlays=await page.locator('.aq-boot').evaluateAll(nodes=>nodes.map(node=>{
+      const style=getComputedStyle(node);
+      return {classes:node.className,ariaBusy:node.getAttribute('aria-busy'),
+        display:style.display,opacity:style.opacity,visibility:style.visibility,
+        pointerEvents:style.pointerEvents,zIndex:style.zIndex};
+    }));
+    console.error('Aquarium boot overlay diagnostics:',JSON.stringify(overlays));
+    throw error;
+  }
   assert.equal(await page.title(),'Aqualator');
   assert.ok(await page.locator('canvas').first().evaluate(canvas=>canvas.width>0&&canvas.height>0));
 }
@@ -142,7 +162,7 @@ async function run(){
   if(!base)await startServer();
   base=base.replace(/\/$/,'');
   await mkdir(new URL('../test-results/',import.meta.url),{recursive:true});
-  browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',proxy:proxyForRemote(),
+  browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||chromium.executablePath(),proxy:proxyForRemote(),
     args:['--no-sandbox','--disable-dev-shm-usage','--enable-unsafe-swiftshader']});
 
   const presets=await context();

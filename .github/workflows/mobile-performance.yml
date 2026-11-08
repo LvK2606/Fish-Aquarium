@@ -1,0 +1,28 @@
+name: Mobile performance regression checks
+on:
+  push:
+    branches: [main, perf/mobile-webgl-thumbnails]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test:performance
+      - run: npm run test:backend
+      - name: Install headless Chromium for WebGL regression
+        run: npx playwright install --with-deps chromium
+      - name: Run aquarium UI and mobile smoke suite
+        run: npm run test:frontend

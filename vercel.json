@@ -4,6 +4,37 @@
   "buildCommand": "npm run build",
   "outputDirectory": "public",
   "functions": {
-    "api/[...path].js": { "maxDuration": 30 }
-  }
+    "api/[...path].js": {
+      "maxDuration": 30
+    }
+  },
+  "headers": [
+    {
+      "source": "/models/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/fonts/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/assets/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    }
+  ]
 }
