@@ -31,6 +31,7 @@ try{
   store.write({...current.state,probe:'first'},current.etag),
   store.write({...current.state,probe:'second'},current.etag),
  ]);
+ for(const result of concurrent)if(result.status==='rejected')console.log('Conditional write result:',result.reason.name,String(result.reason.message).slice(0,400));
  assert.equal(concurrent.filter(result=>result.status==='fulfilled').length,1,'Only one concurrent write may win');
  assert(concurrent.some(result=>result.status==='rejected'&&result.reason instanceof StorageConflict),'Stale ETag must conflict');
 

@@ -13,7 +13,7 @@ Cập nhật: 08/11/2026 (Asia/Saigon).
 
 Các công việc trước đã kết thúc: `Fish-Tank` mirror ZenAqua tại commit `d4634cc` và Vercel `fish-tank-xi.vercel.app`; dự án `aquarium` đã chuyển sang đủ 8 loài Fish-Tank tại commit `7eae0dc`, Vercel `aquarium-opal.vercel.app`. Không chạy lại hoặc ghi đè các dự án này. Vercel CI từng được kiểm tra nhưng skill yêu cầu Turborepo; chưa có yêu cầu chuyển dự án sang monorepo nên không tự triển khai thay đổi đó.
 
-- Repository mục tiêu tại `/workspace/fish-aquarium`, branch `main`; đang tạo và đẩy commit đầu để Vercel kiểm tra lưu trữ thật.
+- Repository mục tiêu tại `/workspace/fish-aquarium`, branch `main`; commit đầu `a458a6df2da03cbf78916d053f4827c7c72f75c7` đã đẩy GitHub.
 - Đã tải 588 tệp nguồn, 63.570.718 byte, gồm 76 GLB, toàn bộ texture biến thể/giới tính và 3 cảnh mẫu. `source-assets.json` lưu SHA-256, không có tệp tải lỗi.
 - Build xác minh hash, GLB/PNG đã đạt; font Việt/Anh/Nhật/Trung đã cục bộ hóa. Hai URL font trong bundle được đổi có kiểm soát và khôi phục trong bộ nhớ khi xác minh hash gốc.
 - Đã viết backend riêng trong `server/`, route Vercel `api/[...path].js`.
@@ -21,14 +21,14 @@ Các công việc trước đã kết thúc: `Fish-Tank` mirror ZenAqua tại co
 - Vercel project `fish-aquarium`: `prj_avJZep2EwHRfEIdh1rXIUPHKAPuL`, GitHub repo ID `1449604314`.
 - Private Blob store `fish-aquarium-data`: `store_Qsbz7n2XRVnS5AoL`, đã kết nối project.
 - Metadata Vercel xác nhận `AUTH_SECRET`, `BLOB_READ_WRITE_TOKEN` encrypted và `APP_ORIGIN` đã cấu hình. Không lưu giá trị secret trong repository.
-- Tên miền project đã được Vercel cấp: `fish-aquarium-five.vercel.app`; chưa có deployment.
+- Tên miền project đã được Vercel cấp: `fish-aquarium-five.vercel.app`. Deployment đầu `dpl_EVa8FKSFFJczcwQNYEQuQQR4nhYs` dừng ở build kiểm tra cạnh tranh Blob; chưa có production READY.
 
 ## Đang làm / chưa hoàn thành
 
 1. Font Nhật/Trung đã hoàn tất. Đã thêm CSS riêng để nút tài khoản không che nút chăm sóc trên laptop.
 2. Cả 3 preset đã đạt GLB/animation; đo nước, kho/thiết bị, bày trí và minigame đã đạt. Đang hoàn tất settings, tài khoản/lưu đám mây, publish → visit, cửa hàng, reload và mobile. Những lần dừng vừa qua là selector kiểm thử sai (role radio, nhãn Sound on, nhấp label công tắc), đã sửa.
-3. Đã thêm `scripts/check-cloud-storage.mjs` và bật `RUN_CLOUD_STORAGE_CHECK=1` trên Vercel. Chưa chạy trong deployment; kiểm tra dùng object riêng và xóa sau khi hoàn tất.
-4. Build/check cuối; commit/push GitHub `main`; theo dõi deployment đúng SHA đến READY.
+3. Đã thêm `scripts/check-cloud-storage.mjs` và bật `RUN_CLOUD_STORAGE_CHECK=1` trên Vercel. Build thật đã đọc/ghi Blob được nhưng assertion loại lỗi khi hai ghi cùng ETag chưa đạt; đang ghi chẩn đoán lỗi để sửa. Object kiểm thử riêng đã được xóa. Không chạm dữ liệu ứng dụng.
+4. Đã pin Node 22.x. Build/check cuối; đẩy bản sửa GitHub `main`; theo dõi deployment đúng SHA đến READY.
 5. Báo URL và giới hạn email chưa cấu hình; cập nhật bản ghi này ở từng mốc.
 
 ## Lưu ý khi tiếp tục
