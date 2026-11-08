@@ -93,3 +93,11 @@ Khi chưa có dịch vụ email, API báo thiếu cấu hình cho thao tác gử
 Build verification still hashes original assets before patching only the fingerprinted `dist/` bundle. GPU gains are device- and scene-dependent, not a promise of 60 FPS. Test real Android interaction before merging to production.
 
 Run `npm run build && npm run test:backend && npm run test:frontend:deploy` to validate the performance governor and browser regressions.
+
+## High Mobile GPU Lite (experimental Preview)
+
+The recorded Android test showed 12–20 rendered FPS even at full DPR 2.0, which is not resolved by limiting requests to 30 frames per second. Mobile High now preserves the original fish GLBs, texture pixels and native 2x render scale at rest, but **eliminates the multi-pass Bloom/Vignette EffectComposer** on mobile High and substitutes a cheaper water caustics shader (two periodic waves instead of two 3×3 Voronoi searches plus 3D noise) to reduce GPU work for each pixel. Desktop High continues using the original expensive effects and shader.
+
+When a settings/device dialog obscures the tank, idle 3D render requests are throttled to approximately 10 Hz so the UI has more GPU headroom. When the user actively drags the aquarium, normal interactive frame scheduling takes priority. The original assets and simulated tank population are unchanged. Water glints and glow look somewhat different on mobile compared with original High; this is an intentional visual tradeoff to retain fish detail and interactive usability.
+
+Use `?perf=1` for the diagnostic HUD and optionally `?perf=1&effects=on` to force the old mobile High postprocessor for side-by-side testing. Neither setting guarantees 60 FPS; verify on the actual Android GPU. Do not merge the experiment without user acceptance.

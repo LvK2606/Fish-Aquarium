@@ -71,13 +71,13 @@ export function createInteractionGovernor({
 }
 
 
-export function createRenderCadence({ idleHz = 30, activeHz = 60 } = {}) {
+export function createRenderCadence({ idleHz = 30, activeHz = 60, overlayHz = 10 } = {}) {
   let last = -Infinity;
   return {
     reset() { last = -Infinity; },
-    shouldRender(now, active) {
+    shouldRender(now, active, overlay = false) {
       if (!Number.isFinite(now)) return false;
-      const hz = active ? activeHz : idleHz;
+      const hz = active ? activeHz : overlay ? overlayHz : idleHz;
       if (!Number.isFinite(hz) || hz <= 0) return false;
       const interval = 1000 / hz;
       if (now < last) last = -Infinity;
@@ -114,6 +114,7 @@ function __aquaverseMobile(){
     return Boolean(coarse||/Android|iPhone|iPad|Mobile/i.test(ua));
   }catch{return false}
 }
+function __aquaverseForceEffects(){return typeof location!=="undefined"&&new URLSearchParams(location.search).get("effects")==="on"}
 function __aquaverseInitialDpr(){
   // Match the original game's full-res High DPR (up to 2x), never 1.5x.
   return Math.max(1,Math.min(2,typeof window==="undefined"?2:window.devicePixelRatio||1));
@@ -166,7 +167,8 @@ function __AquaverseSharpInteraction(){
     let raf=0;
     const frame=now=>{
       if(document.visibilityState==="visible"){
-        if(cadence.shouldRender(now,governor.isDragging()))invalidate();
+        const overlay=!!document.querySelector(".settings-modal,.device-panel,.modal-layer,.account-modal,.shop-modal");
+        if(cadence.shouldRender(now,governor.isDragging(),overlay))invalidate();
       }else cadence.reset();
       raf=requestAnimationFrame(frame);
     };
@@ -190,7 +192,7 @@ function __AquaverseSharpInteraction(){
     document.body.appendChild(panel);
     const update=()=>{
       const info=renderer.info.render,rate=governor.getFps();
-      panel.textContent="High Sharp | DPR "+renderer.getPixelRatio().toFixed(2)+
+      panel.textContent="High GPU Lite | DPR "+renderer.getPixelRatio().toFixed(2)+
         " | FPS "+(rate===null?"--":Math.round(rate))+
         " | calls "+info.calls+" | triangles "+info.triangles+
         " | "+(governor.isDragging()?"drag":"idle");
@@ -246,5 +248,13 @@ export function patchAquariumBundle(source) {
     'function F4e(){const t=zi(n=>n.invalidate),e=F(n=>n.ambient);return B.useEffect(()=>{if(!e)return;const n=window.setInterval(()=>t(),1e3/30);return()=>window.clearInterval(n)},[e,t]),null}',
     'function F4e(){const t=zi(n=>n.invalidate),e=F(n=>n.ambient),i=Qa(n=>n.quality==="low");return B.useEffect(()=>{if(!e||(!i&&__aquaverseMobile()))return;const n=window.setInterval(()=>{if(document.visibilityState==="visible")t()},1e3/30);return()=>window.clearInterval(n)},[e,t,i]),null}',
     'no rendering work while the document is hidden');
+  result = replaceExactlyOnce(result,
+    "const Gz=`\n  uniform float uTime;",
+    "const Gz=__aquaverseMobile()?\"\\n  uniform float uTime;\\n  uniform float uCaustics;\\n  uniform float uLamp;\\n  vec2 hash22(vec2 p) {\\n    vec3 q=fract(vec3(p.xyx)*vec3(0.1031,0.103,0.0973));\\n    q+=dot(q,q.yzx+33.33);\\n    return fract((q.xx+q.yz)*q.zy);\\n  }\\n  float caustics(vec3 world) {\\n    vec2 p=world.xz*1.15;\\n    float d1=sin(p.x*4.8+1.2*sin(p.y*1.7-uTime*0.4));\\n    float d2=sin(p.y*5.3+1.1*cos(p.x*1.4+uTime*0.35));\\n    float web=pow(max(0.0,0.5+0.5*d1*d2),4.0);\\n    return web*0.55*uCaustics*uLamp;\\n  }\\n\":`\n  uniform float uTime;",
+    'use fast mobile caustics with same shader interface');
+  result = replaceExactlyOnce(result,
+    "):u.jsxs(jO,{multisampling:__aquaverseMobile()?0:4,children:[u.jsx(G0e",
+    "):__aquaverseMobile()&&!__aquaverseForceEffects()?null:u.jsxs(jO,{multisampling:__aquaverseMobile()?0:4,children:[u.jsx(G0e",
+    'skip full-screen expensive postprocess only for mobile High');
   return result;
 }

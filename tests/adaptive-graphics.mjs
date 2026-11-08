@@ -81,3 +81,21 @@ test('fingerprinted High render build is valid JS',async t=>{
   const check=spawnSync(process.execPath,['--check',file.pathname],{encoding:'utf8',timeout:30000});
   assert.equal(check.status,0,check.stderr||check.stdout||'bundle syntax error');
 });
+
+test('mobile high uses GPU-light caustics and skips the heavy composer, desktop high remains unchanged', async () => {
+  const source=await readFile(new URL('../public/assets/main-CvOo3B9w.js',import.meta.url),'utf8');
+  const patched=patchAquariumBundle(source);
+  assert.ok(patched.includes('const Gz=__aquaverseMobile()?'));
+  assert.ok(patched.includes('float d1=sin(p.x*4.8'));
+  assert.ok(patched.includes('float voronoiEdge('),'desktop caustics remain intact');
+  assert.ok(patched.includes('):__aquaverseMobile()&&!__aquaverseForceEffects()?null:u.jsxs(jO'),
+    'skip full-screen bloom and vignette passes in mobile High');
+  assert.ok(patched.includes('function __aquaverseForceEffects()'));
+});
+test('modal overlay frames use ~10Hz budget while direct touch keeps 60Hz scheduling',()=>{
+  const clock=createRenderCadence();
+  let overlay=0;for(let n=0;n<180;n++)if(clock.shouldRender(n*1000/60,false,true))overlay++;
+  assert.ok(overlay>=25&&overlay<=33,'overlay should not waste GPU frames behind dialogs');
+  clock.reset();let drag=0;for(let n=0;n<180;n++)if(clock.shouldRender(n*1000/60,true,true))drag++;
+  assert.ok(drag>=170&&drag<=180,'gesture should take priority over modal budget');
+});

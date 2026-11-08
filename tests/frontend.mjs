@@ -401,7 +401,7 @@ async function run(){
     // Real deploy bundle must expose opt-in performance diagnosis on mobile High.
     const perf=phone.locator('#aquaverse-perf-hud');
     await perf.waitFor({state:'visible',timeout:12000});
-    assert.match(await perf.textContent(),/High Sharp/);
+    assert.match(await perf.textContent(),/High GPU Lite/);
     assert.match(await perf.textContent(),/triangles/);
     await phone.locator('.settings-modal').getByRole('button',{name:'Back to the tank',exact:true}).tap();
     await phone.locator('.settings-modal').waitFor({state:'detached'});
