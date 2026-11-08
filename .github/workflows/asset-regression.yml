@@ -1,11 +1,13 @@
 name: Fish Aquarium lossless asset regression
 
 on:
-  push:
-    branches:
-      - perf/lossless-assets-cache-20261108
   pull_request:
     branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: fish-aquarium-asset-validation
+  cancel-in-progress: true
 
 permissions:
   contents: read
