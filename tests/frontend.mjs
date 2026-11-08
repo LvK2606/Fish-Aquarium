@@ -142,7 +142,7 @@ async function run(){
   if(!base)await startServer();
   base=base.replace(/\/$/,'');
   await mkdir(new URL('../test-results/',import.meta.url),{recursive:true});
-  browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',proxy:proxyForRemote(),
+  browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||chromium.executablePath(),proxy:proxyForRemote(),
     args:['--no-sandbox','--disable-dev-shm-usage','--enable-unsafe-swiftshader']});
 
   const presets=await context();

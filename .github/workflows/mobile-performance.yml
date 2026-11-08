@@ -9,6 +9,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -21,3 +22,7 @@ jobs:
       - run: npm run build
       - run: npm run test:performance
       - run: npm run test:backend
+      - name: Install headless Chromium for WebGL regression
+        run: npx playwright install --with-deps chromium
+      - name: Run aquarium UI and mobile smoke suite
+        run: npm run test:frontend
