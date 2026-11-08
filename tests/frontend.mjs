@@ -386,7 +386,7 @@ async function run(){
   await check('Mobile: responsive aquarium and touch controls',async()=>{
     const mobile=await context({viewport:{width:390,height:844},deviceScaleFactor:2.5,isMobile:true,hasTouch:true});
     const phone=await mobile.newPage();
-    await ready(phone);
+    await ready(phone,'/?moi=1&hocviec=0&hoithoai=0&luu=0&perf=1');
     await phone.screenshot({path:fileURLToPath(new URL('../test-results/mobile.png',import.meta.url)),timeout:30000});
     assert.ok(await phone.locator('canvas').first().isVisible());
     assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+2),'Mobile page overflows horizontally');
@@ -398,6 +398,11 @@ async function run(){
     await phone.waitForTimeout(1200);
     const resolution = await phone.locator('#root canvas').first().evaluate(canvas=>canvas.width/canvas.getBoundingClientRect().width);
     assert.ok(resolution>=1.85&&resolution<=2.05,`Mobile High must preserve original sharp 2x DPR, got ${resolution}`);
+    // Real deploy bundle must expose opt-in performance diagnosis on mobile High.
+    const perf=phone.locator('#aquaverse-perf-hud');
+    await perf.waitFor({state:'visible',timeout:12000});
+    assert.match(await perf.textContent(),/High Sharp/);
+    assert.match(await perf.textContent(),/triangles/);
     await phone.locator('.settings-modal').getByRole('button',{name:'Back to the tank',exact:true}).tap();
     await phone.locator('.settings-modal').waitFor({state:'detached'});
     await mobile.close();

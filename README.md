@@ -80,15 +80,16 @@ Theo lựa chọn hiện tại, mã xác minh email và khôi phục mật khẩ
 
 Khi chưa có dịch vụ email, API báo thiếu cấu hình cho thao tác gửi thư; không trả token khôi phục công khai và không giả vờ đã gửi email.
 
-## High: sharp-first mobile performance
+## GPU-optimized High: sharp image, fewer wasted frames
 
-- High on mobile starts at the **same full 2x pixel ratio** as original High (or the native device ratio, whichever is lower). It does not lower DPR while the phone is idle, and a deliberate 30 Hz demand-render loop is no longer mistaken for an overloaded GPU.
-- Only when an actual drag is underway **and** the observed render rate is below 25 Hz does the renderer temporarily fall back to DPR 1.55. Original full resolution returns as soon as the drag ends. A tap or a fast phone never triggers fallback.
-- Mobile OrbitControls damping is disabled so direct touch movements are reflected without synthetic inertia. Non-editing touch pointer moves skip unnecessary 3D hover raycasts; taps and Aquascape editing retain raycast picking.
-- High foliage preserves **every original plant leaf**, with no camera-sector rebuilding that could interrupt gestures. Only far-side moss strands use a lower tessellation mesh (4 vs 6 sides) while close-side moss keeps its original high mesh.
-- Mobile High keeps Bloom at a smaller intermediate resolution and has no additional multisampling; the main 3D scene remains crisp at full DPR. Desktop High still has original 4x multisampling.
-- All original sources are hash-verified first. The optimized copy is written to dist/ with a unique content-hashed bundle name. Original PNG pixels, fish GLBs, materials and fish animations are untouched.
+- **Original sharpness at rest:** mobile High renders at native DPR up to 2x and preserves all original PNG texture pixels, GLB fish models, fish animation and every plant leaf. The normal view is not upscaled from a permanently blurred image.
+- **Demand-scheduled GPU frames:** mobile High requests roughly **30 frames/second** at rest and up to **60 during touch dragging**. Touch events trigger immediate invalidation to improve response. Other game invalidations and the device refresh rate may affect actual FPS.
+- **Only overloaded gestures reduce the number of pixels:** after approximately 450 ms of a demonstrably slow (<41 FPS) drag, a temporary 1.55 DPR render budget becomes available. DPR returns to the original full resolution when the gesture ends. Idle 30 FPS and taps never downscale.
+- **Plant geometry budget:** unusually dense tanks (600+ leaves) use 8 rather than 10 leaf-curve segments on mobile High, retaining all original leaf instances, shading, shapes and selection IDs. Normal-density tanks and desktop High keep 10 segments. Only far moss uses a simpler strand.
+- **Compositor:** mobile High retains Bloom on a lower-resolution intermediate buffer and avoids extra composer MSAA; the main 3D render retains its original full resolution outside slow interactions.
+- **Less redundant processing:** prevent a second invalidation timer in mobile High, pause render requests on hidden tabs, and avoid touch hover raycasts when not editing scenery.
+- **Verify on your device:** append `?perf=1` to the Preview URL to display current DPR, observed frame rate, GPU draw calls, triangle count and drag/idle state. The overlay is entirely opt-in.
 
-Real Android performance still depends on GPU load, fish population and thermal state. This quality-first tradeoff may run at less than 60 FPS on extremely low-end hardware; do not claim a guaranteed frame rate.
+Build verification still hashes original assets before patching only the fingerprinted `dist/` bundle. GPU gains are device- and scene-dependent, not a promise of 60 FPS. Test real Android interaction before merging to production.
 
-Run npm run build, npm run test:backend and npm run test:frontend:deploy before approval. The unit tests cover native-DPR stability at 30 Hz, temporary drag fallback, instant pixel restoration and preserved leaf geometry.
+Run `npm run build && npm run test:backend && npm run test:frontend:deploy` to validate the performance governor and browser regressions.
