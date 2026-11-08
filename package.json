@@ -7,10 +7,11 @@
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "start": "node scripts/serve.mjs",
-    "build": "node scripts/verify-assets.mjs",
-    "test": "node --test tests/backend*.mjs && node tests/frontend.mjs",
+    "build": "node scripts/verify-assets.mjs && npm run test:performance",
+    "test": "npm run test:performance && node --test tests/backend*.mjs && node tests/frontend.mjs",
     "test:backend": "node --test tests/backend*.mjs",
-    "test:frontend": "node tests/frontend.mjs"
+    "test:frontend": "node tests/frontend.mjs",
+    "test:performance": "node --test tests/performance-static.mjs"
   },
   "dependencies": {
     "@vercel/blob": "2.8.0"
@@ -18,5 +19,7 @@
   "devDependencies": {
     "playwright": "1.57.0"
   },
-  "engines": { "node": "22.x" }
+  "engines": {
+    "node": "22.x"
+  }
 }
