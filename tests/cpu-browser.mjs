@@ -8,7 +8,7 @@ import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {chromium} from 'playwright';
 
-// Run identical scenarios against the PR #6 baseline and optimized branch.
+// Run identical scenarios against the PR #7 baseline and optimized branch.
 // rAF frame p95 measures main-thread frame pacing; rendered FPS counts WebGL
 // draw-bearing frames, not theoretical display refresh. Software GL is noisy.
 const label=process.env.PERF_LABEL||'local';
@@ -43,7 +43,7 @@ try{
   const ctx=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:2,isMobile:true,hasTouch:true});
   await ctx.addInitScript(()=>{
     if(['http:','https:'].includes(location.protocol)){
-      localStorage.setItem('aquaverse-prefs',JSON.stringify({quality:'high',tempo:'normal',plantSway:1,leftWide:false}));
+      if(!localStorage.getItem('aquaverse-prefs'))localStorage.setItem('aquaverse-prefs',JSON.stringify({quality:'high',tempo:'normal',plantSway:1,leftWide:false}));
       localStorage.setItem('aquaverse.lang','en');
     }
     const metrics=window.__aqWebGL={drawCalls:0,texturesCreated:0,texturesDeleted:0,buffersCreated:0,buffersDeleted:0};
@@ -70,7 +70,7 @@ try{
   page.setDefaultTimeout(180000);
   const errors=[];
   page.on('pageerror',e=>errors.push(e.message));
-  await page.goto(new URL('/?moi=1&hoithoai=0&luu=0&bocuc=cong-lua',base).href,{waitUntil:'domcontentloaded'});
+  await page.goto(new URL('/?moi=1&hocviec=0&hoithoai=0&luu=0',base).href,{waitUntil:'domcontentloaded'});
   await page.locator('#root canvas').first().waitFor({state:'visible'});
   await page.locator('.aq-boot').waitFor({state:'detached',timeout:180000});
   await page.waitForTimeout(500);
@@ -112,16 +112,25 @@ try{
     },{scenario,ms});
   }
   const aquarium=await measure('mobile-high-aquarium',6000);
+  await mkdir(new URL('../test-results/',import.meta.url),{recursive:true});
+  await writeFile(new URL('../test-results/cpu-benchmark-'+label+'.json',import.meta.url),JSON.stringify({label,phase:'aquarium-measured',metrics:[aquarium]},null,2));
+  // The Shop is CPU/thumbnail-bound; measure it in Low on software GL so opening
+  // the modal is not blocked by High's GPU shaders. Both revisions use the same
+  // quality switch and same scenario.
+  await page.evaluate(()=>localStorage.setItem('aquaverse-prefs',JSON.stringify({quality:'low',tempo:'normal',plantSway:1,leftWide:false})));
+  await page.reload({waitUntil:'domcontentloaded'});
+  await page.locator('#root canvas').first().waitFor({state:'visible'});
+  await page.locator('.aq-boot').waitFor({state:'detached',timeout:180000});
   await page.locator('.tool').filter({hasText:/^Shop$/}).click();
   await page.locator('.shop-modal').waitFor({state:'visible'});
   await page.locator('.shop-modal .tabs .tab').filter({hasText:/Fish & shrimp/}).click();
-  const shop=await measure('mobile-high-shop',6000);
+  const shop=await measure('mobile-low-shop',6000);
   await page.locator('.shop-modal button.close').click();
   await page.locator('.shop-modal').waitFor({state:'detached'});
   await page.waitForTimeout(300);
-  const afterClose=await measure('mobile-high-after-shop-close',3000);
+  const afterClose=await measure('mobile-low-after-shop-close',3000);
   assert.equal(errors.length,0,'JS errors: '+errors.join('; '));
-  const results={label,viewport:'390x844',quality:'high',deviceScaleFactor:2,renderer:'Chromium software WebGL',
+  const results={label,viewport:'390x844',quality:{aquarium:'high',shop:'low'},deviceScaleFactor:2,renderer:'Chromium software WebGL',
     metrics:[aquarium,shop,afterClose]};
   await mkdir(new URL('../test-results/',import.meta.url),{recursive:true});
   await writeFile(new URL('../test-results/cpu-benchmark-'+label+'.json',import.meta.url),JSON.stringify(results,null,2));
