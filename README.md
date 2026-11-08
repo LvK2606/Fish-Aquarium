@@ -63,3 +63,12 @@ Theo lựa chọn hiện tại, mã xác minh email và khôi phục mật khẩ
 4. Kiểm tra gửi lại thư xác minh và luồng quên mật khẩu trên bản sao.
 
 Khi chưa có dịch vụ email, API báo thiếu cấu hình cho thao tác gửi thư; không trả token khôi phục công khai và không giả vờ đã gửi email.
+
+## Hotfix hiệu năng (nhánh `hotfix/shop-longtasks-adaptive-dpr`)
+
+- Shop tạo cả mô hình và render ảnh thẻ 256px tuần tự qua hàng đợi idle, `createImageBitmap` + `canvas.toBlob` WebP (dự phòng JPEG), thay vì PNG Data URL đồng bộ. Ảnh cache dưới dạng Blob URL trong phiên.
+- Bật lại `frustumCulled` cho 17 chỗ trong `InstancedMesh` ứng dụng (12 phép gán + 5 JSX props); hai particle `Points` sử dụng shader động và tam giác full-screen postprocessing được giữ nguyên ngoại lệ.
+- Scene chính dùng DPR di động 1–1,5 và hai thành phần `AdaptiveDpr`/`PerformanceMonitor` tự hạ DPR sau khung hình chậm; mức cao sẽ trở lại sau khoảng ổn định. Không làm giảm texture gốc.
+- Kiểm tra: `npm run build`, `npm run test:performance`, `npm run test:backend`, `TEST_FILTER=Shop npm run test:frontend`. Browser test in `SHOP_LONG_TASKS` với `count`, `maxMs`, `totalMs` và thời gian mở Shop. Giá trị đo phụ thuộc GPU/CPU thực tế; kiểm thử hồi quy chưa phải cam kết FPS trên mọi máy.
+
+Lưu ý: một lời gọi `toDataURL` trong tiện ích đồng bộ của Three.js vẫn được giữ để không phá vỡ API serialization của thư viện; **Shop và chức năng chụp ảnh của ứng dụng không còn gọi `toDataURL`**.
