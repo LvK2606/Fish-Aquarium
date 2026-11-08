@@ -66,7 +66,7 @@ Khi chưa có dịch vụ email, API báo thiếu cấu hình cho thao tác gử
 
 ## Hotfix hiệu năng (nhánh `hotfix/shop-longtasks-adaptive-dpr`)
 
-- Shop render ảnh thẻ 256px qua hàng đợi idle, `createImageBitmap` + `canvas.toBlob` WebP (dự phòng JPEG), thay vì PNG Data URL đồng bộ. Ảnh cache dưới dạng Blob URL trong phiên.
+- Shop tạo cả mô hình và render ảnh thẻ 256px tuần tự qua hàng đợi idle, `createImageBitmap` + `canvas.toBlob` WebP (dự phòng JPEG), thay vì PNG Data URL đồng bộ. Ảnh cache dưới dạng Blob URL trong phiên.
 - Bật lại `frustumCulled` cho các `InstancedMesh` ứng dụng; ngoại lệ thư viện Three.js giữ nguyên cho tam giác full-screen postprocessing.
 - Scene chính dùng DPR di động 1–1,5 và hai thành phần `AdaptiveDpr`/`PerformanceMonitor` tự hạ DPR sau khung hình chậm; mức cao sẽ trở lại sau khoảng ổn định. Không làm giảm texture gốc.
 - Kiểm tra: `npm run build`, `npm run test:performance`, `npm run test:backend`, `TEST_FILTER=Shop npm run test:frontend`. Browser test in `SHOP_LONG_TASKS` với `count`, `maxMs`, `totalMs` và thời gian mở Shop. Giá trị đo phụ thuộc GPU/CPU thực tế; kiểm thử hồi quy chưa phải cam kết FPS trên mọi máy.

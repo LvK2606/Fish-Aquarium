@@ -10,6 +10,7 @@ const shopThumb=code.slice(shopIndex,code.indexOf('function nJ(',shopIndex));
 test('Shop thumbnails are 256px and encoded asynchronously as WebP/JPEG',()=>{
   assert.match(code,/const o_=256,r_=154,y0=1/);
   assert.match(shopThumb,/requestIdleCallback/);
+  assert.match(shopThumb,/typeof t===\"function\"\?await t\(\):t/);
   assert.match(shopThumb,/createImageBitmap\(canvas\)/);
   assert.match(shopThumb,/\.toBlob\(/);
   assert.match(shopThumb,/image\/webp/);
@@ -21,9 +22,9 @@ test('Shop thumbnails are 256px and encoded asynchronously as WebP/JPEG',()=>{
 test('Shop call sites await completion and never synchronously encode PNG',()=>{
   const appCode=code.slice(2000000);
   assert.doesNotMatch(appCode,/toDataURL\s*\(/);
-  assert.match(code,/c\?await sD\(c\):null/);
-  assert.match(code,/r=await sD\(o\)/);
-  assert.match(code,/o=await sD\(a\)/);
+  assert.match(code,/await sD\(\(\)=>eLe\(t,e\),nJ\)/);
+  assert.match(code,/await sD\(\(\)=>iLe\(t\),nJ\)/);
+  assert.match(code,/await sD\(\(\)=>rLe\(t\),lLe\)/);
   // The only remaining toDataURL use is an unmodified Three.js serialization
   // helper that requires a synchronous return value, not a Shop code path.
   assert.equal((code.match(/\.toDataURL\(/g)||[]).length,1);
