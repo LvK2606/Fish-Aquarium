@@ -1,0 +1,4 @@
+/* Keep the account button accessible without covering the care tools on laptops. */
+@media (min-width:721px) and (max-width:1200px){
+  .account-chip{bottom:calc(var(--dock-h,150px) + 8px)}
+}

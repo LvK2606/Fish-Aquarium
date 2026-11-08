@@ -1,0 +1,16 @@
+{
+  "name": "Aqualator",
+  "short_name": "Aqualator",
+  "description": "Raise fish, grow plants, build your own aquarium.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#4cc3e0",
+  "theme_color": "#4cc3e0",
+  "icons": [
+    { "src": "/brand/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/brand/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/brand/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/brand/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

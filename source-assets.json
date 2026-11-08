@@ -1,0 +1,2950 @@
+{
+  "source": "https://www.aqualator.cloud/",
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 2805,
+      "sha256": "bc6e52dce323424f30262e1bcfb4af4a40636f62adc804f2b511f8226289f5e8"
+    },
+    {
+      "path": "assets/main-CvOo3B9w.js",
+      "bytes": 2981052,
+      "sha256": "33da9b2b6f3cf69af41cab3ef1f28f6477a6b417dddb0d32d4392d02c1e73e5a"
+    },
+    {
+      "path": "brand/scene-tall.svg",
+      "bytes": 50665,
+      "sha256": "c440c094b08962f6fe9a589c3cb6ed3bf6c67832194078c7b7b2ef9018d62bdc"
+    },
+    {
+      "path": "brand/fish.svg",
+      "bytes": 4106,
+      "sha256": "c2a2e1ad7fc86bc304c93f1ce0440e234be7e46812dc3e2f52c8403702a131b0"
+    },
+    {
+      "path": "brand/loader.svg",
+      "bytes": 1522,
+      "sha256": "0ddbba1a2e8acfef34afcdeeedc8390d802bdbe31ad142aabc665e124a6688cf"
+    },
+    {
+      "path": "brand/wordmark.png",
+      "bytes": 146983,
+      "sha256": "5ec53bc544a06bc1c124c30a85668762ab84db94a6a0bf47c332cce319e54e53"
+    },
+    {
+      "path": "designs/cong-lua.jpg",
+      "bytes": 194707,
+      "sha256": "86f63d37445f0160170418300c236962966445a5a8c00d7ac97f4f7759653ab3"
+    },
+    {
+      "path": "designs/tuyet-trang.jpg",
+      "bytes": 127919,
+      "sha256": "1936abd5fb0ed496a170904cbd543732b8d0b575a5dbdbfd4bd422e2649e7a06"
+    },
+    {
+      "path": "designs/lang-tuyet.jpg",
+      "bytes": 107383,
+      "sha256": "cc778b6fb86e0a551a05cb6b7872fa2366a1b927cb4b38367fa079db277b1f21"
+    },
+    {
+      "path": "brand/icon.svg",
+      "bytes": 46076,
+      "sha256": "fe2ce6063fca4c0b5c6f2ee23b20917c4508dee17cbfe271318366267d6f2c66"
+    },
+    {
+      "path": "favicon-32.png",
+      "bytes": 2373,
+      "sha256": "a20e5fb00e38e1a8ebc353ec505bd6cb05791ad26dc83d99ad38d95f2784348d"
+    },
+    {
+      "path": "apple-touch-icon.png",
+      "bytes": 45982,
+      "sha256": "278a747ca4daa42c183aca5db0f0ab917045df07cdcab11e3299abfa78497a83"
+    },
+    {
+      "path": "site.webmanifest",
+      "bytes": 624,
+      "sha256": "5923471d987d303b63b1b13f0919a92cf76ecf134a521bc07b4af8d3ecc85678"
+    },
+    {
+      "path": "brand/og.png",
+      "bytes": 653783,
+      "sha256": "e8cc5e9e0a62c7857888c658ebfea60b164b570120327d171ab1f6b4e3828fea"
+    },
+    {
+      "path": "brand/scene.svg",
+      "bytes": 85611,
+      "sha256": "734578586917e076472698bbde3789723b7aa156dcd4c90d53a6cb2ff1e030b8"
+    },
+    {
+      "path": "brand/splash.css",
+      "bytes": 3946,
+      "sha256": "1cbd3714522d8a454b0984197c4556f0d3afc4af8588cced562b9df62264c3da"
+    },
+    {
+      "path": "assets/tokens-CRUX-1Pp.js",
+      "bytes": 711,
+      "sha256": "d2a32840421496e872ade591618d2fa5c33797605d1aec04301717e5a90757d0"
+    },
+    {
+      "path": "assets/tokens-CaFZIQom.css",
+      "bytes": 1340,
+      "sha256": "710506f0c26d2753a3d032164921ae52ed05ce8019b5a469d87df17a3b19bfd7"
+    },
+    {
+      "path": "assets/main-BgQ148XD.css",
+      "bytes": 129727,
+      "sha256": "264430a732de0716469bfd356902e769168523e9ffa1102e030432bd2ff86a54"
+    },
+    {
+      "path": "models/neon-tetra.glb",
+      "bytes": 87864,
+      "sha256": "f775ec2e90b3c3a849f127055653c63f9b29aa5a3c63a3b83ada1d82849a47d4"
+    },
+    {
+      "path": "models/neon-tetra-wild-body.png",
+      "bytes": 224102,
+      "sha256": "3ea04cbc7494270bb5ba196cb5fabd7385da32d561a659da3e8d581bdd23e650"
+    },
+    {
+      "path": "models/neon-tetra-wild-fin.png",
+      "bytes": 40688,
+      "sha256": "1a0cbe80fbd1f5f9b701958053f97d1885220f2ba1df02f8bf10a5fe817bd741"
+    },
+    {
+      "path": "models/neon-tetra-wild-eye.png",
+      "bytes": 15879,
+      "sha256": "de6bd96e05e67990505f609daffee04272c24a8247607a055aee4e11d926c97d"
+    },
+    {
+      "path": "models/neon-tetra-gold-body.png",
+      "bytes": 213035,
+      "sha256": "6e3292f5101e2ad49f490b9c83d58d5b4fab902a819aa863f7d2d9898ac4da6c"
+    },
+    {
+      "path": "models/neon-tetra-gold-fin.png",
+      "bytes": 39772,
+      "sha256": "8b4f76a5b90aa2016217c71818d2122fbc2f180aa31d1731c1116acda71eabf3"
+    },
+    {
+      "path": "models/neon-tetra-gold-eye.png",
+      "bytes": 15361,
+      "sha256": "3a5856fdcd08120d7b947d6cf2cba291627e8bba59d81d19fac942008a2abc2b"
+    },
+    {
+      "path": "models/neon-tetra-diamond-body.png",
+      "bytes": 223790,
+      "sha256": "93922fd2150aff9edfba0d0e8f000457a478e875be26e69ca396f8394f11a0d1"
+    },
+    {
+      "path": "models/neon-tetra-diamond-fin.png",
+      "bytes": 40457,
+      "sha256": "4f1783af7691986387d40cf0954b58c1a0c0a11c92a46e90278ac6dc44ce5a32"
+    },
+    {
+      "path": "models/neon-tetra-diamond-eye.png",
+      "bytes": 15802,
+      "sha256": "0f3100829549bbc95b263197decbb8345b5f04db4a80f40c43e32d4a0297f6d2"
+    },
+    {
+      "path": "models/neon-tetra-albino-body.png",
+      "bytes": 205798,
+      "sha256": "0df8d87746d94ba7928eda13fa7108f2f08b83f47535460c67e983383c3e60ae"
+    },
+    {
+      "path": "models/neon-tetra-albino-fin.png",
+      "bytes": 35238,
+      "sha256": "e82138d5d66943f0bde44bb029c830f5f957660b91b927a9cff23f56dd3dda4f"
+    },
+    {
+      "path": "models/neon-tetra-albino-eye.png",
+      "bytes": 13877,
+      "sha256": "c508adc7914158b3af6dc48940635ce44337dcf261785cda49f7da3974940e6a"
+    },
+    {
+      "path": "models/cardinal-tetra.glb",
+      "bytes": 87952,
+      "sha256": "3d815393263b120297af87320cfbcae4c76ce59703685c450315d9187f0f1020"
+    },
+    {
+      "path": "models/cardinal-tetra-wild-body.png",
+      "bytes": 213854,
+      "sha256": "4343ad5ce5c044e1cacee4633648b7e4a5f811edf7508dbf6892a3a47d33c530"
+    },
+    {
+      "path": "models/cardinal-tetra-wild-fin.png",
+      "bytes": 40364,
+      "sha256": "4f225059607d569b52176ba4ecb9d6674cf338438a16d00c7732f4cf4a20e812"
+    },
+    {
+      "path": "models/cardinal-tetra-wild-eye.png",
+      "bytes": 15725,
+      "sha256": "615b6ef5a4ff0b6702d005782d738396df6cf6dd9ffe48865e6fe19f4fecb104"
+    },
+    {
+      "path": "models/cardinal-tetra-violet-body.png",
+      "bytes": 211160,
+      "sha256": "bbab52fc301a4c083e0ed36000064feaa5dd35f9e46ddacdc98023e61112c898"
+    },
+    {
+      "path": "models/cardinal-tetra-violet-fin.png",
+      "bytes": 40364,
+      "sha256": "4f225059607d569b52176ba4ecb9d6674cf338438a16d00c7732f4cf4a20e812"
+    },
+    {
+      "path": "models/cardinal-tetra-violet-eye.png",
+      "bytes": 15747,
+      "sha256": "3e8d030ed860213e2aa8e5a9eb1ed1231430a1b66da7ab57d796087127d535cb"
+    },
+    {
+      "path": "models/cardinal-tetra-gold-body.png",
+      "bytes": 214738,
+      "sha256": "0d10337c55e70051a62a181e17c589eff2d0de5b61108c0970b48cb61bc7faa1"
+    },
+    {
+      "path": "models/cardinal-tetra-gold-fin.png",
+      "bytes": 41316,
+      "sha256": "9065b91efb703e42eaea2454470a2847fe6318965f649ee1381f603476dc3999"
+    },
+    {
+      "path": "models/cardinal-tetra-gold-eye.png",
+      "bytes": 15193,
+      "sha256": "fad768d6f8635af92016f82b13d2ea76de3d1de5f70fc5702b22a8586b19e90b"
+    },
+    {
+      "path": "models/ember-tetra.glb",
+      "bytes": 80908,
+      "sha256": "fdf5dab485050e4340fc28b5e3da1bf65b049c6298a5b8451a89ba893843afe0"
+    },
+    {
+      "path": "models/ember-tetra-wild-body.png",
+      "bytes": 235608,
+      "sha256": "7b667508e105a923a54849ab5677031a29ee7d25344889e8730e8320544a72bb"
+    },
+    {
+      "path": "models/ember-tetra-wild-fin.png",
+      "bytes": 19175,
+      "sha256": "5c03729c197b50fa1d246d8a1a11a2cdc500f361b18d67c72c9d063af81835bd"
+    },
+    {
+      "path": "models/ember-tetra-wild-eye.png",
+      "bytes": 14317,
+      "sha256": "461dc206232326af46790054368cdc2a3909cc11bbbbbe9e8a1498267c641747"
+    },
+    {
+      "path": "models/ember-tetra-deep-body.png",
+      "bytes": 228207,
+      "sha256": "4e825fd8fb512f48a8ff321f425738e5ae0a7b0b40da286d2d70191f94c4bc03"
+    },
+    {
+      "path": "models/ember-tetra-deep-fin.png",
+      "bytes": 19365,
+      "sha256": "8a144dd2764f060690d77d1e41a089c1731b1ffe364788df46413a0b666edfd2"
+    },
+    {
+      "path": "models/ember-tetra-deep-eye.png",
+      "bytes": 13839,
+      "sha256": "d61940ebe356d311bda6cee98dbc0b84798e52157fd9ff331141789da78a08d3"
+    },
+    {
+      "path": "models/rummynose-tetra.glb",
+      "bytes": 88616,
+      "sha256": "0d88c0b540743ca4cddc7a2eff62f3e06101d1f6dc305ab4785926e720c0c311"
+    },
+    {
+      "path": "models/rummynose-tetra-wild-body.png",
+      "bytes": 226850,
+      "sha256": "a64eb4c8f04cb4b0b1670ecb66f5c3e005cde873603e307064bda6d79e2b0d01"
+    },
+    {
+      "path": "models/rummynose-tetra-wild-fin.png",
+      "bytes": 27748,
+      "sha256": "4d66dd696176f514bb8d5082ae233335321da299228aba5e852426c194895afa"
+    },
+    {
+      "path": "models/rummynose-tetra-wild-eye.png",
+      "bytes": 13898,
+      "sha256": "613ac55ebef179fbbc447ba220e61c0243bd245cba3ff39001330d61383a83a1"
+    },
+    {
+      "path": "models/rummynose-tetra-bright-body.png",
+      "bytes": 227000,
+      "sha256": "135c2ef4f1fa832181d3e566d2590d638a8c5551d0ba95d60f5ee718fb5cf1fe"
+    },
+    {
+      "path": "models/rummynose-tetra-bright-fin.png",
+      "bytes": 27748,
+      "sha256": "4d66dd696176f514bb8d5082ae233335321da299228aba5e852426c194895afa"
+    },
+    {
+      "path": "models/rummynose-tetra-bright-eye.png",
+      "bytes": 13490,
+      "sha256": "80e00d7c7c398e1ff8dae228b813360007d21b625990db6c789e1a786bfc343f"
+    },
+    {
+      "path": "models/betta.glb",
+      "bytes": 167224,
+      "sha256": "2787d2868f506603418c5031392d8269f5df8e02361a6576c8b909b9e27aadc8"
+    },
+    {
+      "path": "models/betta-red-body.png",
+      "bytes": 140067,
+      "sha256": "144b42efa764834454bc2434abd17fa8e5c33d8a6416c01d34dd11f4adae450c"
+    },
+    {
+      "path": "models/betta-red-fin.png",
+      "bytes": 93296,
+      "sha256": "c3c302be9fc33a6d91ac87ae2ae4974ce15c789fca652ffa98b49ecff65792e3"
+    },
+    {
+      "path": "models/betta-royal-blue-body.png",
+      "bytes": 136797,
+      "sha256": "7395b13195f1d94e0a9686f2fde4d47720fc7cb9c0802f4d8db4a3de6f041672"
+    },
+    {
+      "path": "models/betta-royal-blue-fin.png",
+      "bytes": 87942,
+      "sha256": "226abdaf54649ef0627f39fe53f1b5ba2a64af6460479593371fda9f4963b603"
+    },
+    {
+      "path": "models/betta-koi-body.png",
+      "bytes": 131456,
+      "sha256": "c6bd940b44909713fb712e7f70e3e1d39695da2aa147106dc72d3b26a6b622ea"
+    },
+    {
+      "path": "models/betta-koi-fin.png",
+      "bytes": 121917,
+      "sha256": "3622a90615638d4500e1472aeb4dc668dcfe9b6d1d559b6aeb705273ee215bbc"
+    },
+    {
+      "path": "models/betta-dragon-body.png",
+      "bytes": 140299,
+      "sha256": "840af6a4846df5dce540b0f8de8c72e8728edf6229641e5040d9e79cfa583de6"
+    },
+    {
+      "path": "models/betta-dragon-fin.png",
+      "bytes": 101130,
+      "sha256": "0aa7ae175342a6c51ecb7697acf19d47fd1806c29f1cbc5e4e7575ff291ff8d0"
+    },
+    {
+      "path": "models/betta-black-orchid-body.png",
+      "bytes": 122639,
+      "sha256": "b3f53938af8a877c24850c9ec379e7ef902dd3d1e0ae7297b0bf5161c007cfd6"
+    },
+    {
+      "path": "models/betta-black-orchid-fin.png",
+      "bytes": 131503,
+      "sha256": "b3723a1584cc9e618fcff898cee6c21de154c38281478495b495605b3c509512"
+    },
+    {
+      "path": "models/betta-mustard-body.png",
+      "bytes": 134412,
+      "sha256": "90632e22384b7eba020b119a415f0f265fc749374b5151757d4817e69553e26f"
+    },
+    {
+      "path": "models/betta-mustard-fin.png",
+      "bytes": 144923,
+      "sha256": "f6128c13fdae4f45c209a113ee6d2e206d65462d28859c5a794dac3d2e733416"
+    },
+    {
+      "path": "models/betta-copper-body.png",
+      "bytes": 130810,
+      "sha256": "e924d16216ef94c57e4358997ab02c434727f3978591a6ddfabc10f3ecf03b70"
+    },
+    {
+      "path": "models/betta-copper-fin.png",
+      "bytes": 115981,
+      "sha256": "e806341e5232f87160bd7b7ebdb06b291d32cf91e175ce702d46cc998cd51323"
+    },
+    {
+      "path": "models/betta-pastel-body.png",
+      "bytes": 132827,
+      "sha256": "219d04b64946677dad08177f42f003ebddf2f9fc4eda895b2247605ca1b1cb9d"
+    },
+    {
+      "path": "models/betta-pastel-fin.png",
+      "bytes": 100008,
+      "sha256": "99c8cacbdb8c507d8fc4203301344b854f7379bf56a9c666c08b47bade5e939e"
+    },
+    {
+      "path": "models/betta-platinum-body.png",
+      "bytes": 123788,
+      "sha256": "90333412cdcf393cb73f5995f3a7e28107235e5dbb4e852a3583740c0adec1dc"
+    },
+    {
+      "path": "models/betta-platinum-fin.png",
+      "bytes": 71595,
+      "sha256": "c643417bc25ea61c584f02eaca347f908b8fd0415ca7f54d6ab10e231a8cfbc2"
+    },
+    {
+      "path": "models/betta-fancy-body.png",
+      "bytes": 139074,
+      "sha256": "c764275197f9d744ea80e56ce1da4a0c0157ba32041ea3c132a5ac727704461a"
+    },
+    {
+      "path": "models/betta-fancy-fin.png",
+      "bytes": 134784,
+      "sha256": "cd0a78d429aa4b6e1d5d8257b83f0e98e99ac745d712d05c5ca9c8c2dffb14d9"
+    },
+    {
+      "path": "models/betta-butterfly-body.png",
+      "bytes": 144320,
+      "sha256": "dec6d65dfd44160e6e3adb77b49710360f8fe019d3fe5364fa825a45921cbee7"
+    },
+    {
+      "path": "models/betta-butterfly-fin.png",
+      "bytes": 149623,
+      "sha256": "ceb697a2325305b571f1d36369b26e4846f560eb67dca10b42d395c194563aab"
+    },
+    {
+      "path": "models/guppy.glb",
+      "bytes": 76072,
+      "sha256": "101e8f73f14a4fb7b4c271e17b2255adbd15d38a5a89cf18f8093856f5db0299"
+    },
+    {
+      "path": "models/guppy-full-red-body.png",
+      "bytes": 219566,
+      "sha256": "bfdcfab054ec6a6f5983bd5fa3340963d1e8f8dd354f5bb93ecd461787263ef4"
+    },
+    {
+      "path": "models/guppy-full-red-fin.png",
+      "bytes": 31232,
+      "sha256": "8b37f6012b51bc955a7a32b69ddcfaa4078679fba9de93aa485b6fc130b058de"
+    },
+    {
+      "path": "models/guppy-full-red-eye.png",
+      "bytes": 15809,
+      "sha256": "4318d373f7e2480848f9b2c8227feaabfcce70842535e69bd0162e59293699e8"
+    },
+    {
+      "path": "models/guppy-female.glb",
+      "bytes": 71448,
+      "sha256": "c1595d80dd9c19a8598f136d0cc998a12ba304f3be70400d846a2d59947caec9"
+    },
+    {
+      "path": "models/guppy-female-full-red-body.png",
+      "bytes": 247786,
+      "sha256": "39c3030ccffc9945ff243d814fdeed4d0ba0e35d74860cfcf835f075da857909"
+    },
+    {
+      "path": "models/guppy-female-full-red-fin.png",
+      "bytes": 15876,
+      "sha256": "e8182c95e62cf99a08ec7f02bdc629406149a86a652ea587a45287ab1b506e4d"
+    },
+    {
+      "path": "models/guppy-female-full-red-eye.png",
+      "bytes": 15218,
+      "sha256": "03f90dcb2c76b89e7461aac974c0156dc5ec4b6fc70d2fd713eb808f66637a16"
+    },
+    {
+      "path": "models/guppy-blue-grass-body.png",
+      "bytes": 234431,
+      "sha256": "980a92343d6fd26fa21ac1400a4274ab39850363d3a20a067e1264c887a7de39"
+    },
+    {
+      "path": "models/guppy-blue-grass-fin.png",
+      "bytes": 108081,
+      "sha256": "0557dc20719eb0c9751e32bc19097f918bf225339f6eea1d5ec021776b0e50a8"
+    },
+    {
+      "path": "models/guppy-blue-grass-eye.png",
+      "bytes": 15809,
+      "sha256": "4318d373f7e2480848f9b2c8227feaabfcce70842535e69bd0162e59293699e8"
+    },
+    {
+      "path": "models/guppy-female-blue-grass-body.png",
+      "bytes": 247786,
+      "sha256": "39c3030ccffc9945ff243d814fdeed4d0ba0e35d74860cfcf835f075da857909"
+    },
+    {
+      "path": "models/guppy-female-blue-grass-fin.png",
+      "bytes": 15879,
+      "sha256": "f2acf6d0715537d910038acc0500ed0b5b86d6a19930cf69c38125bc66d7b0fa"
+    },
+    {
+      "path": "models/guppy-female-blue-grass-eye.png",
+      "bytes": 15218,
+      "sha256": "03f90dcb2c76b89e7461aac974c0156dc5ec4b6fc70d2fd713eb808f66637a16"
+    },
+    {
+      "path": "models/guppy-tuxedo-body.png",
+      "bytes": 184452,
+      "sha256": "ceb6518db5d2a942b78d4834c8db8c0b15277175e9d1d60b98c59fa2f680630b"
+    },
+    {
+      "path": "models/guppy-tuxedo-fin.png",
+      "bytes": 99894,
+      "sha256": "b61df60d4e5c593d185d551e3fcfa0504001b4a2091cccd9ea2d32379ec8422d"
+    },
+    {
+      "path": "models/guppy-tuxedo-eye.png",
+      "bytes": 15809,
+      "sha256": "4318d373f7e2480848f9b2c8227feaabfcce70842535e69bd0162e59293699e8"
+    },
+    {
+      "path": "models/guppy-female-tuxedo-body.png",
+      "bytes": 213157,
+      "sha256": "6b96029c570cf2e69a921e05815e393223c7e7ed795f9ddbe455d576ee48c505"
+    },
+    {
+      "path": "models/guppy-female-tuxedo-fin.png",
+      "bytes": 15881,
+      "sha256": "76359fa1dae40943c23038daa2ea19cf0210f932771d5dba4e00abf30941b5ea"
+    },
+    {
+      "path": "models/guppy-female-tuxedo-eye.png",
+      "bytes": 15218,
+      "sha256": "03f90dcb2c76b89e7461aac974c0156dc5ec4b6fc70d2fd713eb808f66637a16"
+    },
+    {
+      "path": "models/guppy-mosaic-body.png",
+      "bytes": 235965,
+      "sha256": "f1b2ca6b8b6f6235ea52e2d821fdcf6808551015b0eb846ef19c5543041b5086"
+    },
+    {
+      "path": "models/guppy-mosaic-fin.png",
+      "bytes": 90245,
+      "sha256": "1b5873744fa37521f639dc419e32a3b81ed33ca1d6912bfc3855d99ce8e4da14"
+    },
+    {
+      "path": "models/guppy-mosaic-eye.png",
+      "bytes": 15809,
+      "sha256": "4318d373f7e2480848f9b2c8227feaabfcce70842535e69bd0162e59293699e8"
+    },
+    {
+      "path": "models/guppy-female-mosaic-body.png",
+      "bytes": 247786,
+      "sha256": "39c3030ccffc9945ff243d814fdeed4d0ba0e35d74860cfcf835f075da857909"
+    },
+    {
+      "path": "models/guppy-female-mosaic-fin.png",
+      "bytes": 15877,
+      "sha256": "9bf59acb14664036bd3e48a245ed28746077c8cc3153dc378af8f25b9b91ba69"
+    },
+    {
+      "path": "models/guppy-female-mosaic-eye.png",
+      "bytes": 15218,
+      "sha256": "03f90dcb2c76b89e7461aac974c0156dc5ec4b6fc70d2fd713eb808f66637a16"
+    },
+    {
+      "path": "models/guppy-koi-body.png",
+      "bytes": 222202,
+      "sha256": "847b5c04ef2745b5c596fef1359cfd468873c79850240399c9e38beeb15025a0"
+    },
+    {
+      "path": "models/guppy-koi-fin.png",
+      "bytes": 31585,
+      "sha256": "b316917ad8e751731067f9bf880aa5795fc5b61c34f496643d4350a517909e4c"
+    },
+    {
+      "path": "models/guppy-koi-eye.png",
+      "bytes": 15075,
+      "sha256": "686c7ee77bc75b920b31bb9ba17eb509c43c14053c76f2aae0cf0b0e569648c7"
+    },
+    {
+      "path": "models/guppy-female-koi-body.png",
+      "bytes": 213604,
+      "sha256": "bafe392a8feb04f6a37fb95ccce0bf86d1a573bb0348ad5924faff347b02f45d"
+    },
+    {
+      "path": "models/guppy-female-koi-fin.png",
+      "bytes": 15877,
+      "sha256": "ba6a54104e1d7470fc11c006b8ba95f237eead01615c77978a64ae7a53dce540"
+    },
+    {
+      "path": "models/guppy-female-koi-eye.png",
+      "bytes": 15218,
+      "sha256": "03f90dcb2c76b89e7461aac974c0156dc5ec4b6fc70d2fd713eb808f66637a16"
+    },
+    {
+      "path": "models/guppy-platinum-body.png",
+      "bytes": 234795,
+      "sha256": "d3bac1ffb3ff72025622c0de2faa4090c25076f26cf98c7fc42ee82a95ff6d0a"
+    },
+    {
+      "path": "models/guppy-platinum-fin.png",
+      "bytes": 31345,
+      "sha256": "e50d126c876f5e6f26053133b6c2b6c7efafa2dfaa4e96d92ee1d47e21ec26a0"
+    },
+    {
+      "path": "models/guppy-platinum-eye.png",
+      "bytes": 15809,
+      "sha256": "4318d373f7e2480848f9b2c8227feaabfcce70842535e69bd0162e59293699e8"
+    },
+    {
+      "path": "models/guppy-female-platinum-body.png",
+      "bytes": 230711,
+      "sha256": "ea266c352c84e2e3027c6feacdf036cee4cc553e045b763c9a23a62ee3a14c0a"
+    },
+    {
+      "path": "models/guppy-female-platinum-fin.png",
+      "bytes": 15878,
+      "sha256": "5a47bd75d5a110d2acb7e0400da3b5f7633cf1563c8bcecc767d2335793ffcf5"
+    },
+    {
+      "path": "models/guppy-female-platinum-eye.png",
+      "bytes": 15218,
+      "sha256": "03f90dcb2c76b89e7461aac974c0156dc5ec4b6fc70d2fd713eb808f66637a16"
+    },
+    {
+      "path": "models/guppy-endler-body.png",
+      "bytes": 263527,
+      "sha256": "f1b2201fd020ff4bf7e6cf08a6ae8624fc8c18b139c77ae654cd1b08c1344e20"
+    },
+    {
+      "path": "models/guppy-endler-fin.png",
+      "bytes": 49702,
+      "sha256": "a04e89262a5e738310cb060958d7822da3a6b97117f7ed45784a0e51e4acaa69"
+    },
+    {
+      "path": "models/guppy-endler-eye.png",
+      "bytes": 15809,
+      "sha256": "4318d373f7e2480848f9b2c8227feaabfcce70842535e69bd0162e59293699e8"
+    },
+    {
+      "path": "models/guppy-female-endler-body.png",
+      "bytes": 247786,
+      "sha256": "39c3030ccffc9945ff243d814fdeed4d0ba0e35d74860cfcf835f075da857909"
+    },
+    {
+      "path": "models/guppy-female-endler-fin.png",
+      "bytes": 15880,
+      "sha256": "173b860539b2cb1febb61dfd61e74c5bb02d056eefb9a44b9edf568ebe45bfd5"
+    },
+    {
+      "path": "models/guppy-female-endler-eye.png",
+      "bytes": 15218,
+      "sha256": "03f90dcb2c76b89e7461aac974c0156dc5ec4b6fc70d2fd713eb808f66637a16"
+    },
+    {
+      "path": "models/platy.glb",
+      "bytes": 80216,
+      "sha256": "1967bb7b8b97068255de3d9d07a15f7af323b4827ff3ebecedb97929c778df65"
+    },
+    {
+      "path": "models/platy-red-body.png",
+      "bytes": 271846,
+      "sha256": "eb54db823660dc8682a3f1ed8a74e7cbdc5bb356f4c25afafdd557aa7a9c0de1"
+    },
+    {
+      "path": "models/platy-red-fin.png",
+      "bytes": 22028,
+      "sha256": "4c1b9278057b0f44a19320e6ef37e69e7bb994bacc313972d258872c5f3159e9"
+    },
+    {
+      "path": "models/platy-red-eye.png",
+      "bytes": 15311,
+      "sha256": "3613e3bf8f47bb09897b3b0095e2cd3a3d11e63384661994e6bff443f4967486"
+    },
+    {
+      "path": "models/platy-mickey-body.png",
+      "bytes": 270781,
+      "sha256": "924c22ff6616771370dd11162a650543e1507988fe9d437947812446214872a1"
+    },
+    {
+      "path": "models/platy-mickey-fin.png",
+      "bytes": 20782,
+      "sha256": "34c543a93fd890e3cd0c076a2469a44929ccfb063e1e0a83cdeda77f2b7548d3"
+    },
+    {
+      "path": "models/platy-mickey-eye.png",
+      "bytes": 15311,
+      "sha256": "3613e3bf8f47bb09897b3b0095e2cd3a3d11e63384661994e6bff443f4967486"
+    },
+    {
+      "path": "models/platy-sunset-body.png",
+      "bytes": 204008,
+      "sha256": "fa589634aa7dd4dc6b654f410762e7c6b6f35475a8109ad3e62787a9a15abf2d"
+    },
+    {
+      "path": "models/platy-sunset-fin.png",
+      "bytes": 21618,
+      "sha256": "6d4ffeb4a43f69c4e5e304a177d8cac31f359617c7ef417aa08fa0b457513159"
+    },
+    {
+      "path": "models/platy-sunset-eye.png",
+      "bytes": 15311,
+      "sha256": "3613e3bf8f47bb09897b3b0095e2cd3a3d11e63384661994e6bff443f4967486"
+    },
+    {
+      "path": "models/platy-tuxedo-body.png",
+      "bytes": 236814,
+      "sha256": "788e3ca7c465eae43bab11798651405fd76ca3e8ae253aa22f3d41e91acc7fcd"
+    },
+    {
+      "path": "models/platy-tuxedo-fin.png",
+      "bytes": 22406,
+      "sha256": "aaea0e9d5e59da19f63f91b20e19d38947c4f9bf8cac8f6735916669cb74cd34"
+    },
+    {
+      "path": "models/platy-tuxedo-eye.png",
+      "bytes": 15311,
+      "sha256": "3613e3bf8f47bb09897b3b0095e2cd3a3d11e63384661994e6bff443f4967486"
+    },
+    {
+      "path": "models/platy-blue-body.png",
+      "bytes": 267073,
+      "sha256": "fa77977bccdc095145cc8932945cd54b930392c4c109241d2d083d23141ccab6"
+    },
+    {
+      "path": "models/platy-blue-fin.png",
+      "bytes": 19611,
+      "sha256": "aa2161425c69237c471fb092b29d86326ed3e1db0a5d2afc6596307329291018"
+    },
+    {
+      "path": "models/platy-blue-eye.png",
+      "bytes": 15599,
+      "sha256": "b1f6476b71a3f2d543a588b1d1da83b0575ddff41aceae58a2b22b2ba98ab1b9"
+    },
+    {
+      "path": "models/platy-panda-body.png",
+      "bytes": 207139,
+      "sha256": "06da907bc019e9b840c458e8082b366b548b91aca7fc053cebc17859526c9ad0"
+    },
+    {
+      "path": "models/platy-panda-fin.png",
+      "bytes": 18725,
+      "sha256": "28137dc3911d939ef6c56ead064a50ed1b584a7299627c4553987aa3afba1564"
+    },
+    {
+      "path": "models/platy-panda-eye.png",
+      "bytes": 15317,
+      "sha256": "9388c0ee8a61c8439c2c1c9563148f0d2ddff06c0d856d40798a13eaf1ffec29"
+    },
+    {
+      "path": "models/molly.glb",
+      "bytes": 80816,
+      "sha256": "8c49ae6b18484b5b4e5f8b7d943075eb28ed11230c84232b674499863be976aa"
+    },
+    {
+      "path": "models/molly-black-body.png",
+      "bytes": 235963,
+      "sha256": "ee7b49e1e69eda8c88a3ac11c5a60cc43c677a975184971851bbc5800a8d4ed5"
+    },
+    {
+      "path": "models/molly-black-fin.png",
+      "bytes": 21775,
+      "sha256": "d8a8d7a1359d81d97f2ed498b1a4d4ba96594542b5bb33eed0641eb48d9b175d"
+    },
+    {
+      "path": "models/molly-black-eye.png",
+      "bytes": 14512,
+      "sha256": "58ae96ed2cbcda1448c229a0f3837b23a91a049592ad73bd74b1082788c18c6d"
+    },
+    {
+      "path": "models/molly-dalmatian-body.png",
+      "bytes": 254144,
+      "sha256": "ee44f5d2845123160e17ce868b03e97bd549be0ed3de3296dcc5cf67f3a74426"
+    },
+    {
+      "path": "models/molly-dalmatian-fin.png",
+      "bytes": 17642,
+      "sha256": "40476beb2843c1ef0c650f905a3ec601216e1cd2fdd7a8830bacb8e705d2b07f"
+    },
+    {
+      "path": "models/molly-dalmatian-eye.png",
+      "bytes": 15529,
+      "sha256": "c866a2e6b10a73e53c6a44cde6ede09a088b9febed93b830d532522589b76d35"
+    },
+    {
+      "path": "models/molly-gold-body.png",
+      "bytes": 270542,
+      "sha256": "2ff7dc01bc34a52af82699654dd8d4bf4a58cdacbca7748c6b07106d1de77c42"
+    },
+    {
+      "path": "models/molly-gold-fin.png",
+      "bytes": 21022,
+      "sha256": "cc965c330077b9770a9ee0dcb81034383ab030d602da253f121012dca3c145c4"
+    },
+    {
+      "path": "models/molly-gold-eye.png",
+      "bytes": 15462,
+      "sha256": "3442d517f1fc1800f116c38b07215e161adeda7b960dd53a09bb3ad896d47a7f"
+    },
+    {
+      "path": "models/molly-silver-body.png",
+      "bytes": 247809,
+      "sha256": "7e043c3b030b4ed147e8b30eea1624c6ec4bf5546a57f792adba4945940aae3a"
+    },
+    {
+      "path": "models/molly-silver-fin.png",
+      "bytes": 19314,
+      "sha256": "72adf895ace8c18c4c0033c9e45e0043fede73721540093a634b021da1adb85c"
+    },
+    {
+      "path": "models/molly-silver-eye.png",
+      "bytes": 14767,
+      "sha256": "fef5fbc79314de360d2a80b3206b414d1979d1e30fc2a8d6e7effb837004c019"
+    },
+    {
+      "path": "models/swordtail.glb",
+      "bytes": 87720,
+      "sha256": "b21c4e277faea192d82a21d642595182cf53cf7790841b46e9fa70b68c104ee5"
+    },
+    {
+      "path": "models/swordtail-red-body.png",
+      "bytes": 277782,
+      "sha256": "d7ac45180dea057ae91581c509a90b1a99544fc3d305a07653843e676686fc38"
+    },
+    {
+      "path": "models/swordtail-red-fin.png",
+      "bytes": 22492,
+      "sha256": "0575e34bc672b96b16323c9916b947bdadbc0c234586b48cfc8288a7ec55c1ba"
+    },
+    {
+      "path": "models/swordtail-red-eye.png",
+      "bytes": 15369,
+      "sha256": "bab2e3d52a9db368c478953db98cd0d866d8fc5ef7fdcbde1be6a695b5abcd7b"
+    },
+    {
+      "path": "models/swordtail-female.glb",
+      "bytes": 83696,
+      "sha256": "e6b5628ce7b2f5195e8dc1ca2cc2fe3ba0b75aabd2ac02b823818ec503294026"
+    },
+    {
+      "path": "models/swordtail-female-red-body.png",
+      "bytes": 277782,
+      "sha256": "d7ac45180dea057ae91581c509a90b1a99544fc3d305a07653843e676686fc38"
+    },
+    {
+      "path": "models/swordtail-female-red-fin.png",
+      "bytes": 22492,
+      "sha256": "0575e34bc672b96b16323c9916b947bdadbc0c234586b48cfc8288a7ec55c1ba"
+    },
+    {
+      "path": "models/swordtail-female-red-eye.png",
+      "bytes": 15369,
+      "sha256": "bab2e3d52a9db368c478953db98cd0d866d8fc5ef7fdcbde1be6a695b5abcd7b"
+    },
+    {
+      "path": "models/swordtail-green-body.png",
+      "bytes": 263216,
+      "sha256": "a27265f5bb2cebba0bf92bedeab3dd41630b6027d49e0cc77e69a54c2530147c"
+    },
+    {
+      "path": "models/swordtail-green-fin.png",
+      "bytes": 20532,
+      "sha256": "349d6fac7864e9feb3365c47b018bc3c851996e168f7c0d389a7cc0df7c8ba2d"
+    },
+    {
+      "path": "models/swordtail-green-eye.png",
+      "bytes": 15369,
+      "sha256": "bab2e3d52a9db368c478953db98cd0d866d8fc5ef7fdcbde1be6a695b5abcd7b"
+    },
+    {
+      "path": "models/swordtail-female-green-body.png",
+      "bytes": 263216,
+      "sha256": "a27265f5bb2cebba0bf92bedeab3dd41630b6027d49e0cc77e69a54c2530147c"
+    },
+    {
+      "path": "models/swordtail-female-green-fin.png",
+      "bytes": 20532,
+      "sha256": "349d6fac7864e9feb3365c47b018bc3c851996e168f7c0d389a7cc0df7c8ba2d"
+    },
+    {
+      "path": "models/swordtail-female-green-eye.png",
+      "bytes": 15369,
+      "sha256": "bab2e3d52a9db368c478953db98cd0d866d8fc5ef7fdcbde1be6a695b5abcd7b"
+    },
+    {
+      "path": "models/swordtail-wagtail-body.png",
+      "bytes": 277782,
+      "sha256": "d7ac45180dea057ae91581c509a90b1a99544fc3d305a07653843e676686fc38"
+    },
+    {
+      "path": "models/swordtail-wagtail-fin.png",
+      "bytes": 20266,
+      "sha256": "15572047093795dd46755b40b664ca027736d7bd811f1c5c85da5cd961bd2e23"
+    },
+    {
+      "path": "models/swordtail-wagtail-eye.png",
+      "bytes": 15369,
+      "sha256": "bab2e3d52a9db368c478953db98cd0d866d8fc5ef7fdcbde1be6a695b5abcd7b"
+    },
+    {
+      "path": "models/swordtail-female-wagtail-body.png",
+      "bytes": 277782,
+      "sha256": "d7ac45180dea057ae91581c509a90b1a99544fc3d305a07653843e676686fc38"
+    },
+    {
+      "path": "models/swordtail-female-wagtail-fin.png",
+      "bytes": 20266,
+      "sha256": "15572047093795dd46755b40b664ca027736d7bd811f1c5c85da5cd961bd2e23"
+    },
+    {
+      "path": "models/swordtail-female-wagtail-eye.png",
+      "bytes": 15369,
+      "sha256": "bab2e3d52a9db368c478953db98cd0d866d8fc5ef7fdcbde1be6a695b5abcd7b"
+    },
+    {
+      "path": "models/swordtail-pineapple-body.png",
+      "bytes": 301785,
+      "sha256": "62cace2dc0dcf1c792a98532e7129d0c4e8639d7f56d1254faf21affdfe14ae5"
+    },
+    {
+      "path": "models/swordtail-pineapple-fin.png",
+      "bytes": 21239,
+      "sha256": "ce88d4fdf557a27a01498d139fd3eb5485e5cf674301a732fd27ad73e5a1e36e"
+    },
+    {
+      "path": "models/swordtail-pineapple-eye.png",
+      "bytes": 15369,
+      "sha256": "bab2e3d52a9db368c478953db98cd0d866d8fc5ef7fdcbde1be6a695b5abcd7b"
+    },
+    {
+      "path": "models/swordtail-female-pineapple-body.png",
+      "bytes": 301785,
+      "sha256": "62cace2dc0dcf1c792a98532e7129d0c4e8639d7f56d1254faf21affdfe14ae5"
+    },
+    {
+      "path": "models/swordtail-female-pineapple-fin.png",
+      "bytes": 21239,
+      "sha256": "ce88d4fdf557a27a01498d139fd3eb5485e5cf674301a732fd27ad73e5a1e36e"
+    },
+    {
+      "path": "models/swordtail-female-pineapple-eye.png",
+      "bytes": 15369,
+      "sha256": "bab2e3d52a9db368c478953db98cd0d866d8fc5ef7fdcbde1be6a695b5abcd7b"
+    },
+    {
+      "path": "models/swordtail-tuxedo-body.png",
+      "bytes": 246178,
+      "sha256": "579dafce1d3f98ff5edbfada90737f05a7971d6ac41672199b91d26df2dcbb50"
+    },
+    {
+      "path": "models/swordtail-tuxedo-fin.png",
+      "bytes": 22735,
+      "sha256": "d8426c0e6e53285358fcb4932843313ed6815db385114908c57f04e455aece89"
+    },
+    {
+      "path": "models/swordtail-tuxedo-eye.png",
+      "bytes": 15369,
+      "sha256": "bab2e3d52a9db368c478953db98cd0d866d8fc5ef7fdcbde1be6a695b5abcd7b"
+    },
+    {
+      "path": "models/swordtail-female-tuxedo-body.png",
+      "bytes": 246178,
+      "sha256": "579dafce1d3f98ff5edbfada90737f05a7971d6ac41672199b91d26df2dcbb50"
+    },
+    {
+      "path": "models/swordtail-female-tuxedo-fin.png",
+      "bytes": 22735,
+      "sha256": "d8426c0e6e53285358fcb4932843313ed6815db385114908c57f04e455aece89"
+    },
+    {
+      "path": "models/swordtail-female-tuxedo-eye.png",
+      "bytes": 15369,
+      "sha256": "bab2e3d52a9db368c478953db98cd0d866d8fc5ef7fdcbde1be6a695b5abcd7b"
+    },
+    {
+      "path": "models/corydoras-panda.glb",
+      "bytes": 83768,
+      "sha256": "2f9ccc133e47dec43918bb02bb0179b8b1b7fa76552bab85795b9db435354a64"
+    },
+    {
+      "path": "models/corydoras-panda-wild-body.png",
+      "bytes": 212006,
+      "sha256": "321f3a14a0bd1567970630bbc6de2483217b5f7cc49e8c72593d0b333442e3eb"
+    },
+    {
+      "path": "models/corydoras-panda-wild-fin.png",
+      "bytes": 13284,
+      "sha256": "cf4236c575168a1c5a3e2682e3e5d4c037a8c73f7838973280f3da420b912215"
+    },
+    {
+      "path": "models/corydoras-panda-wild-eye.png",
+      "bytes": 15471,
+      "sha256": "aaaec917431ccef66203d0153389c047a98f622cf4af474a949ce80e19491b36"
+    },
+    {
+      "path": "models/corydoras-panda-longfin.glb",
+      "bytes": 85892,
+      "sha256": "a312bc2374d0b40c00add7135ad6dcaf95156f499070f9ab3e0dc1d82a328e5d"
+    },
+    {
+      "path": "models/corydoras-panda-longfin-longfin-body.png",
+      "bytes": 212006,
+      "sha256": "321f3a14a0bd1567970630bbc6de2483217b5f7cc49e8c72593d0b333442e3eb"
+    },
+    {
+      "path": "models/corydoras-panda-longfin-longfin-fin.png",
+      "bytes": 12268,
+      "sha256": "d30c284423219bdf144357b94c32e606a005fab2a7f94139661c3049a3037d5c"
+    },
+    {
+      "path": "models/corydoras-panda-longfin-longfin-eye.png",
+      "bytes": 15471,
+      "sha256": "aaaec917431ccef66203d0153389c047a98f622cf4af474a949ce80e19491b36"
+    },
+    {
+      "path": "models/corydoras-sterbai.glb",
+      "bytes": 84976,
+      "sha256": "dfd2a6cee304965933e6970926083435d10bc15f711d9915b0085c4bb1f2c01f"
+    },
+    {
+      "path": "models/corydoras-sterbai-wild-body.png",
+      "bytes": 279536,
+      "sha256": "1fa78afecc5fa81a44fc8021b783e376882894587240dc6d58f25d2496cdefb9"
+    },
+    {
+      "path": "models/corydoras-sterbai-wild-fin.png",
+      "bytes": 36925,
+      "sha256": "e210dddbdd539a889476f865edce27f6fa9256af22f8f6df261d59361b33e667"
+    },
+    {
+      "path": "models/corydoras-sterbai-wild-eye.png",
+      "bytes": 15471,
+      "sha256": "aaaec917431ccef66203d0153389c047a98f622cf4af474a949ce80e19491b36"
+    },
+    {
+      "path": "models/corydoras-sterbai-albino-body.png",
+      "bytes": 232978,
+      "sha256": "7151da30dfd6c9cb9b25ef5d2573eb19113a6d3a92e1a59acaf3401b3c2c22b3"
+    },
+    {
+      "path": "models/corydoras-sterbai-albino-fin.png",
+      "bytes": 33079,
+      "sha256": "4af925950217c2ff9370ff98580f8707b332e3ff9c5b1009f7d7337feef0f5b0"
+    },
+    {
+      "path": "models/corydoras-sterbai-albino-eye.png",
+      "bytes": 14558,
+      "sha256": "e456a7273f1ba6a0a931833ce78e3ba3876c2280dbab69bf86ae5b3faef03d5d"
+    },
+    {
+      "path": "models/corydoras-aeneus.glb",
+      "bytes": 84944,
+      "sha256": "d574fc8e12bc39e06f63a9dbbc2d6bd3c78b47ecc1c279fe6649fb4b5e4a6cf2"
+    },
+    {
+      "path": "models/corydoras-aeneus-bronze-body.png",
+      "bytes": 279268,
+      "sha256": "b56eb852832b1af5b1ac5dd2b622da32ee66d714e95b78ab66eaa97f02b810c6"
+    },
+    {
+      "path": "models/corydoras-aeneus-bronze-fin.png",
+      "bytes": 14220,
+      "sha256": "a4b8f3b72dc7f22454a113048cadc829798b295f3b63145e3e04d05189b5d5fe"
+    },
+    {
+      "path": "models/corydoras-aeneus-bronze-eye.png",
+      "bytes": 15471,
+      "sha256": "aaaec917431ccef66203d0153389c047a98f622cf4af474a949ce80e19491b36"
+    },
+    {
+      "path": "models/corydoras-aeneus-albino-body.png",
+      "bytes": 210928,
+      "sha256": "4986b910164d4562cd07fbba21b579f1de383fa5d933e9bb4b0c6ac182fbf442"
+    },
+    {
+      "path": "models/corydoras-aeneus-albino-fin.png",
+      "bytes": 14224,
+      "sha256": "ce27d088432ad0f1174eed5c73acafa7e516c2215ed4596f362cae7eb8daa5eb"
+    },
+    {
+      "path": "models/corydoras-aeneus-albino-eye.png",
+      "bytes": 14558,
+      "sha256": "e456a7273f1ba6a0a931833ce78e3ba3876c2280dbab69bf86ae5b3faef03d5d"
+    },
+    {
+      "path": "models/corydoras-aeneus-black-body.png",
+      "bytes": 231183,
+      "sha256": "5931ef0164ec4a57228b18eb566d639f41b260b53df7f57fa7f4ac1c847ed2e4"
+    },
+    {
+      "path": "models/corydoras-aeneus-black-fin.png",
+      "bytes": 14217,
+      "sha256": "e8635e23ae04b8592dc334beb16a28fdc4ee2c2133046e3159427ca12d7666dc"
+    },
+    {
+      "path": "models/corydoras-aeneus-black-eye.png",
+      "bytes": 15471,
+      "sha256": "aaaec917431ccef66203d0153389c047a98f622cf4af474a949ce80e19491b36"
+    },
+    {
+      "path": "models/corydoras-paleatus.glb",
+      "bytes": 85012,
+      "sha256": "f782ea9ac71b952bc0898830cd98713dbec947d80ccdf926ae19594d35fd5da7"
+    },
+    {
+      "path": "models/corydoras-paleatus-peppered-body.png",
+      "bytes": 284744,
+      "sha256": "285a22e0b4ab397b95cf5f9405e48d2f187c835bb023b744f331153d60f8be15"
+    },
+    {
+      "path": "models/corydoras-paleatus-peppered-fin.png",
+      "bytes": 58417,
+      "sha256": "e33033fe85d6bf36e8b8384c749ac75e5bee9a70adbc73a4f236f00937937c37"
+    },
+    {
+      "path": "models/corydoras-paleatus-peppered-eye.png",
+      "bytes": 15471,
+      "sha256": "aaaec917431ccef66203d0153389c047a98f622cf4af474a949ce80e19491b36"
+    },
+    {
+      "path": "models/corydoras-paleatus-albino-body.png",
+      "bytes": 207234,
+      "sha256": "edb29f915bbed22dd8b60e062ba2a216a04e218a3b24e945c53802490b412d1f"
+    },
+    {
+      "path": "models/corydoras-paleatus-albino-fin.png",
+      "bytes": 14224,
+      "sha256": "ce27d088432ad0f1174eed5c73acafa7e516c2215ed4596f362cae7eb8daa5eb"
+    },
+    {
+      "path": "models/corydoras-paleatus-albino-eye.png",
+      "bytes": 14558,
+      "sha256": "e456a7273f1ba6a0a931833ce78e3ba3876c2280dbab69bf86ae5b3faef03d5d"
+    },
+    {
+      "path": "models/corydoras-paleatus-longfin.glb",
+      "bytes": 85996,
+      "sha256": "e7d7f05053084dc8dc9fd9d1a25babc7970f521794be8cd60358dcc87ae38603"
+    },
+    {
+      "path": "models/corydoras-paleatus-longfin-longfin-body.png",
+      "bytes": 284744,
+      "sha256": "285a22e0b4ab397b95cf5f9405e48d2f187c835bb023b744f331153d60f8be15"
+    },
+    {
+      "path": "models/corydoras-paleatus-longfin-longfin-fin.png",
+      "bytes": 55764,
+      "sha256": "b062e82efb5eaa8e3d4527bd7bbb21a8bb0f9d4b28a2fe79953030c48090d145"
+    },
+    {
+      "path": "models/corydoras-paleatus-longfin-longfin-eye.png",
+      "bytes": 15471,
+      "sha256": "aaaec917431ccef66203d0153389c047a98f622cf4af474a949ce80e19491b36"
+    },
+    {
+      "path": "models/corydoras-trilineatus.glb",
+      "bytes": 84944,
+      "sha256": "36f89aa744020e00e5c5523270e4b6526a543013e6560f7725491546004b2979"
+    },
+    {
+      "path": "models/corydoras-trilineatus-wild-body.png",
+      "bytes": 362821,
+      "sha256": "4c36785c4239b51a7c6a9389c914abd6b5da801051776e86d3030c815f86277b"
+    },
+    {
+      "path": "models/corydoras-trilineatus-wild-fin.png",
+      "bytes": 17103,
+      "sha256": "2f53cfd651386539b16b1e308d97aa8aa4c08a2b6f5553be3002fefe81f33244"
+    },
+    {
+      "path": "models/corydoras-trilineatus-wild-eye.png",
+      "bytes": 15471,
+      "sha256": "aaaec917431ccef66203d0153389c047a98f622cf4af474a949ce80e19491b36"
+    },
+    {
+      "path": "models/corydoras-pygmaeus.glb",
+      "bytes": 84916,
+      "sha256": "f9ecf2fc53d3289ab68109709e732341b233c3603740e584dac0461e0f43b3d4"
+    },
+    {
+      "path": "models/corydoras-pygmaeus-wild-body.png",
+      "bytes": 180995,
+      "sha256": "990c26064aa3b0818f9fcb85683f8bfda76cbfff073da92db638cdd4f1c8bf84"
+    },
+    {
+      "path": "models/corydoras-pygmaeus-wild-fin.png",
+      "bytes": 13401,
+      "sha256": "3c4f37c391f27fc6a302713c270c7674118e0edf914f90d089366952f31d7e47"
+    },
+    {
+      "path": "models/corydoras-pygmaeus-wild-eye.png",
+      "bytes": 15471,
+      "sha256": "aaaec917431ccef66203d0153389c047a98f622cf4af474a949ce80e19491b36"
+    },
+    {
+      "path": "models/otocinclus.glb",
+      "bytes": 78484,
+      "sha256": "87929c94797fad2ba46486b9267e93a7a6dca8469e640c0d5e466e3fe6433137"
+    },
+    {
+      "path": "models/otocinclus-wild-body.png",
+      "bytes": 233733,
+      "sha256": "563c5200ca94390f604ec56104412c57c0ec7ffe43686ea8721868cc1ee3980c"
+    },
+    {
+      "path": "models/otocinclus-wild-fin.png",
+      "bytes": 75702,
+      "sha256": "d4c95b4394a33f998f1110702ecc3c2ac7cd0b966943657706f3dff586b3efc6"
+    },
+    {
+      "path": "models/otocinclus-wild-eye.png",
+      "bytes": 14984,
+      "sha256": "1d5b20935c2202434879fc61769da55c3d057d64d1b9895ba111fb0c189cdd08"
+    },
+    {
+      "path": "models/otocinclus-dark-body.png",
+      "bytes": 215795,
+      "sha256": "5991f71ab50bfaee993074b31d8f2c7666224055b0cb2d243db314168ed24247"
+    },
+    {
+      "path": "models/otocinclus-dark-fin.png",
+      "bytes": 74779,
+      "sha256": "4991b7490cbe99f8c7e0d4db50f31ace2d82f3ae7208fb4936eb1fc4da5eae5f"
+    },
+    {
+      "path": "models/otocinclus-dark-eye.png",
+      "bytes": 14787,
+      "sha256": "4a9cf8733d8d6d2a65eba1898845fd194215117b27f97558d11b9f02325896e8"
+    },
+    {
+      "path": "models/siamese-algae-eater.glb",
+      "bytes": 83280,
+      "sha256": "6e5b6fa8655854c9a48923c0ac90e6b47a4eb922ef1b9ae91822c36a400ecbb2"
+    },
+    {
+      "path": "models/siamese-algae-eater-wild-body.png",
+      "bytes": 206872,
+      "sha256": "d6b4d6745dfe8e1114d7b1b756143ab019dc6d351ddf9f56fd578b0750bcf104"
+    },
+    {
+      "path": "models/siamese-algae-eater-wild-fin.png",
+      "bytes": 14921,
+      "sha256": "f19dc5c1074cebbbaf7c4f9a1a30e2e414e79b7803595655cb2d96841ca76cfa"
+    },
+    {
+      "path": "models/siamese-algae-eater-wild-eye.png",
+      "bytes": 15218,
+      "sha256": "89cfb1c54a816b6a97cd89322044223214a17ff9f5fa1087f1cbbb5b94b52fba"
+    },
+    {
+      "path": "models/siamese-algae-eater-pale-body.png",
+      "bytes": 206923,
+      "sha256": "5e7cf2d0adcb9d064828cb627810dd77a69a128c0d11b04a43b4b45719e4d43c"
+    },
+    {
+      "path": "models/siamese-algae-eater-pale-fin.png",
+      "bytes": 14939,
+      "sha256": "35aa6d3a6de96bc8d316728e4ad9df977e56d6921535cf56ae49bac6abf17d8b"
+    },
+    {
+      "path": "models/siamese-algae-eater-pale-eye.png",
+      "bytes": 15218,
+      "sha256": "89cfb1c54a816b6a97cd89322044223214a17ff9f5fa1087f1cbbb5b94b52fba"
+    },
+    {
+      "path": "models/amano-shrimp.glb",
+      "bytes": 127388,
+      "sha256": "1700b1d26ac555fee15f54a5285b235392554db8a0a1aad11be39e7e6f32324b"
+    },
+    {
+      "path": "models/amano-shrimp-grey-blue-body.png",
+      "bytes": 67300,
+      "sha256": "68e444602990926b9accfe22e22d43c260076932e4f78618ba0a38171d195b03"
+    },
+    {
+      "path": "models/amano-shrimp-grey-blue-fin.png",
+      "bytes": 35087,
+      "sha256": "65456ac244f30a624bc4ee76ff5161698c516260aebc495d1b95d1567f4c0e3b"
+    },
+    {
+      "path": "models/amano-shrimp-green-brown-body.png",
+      "bytes": 72152,
+      "sha256": "ae8396ddf312c098381e808702780c8b29ece22651e3e71dcc653789e7959eb7"
+    },
+    {
+      "path": "models/amano-shrimp-green-brown-fin.png",
+      "bytes": 41204,
+      "sha256": "8d120695ecd579608b80d4d5db25f5eabc4a7547544a747001271956f59a9533"
+    },
+    {
+      "path": "models/cherry-shrimp.glb",
+      "bytes": 127468,
+      "sha256": "9540752d6621613b4ef57c05d76afe172767e1e451b7ca4bd2c538f6ea48b8b6"
+    },
+    {
+      "path": "models/cherry-shrimp-red-body.png",
+      "bytes": 102123,
+      "sha256": "7947039d87ceb55964085fd02c0709458e6ac78cad25e01860711c390ed321e4"
+    },
+    {
+      "path": "models/cherry-shrimp-red-fin.png",
+      "bytes": 45664,
+      "sha256": "9e7ce654556dbbcdb1ac5664312bdfab4a1e9690b67756b8e7e693596b79b818"
+    },
+    {
+      "path": "models/cherry-shrimp-fire-red-body.png",
+      "bytes": 51088,
+      "sha256": "541ac325cceb21e9879bdeeff841b67f7c7fd32f6f9a5943db795c568a5ae698"
+    },
+    {
+      "path": "models/cherry-shrimp-fire-red-fin.png",
+      "bytes": 25383,
+      "sha256": "a65a891883bf1f4e35cc8006a6c0c42fc8134f53e1e83d77b1945fe66d2471ef"
+    },
+    {
+      "path": "models/cherry-shrimp-yellow-body.png",
+      "bytes": 74353,
+      "sha256": "d755e8986ad615e53f76639972bfa067c66b62d420503f23c9d2d3e21a3bb618"
+    },
+    {
+      "path": "models/cherry-shrimp-yellow-fin.png",
+      "bytes": 38598,
+      "sha256": "e5789685c00addd74442b1c33035dc51320dd801b7a4ed9ddf40f52d92a1e2bc"
+    },
+    {
+      "path": "models/cherry-shrimp-orange-body.png",
+      "bytes": 74710,
+      "sha256": "e9da3a622bb48438a1e44ef44e75e06c320228b5a29f6bd0975d37f10cbdcf2b"
+    },
+    {
+      "path": "models/cherry-shrimp-orange-fin.png",
+      "bytes": 38904,
+      "sha256": "01f848e57d53a33009f79531261844f48dafe9cb7b6b5e4269a626947fea9c45"
+    },
+    {
+      "path": "models/cherry-shrimp-blue-dream-body.png",
+      "bytes": 75513,
+      "sha256": "828f76c720390e6088ebcaf0f1a64e05b8ab794f3b4bf299699d8ac0afadc989"
+    },
+    {
+      "path": "models/cherry-shrimp-blue-dream-fin.png",
+      "bytes": 38746,
+      "sha256": "4cc619c3f117ca709fa14c4329b1e7537de8cb0dcc6b44567db81fba4a3b859e"
+    },
+    {
+      "path": "models/cherry-shrimp-green-jade-body.png",
+      "bytes": 74946,
+      "sha256": "0a6c0b127a256e12cedcd7388bad10b085e5a369c4c3f933140f3847d78f6852"
+    },
+    {
+      "path": "models/cherry-shrimp-green-jade-fin.png",
+      "bytes": 39004,
+      "sha256": "0419d95967a79f806128c8f129716f9c878481bbda49ad0e9265c9d71eb41f9d"
+    },
+    {
+      "path": "models/cherry-shrimp-black-rose-body.png",
+      "bytes": 32507,
+      "sha256": "1e920dc5253f4038dd795aa9b2f120cf2e09c86403939edaa56da9dcd46146c1"
+    },
+    {
+      "path": "models/cherry-shrimp-black-rose-fin.png",
+      "bytes": 19102,
+      "sha256": "919b81eb4a00c6e68a506865a8bf64e8124d513e9a8687d1ebedc2a1dc42858e"
+    },
+    {
+      "path": "models/cherry-shrimp-chocolate-body.png",
+      "bytes": 67852,
+      "sha256": "9035480f40f35c42403a8300ef4e4a4a62526c03d17b37069e5578fd5542349e"
+    },
+    {
+      "path": "models/cherry-shrimp-chocolate-fin.png",
+      "bytes": 32882,
+      "sha256": "f6e94aec13bba3e7e3ef23890c85aa65a180480db60b11ee6183e153cb8d793d"
+    },
+    {
+      "path": "models/cherry-shrimp-wild-body.png",
+      "bytes": 121532,
+      "sha256": "0c9e77edb684131251ca8eef759cb0853cd8e0d6ee0b40c9df7d503598eb260c"
+    },
+    {
+      "path": "models/cherry-shrimp-wild-fin.png",
+      "bytes": 56485,
+      "sha256": "ee91f4495bc96f5b8c928bfd64322701f7c4a4061448263cee6573b5a99cc3c7"
+    },
+    {
+      "path": "models/nerite-snail.glb",
+      "bytes": 43728,
+      "sha256": "d9736777352475f9aa3fd81d4e1f7a1a4fa8cab51e9abda4037a86b418e7fc6f"
+    },
+    {
+      "path": "models/nerite-snail-zebra-body.png",
+      "bytes": 83779,
+      "sha256": "ba057c1f2008293bfb8ce77f3127a5da0aa95501baf9f1ed54b10562ab68f2c0"
+    },
+    {
+      "path": "models/nerite-snail-zebra-fin.png",
+      "bytes": 38407,
+      "sha256": "03e6542fc2a27bcb7dc2a9382d905ecd4115756a72bc6e475d390917500c197e"
+    },
+    {
+      "path": "models/nerite-snail-tiger-body.png",
+      "bytes": 99464,
+      "sha256": "36162ca9c87d421b22a71ee800726adfab49bfe7118697bdf3d94ae2e0ae75ae"
+    },
+    {
+      "path": "models/nerite-snail-tiger-fin.png",
+      "bytes": 38407,
+      "sha256": "03e6542fc2a27bcb7dc2a9382d905ecd4115756a72bc6e475d390917500c197e"
+    },
+    {
+      "path": "models/ramshorn-snail.glb",
+      "bytes": 73352,
+      "sha256": "21619cb8bb846bb49b17050389ca7e7e22533e933117676d76e35a7e71f981e0"
+    },
+    {
+      "path": "models/ramshorn-snail-red-body.png",
+      "bytes": 65754,
+      "sha256": "180d9d53ded6ab738a083320d73eefb71ce63bdc193449229520c74b12adf4ed"
+    },
+    {
+      "path": "models/ramshorn-snail-red-fin.png",
+      "bytes": 37816,
+      "sha256": "ab40be4847bf53acfecbce370bab8680c44a7b5d1e1e9ee55cfd5a478a051b65"
+    },
+    {
+      "path": "models/ramshorn-snail-brown-body.png",
+      "bytes": 58666,
+      "sha256": "2b80348ae37e13ef79f399a64ac3fa0138576b2119185a2f5dd8f7e8359e7b72"
+    },
+    {
+      "path": "models/ramshorn-snail-brown-fin.png",
+      "bytes": 39639,
+      "sha256": "a534bcb4d7ad7adf101d79153268d58038fbce40625af85d358824baae0e7748"
+    },
+    {
+      "path": "models/ramshorn-snail-blue-body.png",
+      "bytes": 43146,
+      "sha256": "01f78925f7462a7d321af315beaefa1c7abc688476c1f4956dc27c0f30445ff4"
+    },
+    {
+      "path": "models/ramshorn-snail-blue-fin.png",
+      "bytes": 40452,
+      "sha256": "42a2d1ce5067908b29ada21faced2c88c95b87bb1d282f9b4c89e2282589171e"
+    },
+    {
+      "path": "models/ramshorn-snail-leopard-body.png",
+      "bytes": 82538,
+      "sha256": "39c3ae3af0f462cebdbdcc371267b29f159eed9678af849954c4c492610ed985"
+    },
+    {
+      "path": "models/ramshorn-snail-leopard-fin.png",
+      "bytes": 38633,
+      "sha256": "2654b5f1d1d73319c6a6c5cf47a67dba541b316b76e1e7b93d9503b93fe71f32"
+    },
+    {
+      "path": "models/trumpet-snail.glb",
+      "bytes": 153728,
+      "sha256": "d05331c58b504767298747ff06ebd7c17f7c2e38ba3301b0fbc3d44a4c98aa2a"
+    },
+    {
+      "path": "models/trumpet-snail-wild-body.png",
+      "bytes": 82198,
+      "sha256": "53f0012efe8084e0791db8f6e949f7aa9aade0812a52e0d06622c22bf89616c6"
+    },
+    {
+      "path": "models/trumpet-snail-wild-fin.png",
+      "bytes": 39353,
+      "sha256": "fe482e5c93ca59220989505e3807c2089924a4f1b8dd3c4c0ea0dea37c1946b8"
+    },
+    {
+      "path": "models/assassin-snail.glb",
+      "bytes": 109904,
+      "sha256": "a2fed38506371fae5ddfa36c64906c63570417bd2e22b79862de36f5535be3c0"
+    },
+    {
+      "path": "models/assassin-snail-wild-body.png",
+      "bytes": 51823,
+      "sha256": "ec6739321bae359a47f08701b581010b7c76f3af517b5dfb5435ceae8a412504"
+    },
+    {
+      "path": "models/assassin-snail-wild-fin.png",
+      "bytes": 39353,
+      "sha256": "fe482e5c93ca59220989505e3807c2089924a4f1b8dd3c4c0ea0dea37c1946b8"
+    },
+    {
+      "path": "models/crystal-red-shrimp.glb",
+      "bytes": 127228,
+      "sha256": "c2d6f2a1be2b019242f88c7cf0dd2646452ddbe3994aa9d2236db2ca578b7c24"
+    },
+    {
+      "path": "models/crystal-red-shrimp-c-grade-body.png",
+      "bytes": 16237,
+      "sha256": "4e43ea857c3b37c73775a07462a707c20fe94ab594fb0dc292cc7c61e79480f1"
+    },
+    {
+      "path": "models/crystal-red-shrimp-c-grade-fin.png",
+      "bytes": 34355,
+      "sha256": "cf05e40d1a1109737aa9be9abf32a6d2faf83a383a82e771dffbdfcf77e401e3"
+    },
+    {
+      "path": "models/crystal-red-shrimp-s-grade-body.png",
+      "bytes": 13529,
+      "sha256": "aa47130aa6659bd70de92cabc37a3b1e6e9411476d43909c9651f23cc2fc343a"
+    },
+    {
+      "path": "models/crystal-red-shrimp-s-grade-fin.png",
+      "bytes": 34355,
+      "sha256": "cf05e40d1a1109737aa9be9abf32a6d2faf83a383a82e771dffbdfcf77e401e3"
+    },
+    {
+      "path": "models/crystal-red-shrimp-ss-grade-body.png",
+      "bytes": 11145,
+      "sha256": "ee1ef6fd5cfc200bddc331fb12228fc2dcdceda72c5cbcf27a63dbc01c31164d"
+    },
+    {
+      "path": "models/crystal-red-shrimp-ss-grade-fin.png",
+      "bytes": 34351,
+      "sha256": "417bd42f0b5d78c9ff151912789624db4fad139eed91f0d8ba809603eee24b92"
+    },
+    {
+      "path": "models/crystal-red-shrimp-black-body.png",
+      "bytes": 15995,
+      "sha256": "61a9bb94743ec6961ec48fc9432733a229fbbcfe35827e45af50e81e923b7a05"
+    },
+    {
+      "path": "models/crystal-red-shrimp-black-fin.png",
+      "bytes": 32968,
+      "sha256": "25d1380b93a695b4be0bf1ede06b952b517cf89e5990c2cd0860ddd6a3e78933"
+    },
+    {
+      "path": "models/paradise-fish.glb",
+      "bytes": 88640,
+      "sha256": "344a6a3979a092e6b823c7d3de508eada9797f5ebfa0757ded8ce58be17929d9"
+    },
+    {
+      "path": "models/paradise-fish-wild-body.png",
+      "bytes": 228205,
+      "sha256": "2e732c7a41db4e7381a1e4e9168b9321628c98bbc80313bb0654f7e51b8d3820"
+    },
+    {
+      "path": "models/paradise-fish-wild-fin.png",
+      "bytes": 15366,
+      "sha256": "f350d9a095bad7026f447213fb794621bf14076ead318e4a32ab2129ab67fdd9"
+    },
+    {
+      "path": "models/paradise-fish-wild-eye.png",
+      "bytes": 15177,
+      "sha256": "0b5f8d710ff4eca73a59782bf54f974cc9cb76330908ec3fbeaa61f6d878eb08"
+    },
+    {
+      "path": "models/paradise-fish-albino-body.png",
+      "bytes": 219601,
+      "sha256": "3446f27ac2104ba0ac3443ccbc4e665f7e07034fe76776436cd2bbd9f43b2c68"
+    },
+    {
+      "path": "models/paradise-fish-albino-fin.png",
+      "bytes": 14924,
+      "sha256": "cf62a96c59f77f0849fe68652c37da474794ba1c28eaf0dd6a724820a08d799a"
+    },
+    {
+      "path": "models/paradise-fish-albino-eye.png",
+      "bytes": 15314,
+      "sha256": "41ac1f62cc8bf0860bee35a1db668dc6f211a6901d9aeac58b82d5d402605310"
+    },
+    {
+      "path": "models/paradise-fish-black-body.png",
+      "bytes": 200716,
+      "sha256": "1681f3eec55ead609b3b075e4ead7687cf4345f7e4850a311d6c8620ed89fd38"
+    },
+    {
+      "path": "models/paradise-fish-black-fin.png",
+      "bytes": 14656,
+      "sha256": "ae0bd03ca1fa24f9fe8621124b8bbc1bfc63712bdd070fefad4a7ff9aba5b6d7"
+    },
+    {
+      "path": "models/paradise-fish-black-eye.png",
+      "bytes": 15177,
+      "sha256": "0b5f8d710ff4eca73a59782bf54f974cc9cb76330908ec3fbeaa61f6d878eb08"
+    },
+    {
+      "path": "models/croaking-gourami.glb",
+      "bytes": 81812,
+      "sha256": "c2075d7eb4f567a4c66801543e1d3e61302cde013292f0d8f520f23c8172b2dc"
+    },
+    {
+      "path": "models/croaking-gourami-wild-body.png",
+      "bytes": 221144,
+      "sha256": "2af52803886a166082e3df921ab7e101d7ca6c531f240b2e722920fbb01fc063"
+    },
+    {
+      "path": "models/croaking-gourami-wild-fin.png",
+      "bytes": 63867,
+      "sha256": "7601616236b337b872349bcfdd8db156296cb93a588d8ab4bdf857fc31f21034"
+    },
+    {
+      "path": "models/croaking-gourami-wild-eye.png",
+      "bytes": 15335,
+      "sha256": "b495f281068158a62130dafe500d0489ab7a002b13b19b8dc0b68adc1c4e4cf4"
+    },
+    {
+      "path": "models/celestial-pearl-danio.glb",
+      "bytes": 71044,
+      "sha256": "ef94611adf73d3af0093e6397de9c2e506f8edab8b3854430ae05b5f4ef691b9"
+    },
+    {
+      "path": "models/celestial-pearl-danio-wild-body.png",
+      "bytes": 285743,
+      "sha256": "0895ce5d11999ceaf5bcf83a3c605425c82285dafb7654adda0bf96be7886277"
+    },
+    {
+      "path": "models/celestial-pearl-danio-wild-fin.png",
+      "bytes": 13120,
+      "sha256": "41b23ad1d5a1a3f642eb5f9550c7b517ebc5c0ab657d2a1c267184938ff4c5f1"
+    },
+    {
+      "path": "models/celestial-pearl-danio-wild-eye.png",
+      "bytes": 15217,
+      "sha256": "f19f87d67cbfe6eb8c403624c80aa9ca481a0a00c6d6e06f1ef5e6ebc7494cc7"
+    },
+    {
+      "path": "models/silver-hatchetfish.glb",
+      "bytes": 86836,
+      "sha256": "d59ed04b3f61e815b16268d5c8ca2087f09f19780e810c6dce6462e49799095a"
+    },
+    {
+      "path": "models/silver-hatchetfish-silver-body.png",
+      "bytes": 266217,
+      "sha256": "f022a18ac1da24a7ed9c12e3308cb9886a77e5585e4c3be512bc74cfdce2a51d"
+    },
+    {
+      "path": "models/silver-hatchetfish-silver-fin.png",
+      "bytes": 24526,
+      "sha256": "be667406717845e8c9cb615f3aa9801e713aaf656425e9b8ce9d8559867517b0"
+    },
+    {
+      "path": "models/silver-hatchetfish-silver-eye.png",
+      "bytes": 14840,
+      "sha256": "bd7298cfbb52b96218c718daa39f764dc8fafb4fb402bedb95f6882a034a1634"
+    },
+    {
+      "path": "models/zebra-danio.glb",
+      "bytes": 80856,
+      "sha256": "c3f4de9f68d08e5aaf75494b4d99b351a15efd9d84fed57a8aa1bc1a3f37f3a2"
+    },
+    {
+      "path": "models/zebra-danio-wild-body.png",
+      "bytes": 208392,
+      "sha256": "bb437bf31f2e65a6c43f8716171b3c0dd1a6560cd8bd5a4b38068199c0c456f8"
+    },
+    {
+      "path": "models/zebra-danio-wild-fin.png",
+      "bytes": 30423,
+      "sha256": "e45392d57ae19c31566dd19bcfb42e11f4daf2f352dd5da42176ed4139dd1133"
+    },
+    {
+      "path": "models/zebra-danio-wild-eye.png",
+      "bytes": 15939,
+      "sha256": "10d99ee403c14f2fddebb1006ebc4dd5b5149ddb9552c6004b46c6e292468432"
+    },
+    {
+      "path": "models/zebra-danio-leopard-body.png",
+      "bytes": 291754,
+      "sha256": "1d493ac433e9679b437d8c905e6d09beae2ee311e803790fcc11dcd38df65c9a"
+    },
+    {
+      "path": "models/zebra-danio-leopard-fin.png",
+      "bytes": 75816,
+      "sha256": "c466ca75755b338c7cab88c28dd24efd337e9cdf40dc0e79e9be765d623f9577"
+    },
+    {
+      "path": "models/zebra-danio-leopard-eye.png",
+      "bytes": 15939,
+      "sha256": "10d99ee403c14f2fddebb1006ebc4dd5b5149ddb9552c6004b46c6e292468432"
+    },
+    {
+      "path": "models/zebra-danio-golden-body.png",
+      "bytes": 208341,
+      "sha256": "51b281ce55cfd97bf0227bcc8dfb02fced03587fdf0a3b22a9f3e9ae48623a1b"
+    },
+    {
+      "path": "models/zebra-danio-golden-fin.png",
+      "bytes": 27410,
+      "sha256": "569d1105381c3c3fa32a96cf9350530d35325d6b59b540167a8d1b7dfd26d147"
+    },
+    {
+      "path": "models/zebra-danio-golden-eye.png",
+      "bytes": 15947,
+      "sha256": "5aad16d22f3e1d00cd3ab53f630013dad2bfcc5e3ca2ed483b405787f6f2f815"
+    },
+    {
+      "path": "models/harlequin-rasbora.glb",
+      "bytes": 81208,
+      "sha256": "27bbf6078a9e9b1af1eccfaeb155c891a30ed42c36dd116a519ac2b81b63dc28"
+    },
+    {
+      "path": "models/harlequin-rasbora-wild-body.png",
+      "bytes": 230560,
+      "sha256": "27b265a1a3495f1e5a958303c74ac1c44e4df7f32a86bac6872bd4edc95bb49f"
+    },
+    {
+      "path": "models/harlequin-rasbora-wild-fin.png",
+      "bytes": 49683,
+      "sha256": "64fe0024cc72cc2d65240b9c44a588cfc269263e6a8baf0119520ca86d42d446"
+    },
+    {
+      "path": "models/harlequin-rasbora-wild-eye.png",
+      "bytes": 14818,
+      "sha256": "6bc261519cc388e6ccf29f775d16875681bef804eaacc8210957cc5dadcc43da"
+    },
+    {
+      "path": "models/harlequin-rasbora-gold-body.png",
+      "bytes": 229217,
+      "sha256": "38646bcd2a24e8fc40249dbec52ac3d90c683de15a3513237d0e8cddddd3584e"
+    },
+    {
+      "path": "models/harlequin-rasbora-gold-fin.png",
+      "bytes": 46867,
+      "sha256": "ef17f57cf7fd8fc9d49e52ed7c2daa97c93381ad3a86de199199a02b68420b3f"
+    },
+    {
+      "path": "models/harlequin-rasbora-gold-eye.png",
+      "bytes": 15440,
+      "sha256": "d1827ea60fb5003cfffeb5af757dd59aa1fee70f25ecb25a49d4f9a0b4c24a85"
+    },
+    {
+      "path": "models/chili-rasbora.glb",
+      "bytes": 68688,
+      "sha256": "f7d9120f38267ef084afc2a4ec8811a7f8d2e3521a7e9b04d9e333df434a591e"
+    },
+    {
+      "path": "models/chili-rasbora-wild-body.png",
+      "bytes": 211416,
+      "sha256": "f5e272037cb82ded5c6fd5db70d0c54969687731d633b70f62e008811251265b"
+    },
+    {
+      "path": "models/chili-rasbora-wild-fin.png",
+      "bytes": 57318,
+      "sha256": "06d9a43b31ebc892705c869006aad96a4945de5c75fee815a190cbd17f52a262"
+    },
+    {
+      "path": "models/chili-rasbora-wild-eye.png",
+      "bytes": 14416,
+      "sha256": "3d26af7296833a1f8fabe8ec235a61f85fd3ef8c5c05aefe66882c7c51c4ff23"
+    },
+    {
+      "path": "models/chili-rasbora-deep-body.png",
+      "bytes": 209223,
+      "sha256": "30e7eeb217283cd08df733302a70834ad9b43deb54806b67f70557467b065e1c"
+    },
+    {
+      "path": "models/chili-rasbora-deep-fin.png",
+      "bytes": 58445,
+      "sha256": "00748016e1c9dfa259db8098f6c22220506663859b139803947795e0a4365416"
+    },
+    {
+      "path": "models/chili-rasbora-deep-eye.png",
+      "bytes": 14416,
+      "sha256": "3d26af7296833a1f8fabe8ec235a61f85fd3ef8c5c05aefe66882c7c51c4ff23"
+    },
+    {
+      "path": "models/pearl-gourami.glb",
+      "bytes": 83152,
+      "sha256": "3bad63b48b0b0fdc6fe8b828c9db2930bd5e3fa9ceeee441032fa6c0b86bcb4e"
+    },
+    {
+      "path": "models/pearl-gourami-wild-body.png",
+      "bytes": 307145,
+      "sha256": "49da7eb8d362883988d11f53014d607530e57c058a40732a48f831912c479418"
+    },
+    {
+      "path": "models/pearl-gourami-wild-fin.png",
+      "bytes": 88555,
+      "sha256": "638d6bbc5bbe90cda7c42c2eb44484cc38bdb3f1e7c07f90923e478743f247d4"
+    },
+    {
+      "path": "models/pearl-gourami-wild-eye.png",
+      "bytes": 14766,
+      "sha256": "ea444d6dd0448eb0325b574eca32650141903c20783ca66a7c748e0cbd996741"
+    },
+    {
+      "path": "models/pearl-gourami-female.glb",
+      "bytes": 82432,
+      "sha256": "aa12c4b156fe0daed7e52adb13ab76dcd44e4407cb154fdddf7b677f67bb3600"
+    },
+    {
+      "path": "models/pearl-gourami-female-wild-body.png",
+      "bytes": 306045,
+      "sha256": "21548bdfd4fe5f0ff8c690df5373e8b563bebaa7151aa94101e5cf0df2bd5721"
+    },
+    {
+      "path": "models/pearl-gourami-female-wild-fin.png",
+      "bytes": 79225,
+      "sha256": "37271ae5fa2ada037c748649922740f08c27ea52e6e7a5eae3ec34677eb4f39f"
+    },
+    {
+      "path": "models/pearl-gourami-female-wild-eye.png",
+      "bytes": 14766,
+      "sha256": "ea444d6dd0448eb0325b574eca32650141903c20783ca66a7c748e0cbd996741"
+    },
+    {
+      "path": "models/pearl-gourami-red-throat-body.png",
+      "bytes": 308874,
+      "sha256": "026d53c6e2093bcea3994246fa9dd2c4abee029a5723bcf490e1a1feae42103e"
+    },
+    {
+      "path": "models/pearl-gourami-red-throat-fin.png",
+      "bytes": 89180,
+      "sha256": "0078ce14de07247befa050342ac8310209d2b4dfd389e783a94512db488421a7"
+    },
+    {
+      "path": "models/pearl-gourami-red-throat-eye.png",
+      "bytes": 14766,
+      "sha256": "ea444d6dd0448eb0325b574eca32650141903c20783ca66a7c748e0cbd996741"
+    },
+    {
+      "path": "models/pearl-gourami-female-red-throat-body.png",
+      "bytes": 306045,
+      "sha256": "21548bdfd4fe5f0ff8c690df5373e8b563bebaa7151aa94101e5cf0df2bd5721"
+    },
+    {
+      "path": "models/pearl-gourami-female-red-throat-fin.png",
+      "bytes": 79225,
+      "sha256": "37271ae5fa2ada037c748649922740f08c27ea52e6e7a5eae3ec34677eb4f39f"
+    },
+    {
+      "path": "models/pearl-gourami-female-red-throat-eye.png",
+      "bytes": 14766,
+      "sha256": "ea444d6dd0448eb0325b574eca32650141903c20783ca66a7c748e0cbd996741"
+    },
+    {
+      "path": "models/dwarf-gourami.glb",
+      "bytes": 81572,
+      "sha256": "0ddf42594456bbe0bb9b3d49d9026d0dd76f86ebd8e8b8daf8fcf830239bdfd3"
+    },
+    {
+      "path": "models/dwarf-gourami-wild-body.png",
+      "bytes": 283600,
+      "sha256": "7e5ec44755477674f8a150693c8afb8a6991b0c2d406bf5572ac86192071525f"
+    },
+    {
+      "path": "models/dwarf-gourami-wild-fin.png",
+      "bytes": 71997,
+      "sha256": "4a43d5defc7147bf26e743dd724cf1d527e58bdcfb8e7b8cb05fbd116a0146b4"
+    },
+    {
+      "path": "models/dwarf-gourami-wild-eye.png",
+      "bytes": 15096,
+      "sha256": "44334a9172d9b2c7cdfeab9becf978a28b8266aa79fbd24d84277471149cf08d"
+    },
+    {
+      "path": "models/dwarf-gourami-female.glb",
+      "bytes": 81596,
+      "sha256": "6fbd1d666cfc4992fb3231f6ccd2bc18ad96a36bb7e8b035a72f607072ee86fe"
+    },
+    {
+      "path": "models/dwarf-gourami-female-wild-body.png",
+      "bytes": 226800,
+      "sha256": "59163128e54285e13a30bcb785e902e5a053ae11faa793d2fb4dc3a325ddeef0"
+    },
+    {
+      "path": "models/dwarf-gourami-female-wild-fin.png",
+      "bytes": 13334,
+      "sha256": "4a50e990c7b4ea9db52359795a1ed6f3e1c2c114348849589721a63015f6dc84"
+    },
+    {
+      "path": "models/dwarf-gourami-female-wild-eye.png",
+      "bytes": 15181,
+      "sha256": "f7d8ce695776611a7cc0f3708003418d8cab92e29335681cdf709f6b44c91b3e"
+    },
+    {
+      "path": "models/dwarf-gourami-flame-body.png",
+      "bytes": 239726,
+      "sha256": "bf730b72f2b2d9fe085dff70d33611bb22cda53676d94b6a9955816ca6996059"
+    },
+    {
+      "path": "models/dwarf-gourami-flame-fin.png",
+      "bytes": 68974,
+      "sha256": "79b42bf2c470492fb3be16282802280a7ac18dc14c7a04757f5b007bbdbe2929"
+    },
+    {
+      "path": "models/dwarf-gourami-flame-eye.png",
+      "bytes": 15096,
+      "sha256": "44334a9172d9b2c7cdfeab9becf978a28b8266aa79fbd24d84277471149cf08d"
+    },
+    {
+      "path": "models/dwarf-gourami-female-flame-body.png",
+      "bytes": 230736,
+      "sha256": "48fdbe1564138618d2d4ca5db3d393f3a7d8865395135de956110df76b6b1122"
+    },
+    {
+      "path": "models/dwarf-gourami-female-flame-fin.png",
+      "bytes": 13334,
+      "sha256": "4a50e990c7b4ea9db52359795a1ed6f3e1c2c114348849589721a63015f6dc84"
+    },
+    {
+      "path": "models/dwarf-gourami-female-flame-eye.png",
+      "bytes": 15181,
+      "sha256": "f7d8ce695776611a7cc0f3708003418d8cab92e29335681cdf709f6b44c91b3e"
+    },
+    {
+      "path": "models/dwarf-gourami-powder-blue-body.png",
+      "bytes": 268086,
+      "sha256": "ee393158bb9ad6169dae36b0da6815d3fb35ead6418071e9429c7d2775ce30e5"
+    },
+    {
+      "path": "models/dwarf-gourami-powder-blue-fin.png",
+      "bytes": 70071,
+      "sha256": "5f3f0c0d6b7781c2e56443731e33c8166f56eb035efb0cda05bb62beda9c7465"
+    },
+    {
+      "path": "models/dwarf-gourami-powder-blue-eye.png",
+      "bytes": 15096,
+      "sha256": "44334a9172d9b2c7cdfeab9becf978a28b8266aa79fbd24d84277471149cf08d"
+    },
+    {
+      "path": "models/dwarf-gourami-female-powder-blue-body.png",
+      "bytes": 226903,
+      "sha256": "fee0ab2c68f9d5bce760c7c060f76ce1aa895ce4d070a7bc391df261da691494"
+    },
+    {
+      "path": "models/dwarf-gourami-female-powder-blue-fin.png",
+      "bytes": 13334,
+      "sha256": "4a50e990c7b4ea9db52359795a1ed6f3e1c2c114348849589721a63015f6dc84"
+    },
+    {
+      "path": "models/dwarf-gourami-female-powder-blue-eye.png",
+      "bytes": 15181,
+      "sha256": "f7d8ce695776611a7cc0f3708003418d8cab92e29335681cdf709f6b44c91b3e"
+    },
+    {
+      "path": "models/dwarf-gourami-cobalt-body.png",
+      "bytes": 231720,
+      "sha256": "bda7c31bd8059e33c9b1c3913a3ad4bb2b940ada94a8d590c64f5cab0dff4a7a"
+    },
+    {
+      "path": "models/dwarf-gourami-cobalt-fin.png",
+      "bytes": 64300,
+      "sha256": "4155009b4966fd3609fbba4eba4911ef01135d85100fd22b8a8a10a23bcca790"
+    },
+    {
+      "path": "models/dwarf-gourami-cobalt-eye.png",
+      "bytes": 15096,
+      "sha256": "44334a9172d9b2c7cdfeab9becf978a28b8266aa79fbd24d84277471149cf08d"
+    },
+    {
+      "path": "models/dwarf-gourami-female-cobalt-body.png",
+      "bytes": 225548,
+      "sha256": "406adef8a5d7583c7dbbca8920cf179e0217abea7f8201df9e7e6d707527513b"
+    },
+    {
+      "path": "models/dwarf-gourami-female-cobalt-fin.png",
+      "bytes": 13334,
+      "sha256": "4a50e990c7b4ea9db52359795a1ed6f3e1c2c114348849589721a63015f6dc84"
+    },
+    {
+      "path": "models/dwarf-gourami-female-cobalt-eye.png",
+      "bytes": 15181,
+      "sha256": "f7d8ce695776611a7cc0f3708003418d8cab92e29335681cdf709f6b44c91b3e"
+    },
+    {
+      "path": "models/angelfish.glb",
+      "bytes": 88160,
+      "sha256": "43094bc95225dc88100c1214b31dfa7bd3c219490cfd6082a497b3cb9445639d"
+    },
+    {
+      "path": "models/angelfish-silver-body.png",
+      "bytes": 244356,
+      "sha256": "9d60725010f6f7154aade93c7a117ad0bc78b3e91bd4dea6c157b44375e88fca"
+    },
+    {
+      "path": "models/angelfish-silver-fin.png",
+      "bytes": 25438,
+      "sha256": "2b6b23dd755dfb618d46168ce7289d421dbcda67be2c666a1036925e15a09787"
+    },
+    {
+      "path": "models/angelfish-silver-eye.png",
+      "bytes": 14324,
+      "sha256": "99af46cbb3a145340ccf995d2d600060074d47da702a2a79c2b4d46a090d98d2"
+    },
+    {
+      "path": "models/angelfish-black-body.png",
+      "bytes": 261693,
+      "sha256": "2d8874a0b42ee6ea9b70a34321d0649d3ffcc3aec6457bc47297ba4586639691"
+    },
+    {
+      "path": "models/angelfish-black-fin.png",
+      "bytes": 67947,
+      "sha256": "4ed9cbbe24c347015fb4190fe4e547fe142ef95bf4cf3d13c1e610c968937f6f"
+    },
+    {
+      "path": "models/angelfish-black-eye.png",
+      "bytes": 13983,
+      "sha256": "fa39ab79c2bd4a75995be8b40926fae82bef597e5cd064e64166a6de72003c25"
+    },
+    {
+      "path": "models/angelfish-marble-body.png",
+      "bytes": 277302,
+      "sha256": "8cd287f3f6a6cc16a0f00cc573868af12ac12470b6df9a32dcadabcb4139d3cd"
+    },
+    {
+      "path": "models/angelfish-marble-fin.png",
+      "bytes": 66544,
+      "sha256": "fa0a7b1093ae36506e8c64f3e9af61ff47a444c47682d173854e715e0ad6e675"
+    },
+    {
+      "path": "models/angelfish-marble-eye.png",
+      "bytes": 14324,
+      "sha256": "99af46cbb3a145340ccf995d2d600060074d47da702a2a79c2b4d46a090d98d2"
+    },
+    {
+      "path": "models/angelfish-koi-body.png",
+      "bytes": 325709,
+      "sha256": "37caece7e69995b05c737c4dd10cc4526be30c426ff3cadadd920ef6ade6af74"
+    },
+    {
+      "path": "models/angelfish-koi-fin.png",
+      "bytes": 69080,
+      "sha256": "99c1ab37b594cb022335fa80155c98ca593e56124c3707b7334f93743343eca5"
+    },
+    {
+      "path": "models/angelfish-koi-eye.png",
+      "bytes": 14324,
+      "sha256": "99af46cbb3a145340ccf995d2d600060074d47da702a2a79c2b4d46a090d98d2"
+    },
+    {
+      "path": "models/angelfish-gold-body.png",
+      "bytes": 307137,
+      "sha256": "5ec398ba11ab1740deb19656b7b1458b3e320365cbf7046ed99543fd90809649"
+    },
+    {
+      "path": "models/angelfish-gold-fin.png",
+      "bytes": 13477,
+      "sha256": "3227c235910ae11bc9accd432d6af799244541efe9ed2e89aef3290bb8cd9cf1"
+    },
+    {
+      "path": "models/angelfish-gold-eye.png",
+      "bytes": 15032,
+      "sha256": "bb99993fec770ec5c471b93aa982ee685ed6166d02a3c9891cb17d7b8b939f8b"
+    },
+    {
+      "path": "models/angelfish-platinum-body.png",
+      "bytes": 212128,
+      "sha256": "0d45ee71c3bd1c8b31839f29335342526991a622a367fbf925b35c956b8fe008"
+    },
+    {
+      "path": "models/angelfish-platinum-fin.png",
+      "bytes": 13380,
+      "sha256": "416dbe64903af5e5bd27eb1cf2553ec34d8eccc7b980090c06d4930b232d797e"
+    },
+    {
+      "path": "models/angelfish-platinum-eye.png",
+      "bytes": 14260,
+      "sha256": "e2dba73f9f8b15d1db5829d7567bf215ebc63040c27b551480c969dca1e7c08a"
+    },
+    {
+      "path": "models/angelfish-leopard-body.png",
+      "bytes": 385002,
+      "sha256": "8ab1c05b2c5b021ea083abad9825b581a53dfa96dbf96c54db2da29534d68c77"
+    },
+    {
+      "path": "models/angelfish-leopard-fin.png",
+      "bytes": 71661,
+      "sha256": "cba42f95bcaae865a9b7722a34798785da513927caa67f8e8738a90954c2b132"
+    },
+    {
+      "path": "models/angelfish-leopard-eye.png",
+      "bytes": 14324,
+      "sha256": "99af46cbb3a145340ccf995d2d600060074d47da702a2a79c2b4d46a090d98d2"
+    },
+    {
+      "path": "models/ram-cichlid.glb",
+      "bytes": 82652,
+      "sha256": "7474dbcd62f0819f1aefd3b65203966704557a0ddf5c281713705ed52d50ecd1"
+    },
+    {
+      "path": "models/ram-cichlid-german-blue-body.png",
+      "bytes": 250328,
+      "sha256": "720d3d66409035fbe5cb42cd2fc431d227e7c271f609975800d3584e279499be"
+    },
+    {
+      "path": "models/ram-cichlid-german-blue-fin.png",
+      "bytes": 70409,
+      "sha256": "17a02ec185f5aed3ead1b44b90303978c31d2c1a5d2ea18397de8cbfea6ccf16"
+    },
+    {
+      "path": "models/ram-cichlid-german-blue-eye.png",
+      "bytes": 14096,
+      "sha256": "d13f7cb79c1cc039c54185cb30157242c35842f4d462e1063789a1e3265727d2"
+    },
+    {
+      "path": "models/ram-cichlid-electric-blue-body.png",
+      "bytes": 247904,
+      "sha256": "3243c383aaee1b2fab5037f6c199baab221900645ee992a8f6df81045dae8df6"
+    },
+    {
+      "path": "models/ram-cichlid-electric-blue-fin.png",
+      "bytes": 70372,
+      "sha256": "f732b80ad23aeaa1a65e4b18083f82f78e56df0b714ad814e41c2050129b8dd9"
+    },
+    {
+      "path": "models/ram-cichlid-electric-blue-eye.png",
+      "bytes": 14096,
+      "sha256": "d13f7cb79c1cc039c54185cb30157242c35842f4d462e1063789a1e3265727d2"
+    },
+    {
+      "path": "models/ram-cichlid-gold-body.png",
+      "bytes": 239668,
+      "sha256": "3e5802b577a3bec2a19eb7b43df8342b335f350cf1979f1bddcc6654a75db398"
+    },
+    {
+      "path": "models/ram-cichlid-gold-fin.png",
+      "bytes": 66134,
+      "sha256": "fb5ec6583d74442500a969b02b1cb5cde82c9d1fb4a8abf2a060fd2b589b1f75"
+    },
+    {
+      "path": "models/ram-cichlid-gold-eye.png",
+      "bytes": 14096,
+      "sha256": "d13f7cb79c1cc039c54185cb30157242c35842f4d462e1063789a1e3265727d2"
+    },
+    {
+      "path": "models/ram-cichlid-black-body.png",
+      "bytes": 228193,
+      "sha256": "bbec873b38cd62c023bdc788e493ecad4e643d8ed301335e32571be6a1d00e81"
+    },
+    {
+      "path": "models/ram-cichlid-black-fin.png",
+      "bytes": 74520,
+      "sha256": "0731a8519995781bcb2fcecd5efa55eb61c4b1b94e4426215658bcb93a25f69a"
+    },
+    {
+      "path": "models/ram-cichlid-black-eye.png",
+      "bytes": 14096,
+      "sha256": "d13f7cb79c1cc039c54185cb30157242c35842f4d462e1063789a1e3265727d2"
+    },
+    {
+      "path": "models/bristlenose-pleco.glb",
+      "bytes": 97700,
+      "sha256": "e62ac7255545325fa956993479d92584b29a2b8f84798a9680314a90846583ea"
+    },
+    {
+      "path": "models/bristlenose-pleco-wild-body.png",
+      "bytes": 300446,
+      "sha256": "e8e482b2deb1eff169cba31faefb71e75b95c5b99dcc482236758d141d9c7680"
+    },
+    {
+      "path": "models/bristlenose-pleco-wild-fin.png",
+      "bytes": 81032,
+      "sha256": "aba14f784f690d1236fe8e4732d736c22ce45547969cda4d9496465c36e08062"
+    },
+    {
+      "path": "models/bristlenose-pleco-wild-eye.png",
+      "bytes": 14900,
+      "sha256": "1e0f70ef5c23683b67e240b0729124db9ce66763383d1368fcd8a1b21530c170"
+    },
+    {
+      "path": "models/bristlenose-pleco-albino-body.png",
+      "bytes": 276579,
+      "sha256": "91a30a9ea149befee32ce498fb2fce561bb841fc50294e472309231697a83247"
+    },
+    {
+      "path": "models/bristlenose-pleco-albino-fin.png",
+      "bytes": 14150,
+      "sha256": "32afe1b3c530c8de80a481b5ed9e39e86be12b7f1c6b69b7373673f54f164d85"
+    },
+    {
+      "path": "models/bristlenose-pleco-albino-eye.png",
+      "bytes": 14371,
+      "sha256": "073761cc69a0e7202042ecfd224c70bba83013f6ae9cce6db68434442981b097"
+    },
+    {
+      "path": "models/bristlenose-pleco-super-red-body.png",
+      "bytes": 251128,
+      "sha256": "775768ff52cd63109287d5fd53434afcac9b55c67b8380db158faa9c9be59743"
+    },
+    {
+      "path": "models/bristlenose-pleco-super-red-fin.png",
+      "bytes": 13803,
+      "sha256": "c607df5b7547e1db38b0cf345e949938dbf1233d2179b00c867c0e4de3c187f3"
+    },
+    {
+      "path": "models/bristlenose-pleco-super-red-eye.png",
+      "bytes": 14900,
+      "sha256": "1e0f70ef5c23683b67e240b0729124db9ce66763383d1368fcd8a1b21530c170"
+    },
+    {
+      "path": "models/bristlenose-pleco-calico-body.png",
+      "bytes": 307358,
+      "sha256": "d89a1c41b27516efcd5e7cdfb0f23a4047c085a4d47ade8a85cfd8cd72280d77"
+    },
+    {
+      "path": "models/bristlenose-pleco-calico-fin.png",
+      "bytes": 82744,
+      "sha256": "f7c60d5f3d45c3a94a2c3111ed29ddebbae15da47065e0f76f4695a632bcdd48"
+    },
+    {
+      "path": "models/bristlenose-pleco-calico-eye.png",
+      "bytes": 14900,
+      "sha256": "1e0f70ef5c23683b67e240b0729124db9ce66763383d1368fcd8a1b21530c170"
+    },
+    {
+      "path": "models/tiger-barb.glb",
+      "bytes": 80068,
+      "sha256": "0df5be35f17884fad0b0e476735762780d7f492e715995d54d745a1f96f93c34"
+    },
+    {
+      "path": "models/tiger-barb-wild-body.png",
+      "bytes": 243755,
+      "sha256": "782beb916b0a9688efb815b7ebbbf42654de120de69a802acc3814a508418533"
+    },
+    {
+      "path": "models/tiger-barb-wild-fin.png",
+      "bytes": 46692,
+      "sha256": "d7788ee45ab283875c5ee20c3ab41cb4198ff8a846711bbe4a84f89e2ea9638b"
+    },
+    {
+      "path": "models/tiger-barb-wild-eye.png",
+      "bytes": 15048,
+      "sha256": "f73d793dea07edb28385e630821152fd704a2cce5491892df82703819e3bde55"
+    },
+    {
+      "path": "models/tiger-barb-green-body.png",
+      "bytes": 278850,
+      "sha256": "6cd2a9f071bc752c1bca5fd086f8884485819d155b6511b8e538c717ddcf092f"
+    },
+    {
+      "path": "models/tiger-barb-green-fin.png",
+      "bytes": 45879,
+      "sha256": "cd7b4cc94ac621843e685282c615ebd6e38c98e1bf079225ac3aab53284edf3c"
+    },
+    {
+      "path": "models/tiger-barb-green-eye.png",
+      "bytes": 15004,
+      "sha256": "671da691ab09ca6ce150c07ace4d836bc6cfb30634e9386ddbac8fca89d3da09"
+    },
+    {
+      "path": "models/tiger-barb-albino-body.png",
+      "bytes": 214981,
+      "sha256": "7312abf7c751355513f0becbf2363b397af6bf1a379b3853df93e416d67b49d2"
+    },
+    {
+      "path": "models/tiger-barb-albino-fin.png",
+      "bytes": 43898,
+      "sha256": "1c8e52b668de57b820d23a1a19284f57991757c15656a8599cf404635fd082b8"
+    },
+    {
+      "path": "models/tiger-barb-albino-eye.png",
+      "bytes": 14567,
+      "sha256": "a7eeafc91dbf548f961c2435c89ba69afc24b8c474b9d1ec00caf87da5716b5e"
+    },
+    {
+      "path": "models/kuhli-loach.glb",
+      "bytes": 73380,
+      "sha256": "081d36b5985622a15031df8f4f6184a7d4f6eee99bb39aad84bd8228563073c7"
+    },
+    {
+      "path": "models/kuhli-loach-wild-body.png",
+      "bytes": 194491,
+      "sha256": "064d2a57cc4b0b6644c9ed43a847f12a6dceb40cd6b93aecd3dd1132f67baf00"
+    },
+    {
+      "path": "models/kuhli-loach-wild-fin.png",
+      "bytes": 14510,
+      "sha256": "890350f2cdf7f6f6bc5ed2f35f7a0829170a6ed1c2d7b30713de02d35264cffc"
+    },
+    {
+      "path": "models/kuhli-loach-wild-eye.png",
+      "bytes": 13950,
+      "sha256": "beafec105b9968e562b9258c74a5bc18af029285ea7463203c404aac82c4180c"
+    },
+    {
+      "path": "models/kuhli-loach-pink-body.png",
+      "bytes": 193652,
+      "sha256": "429bca2d46d9c728a4aa41a7c95e96280a70a099bf199747cc3d68b382d2a7a9"
+    },
+    {
+      "path": "models/kuhli-loach-pink-fin.png",
+      "bytes": 14510,
+      "sha256": "03f028e5cdd00b96d421417ee91e613b0ba4c1a2231f2be38b662d6211734e16"
+    },
+    {
+      "path": "models/kuhli-loach-pink-eye.png",
+      "bytes": 13950,
+      "sha256": "beafec105b9968e562b9258c74a5bc18af029285ea7463203c404aac82c4180c"
+    },
+    {
+      "path": "models/hillstream-loach.glb",
+      "bytes": 83868,
+      "sha256": "e75e0a2ca6f49e1768b8800234b01d3fdd5845bf7cede2ad6de0186dc87696ff"
+    },
+    {
+      "path": "models/hillstream-loach-wild-body.png",
+      "bytes": 279546,
+      "sha256": "4e747c58c308ecb4f97ced47790fe8aa945ba8e524748787878fe862d645318d"
+    },
+    {
+      "path": "models/hillstream-loach-wild-fin.png",
+      "bytes": 15662,
+      "sha256": "3709232e544e54abb9913f8e68195732fb7397caa79d5cff20675c401955e84b"
+    },
+    {
+      "path": "models/hillstream-loach-wild-eye.png",
+      "bytes": 14968,
+      "sha256": "728bd28a71958e12e7f7d9c43240eac930ae87832ed7f973a9690beea1f1bfab"
+    },
+    {
+      "path": "models/hillstream-loach-contrast-body.png",
+      "bytes": 293923,
+      "sha256": "a8343219106236b38f4f72b78d8e23401d25624e062def4444f010340a800662"
+    },
+    {
+      "path": "models/hillstream-loach-contrast-fin.png",
+      "bytes": 15684,
+      "sha256": "c1a82bd9059bb06a9866d8194350ba021d57a6aa1b894c197828aa0fa3d55c47"
+    },
+    {
+      "path": "models/hillstream-loach-contrast-eye.png",
+      "bytes": 14968,
+      "sha256": "728bd28a71958e12e7f7d9c43240eac930ae87832ed7f973a9690beea1f1bfab"
+    },
+    {
+      "path": "models/goldfish.glb",
+      "bytes": 83764,
+      "sha256": "6895e9b05807a4c88057f52b8f9b2ca981997865994082fc6aaa59c0b76ceea1"
+    },
+    {
+      "path": "models/goldfish-comet-body.png",
+      "bytes": 287740,
+      "sha256": "3663b3086776237996dd7ba700c4fe9c3de8381243bd193b2801d35131c8e2f7"
+    },
+    {
+      "path": "models/goldfish-comet-fin.png",
+      "bytes": 61182,
+      "sha256": "fc832b6484d2bb2050a76e6b34678b33a305c6f4b404ad04ce80168ba1dc7527"
+    },
+    {
+      "path": "models/goldfish-comet-eye.png",
+      "bytes": 15007,
+      "sha256": "d62c7cf0e2104cbe7c7e4d67371dff9ae499fd8681e6e37833d0255f8ea790aa"
+    },
+    {
+      "path": "models/goldfish-oranda.glb",
+      "bytes": 107724,
+      "sha256": "12e77a4a92fa3f354d0d48202abfb4e68ebf8f7c826b569b92f49cc6a6edfe4b"
+    },
+    {
+      "path": "models/goldfish-oranda-oranda-redcap-body.png",
+      "bytes": 234804,
+      "sha256": "892bcffb2a6ec44eafa2f4eac4b46c07edfb8630240a64170f5c1788a186a676"
+    },
+    {
+      "path": "models/goldfish-oranda-oranda-redcap-fin.png",
+      "bytes": 14469,
+      "sha256": "f6827207c557c69498b2febc8c84ce4cda723a1b75f7dd503390111590c476f5"
+    },
+    {
+      "path": "models/goldfish-oranda-oranda-redcap-eye.png",
+      "bytes": 15007,
+      "sha256": "d62c7cf0e2104cbe7c7e4d67371dff9ae499fd8681e6e37833d0255f8ea790aa"
+    },
+    {
+      "path": "models/goldfish-ranchu.glb",
+      "bytes": 101100,
+      "sha256": "a7e54c8d1027bde7f375087240e617c49a3c1389788929b9206795fdd22723f4"
+    },
+    {
+      "path": "models/goldfish-ranchu-ranchu-body.png",
+      "bytes": 295860,
+      "sha256": "98cd403846c8aa8a13a4acd5a4e4ae0d316a578126512f4099aa9f14a10884c4"
+    },
+    {
+      "path": "models/goldfish-ranchu-ranchu-fin.png",
+      "bytes": 75134,
+      "sha256": "1448368b0a16102053824eb5e77b64ccc8092e8e9fbd9a5be68cfa1269837bcc"
+    },
+    {
+      "path": "models/goldfish-ranchu-ranchu-eye.png",
+      "bytes": 15007,
+      "sha256": "d62c7cf0e2104cbe7c7e4d67371dff9ae499fd8681e6e37833d0255f8ea790aa"
+    },
+    {
+      "path": "models/goldfish-ryukin.glb",
+      "bytes": 95212,
+      "sha256": "fe531cf98233c422f95a8b3a4a7ea8cad0cceaf4be6d420decba2145d457247f"
+    },
+    {
+      "path": "models/goldfish-ryukin-ryukin-body.png",
+      "bytes": 298364,
+      "sha256": "6ee35212905227ca097a39b4127c45225516ac05f00e78df969bb6c0ec1c49f4"
+    },
+    {
+      "path": "models/goldfish-ryukin-ryukin-fin.png",
+      "bytes": 76732,
+      "sha256": "1cf7dda218ab46d8b3acd8980934a591a2a3bbb43ef177afc5d22eeaee8f46b9"
+    },
+    {
+      "path": "models/goldfish-ryukin-ryukin-eye.png",
+      "bytes": 15007,
+      "sha256": "d62c7cf0e2104cbe7c7e4d67371dff9ae499fd8681e6e37833d0255f8ea790aa"
+    },
+    {
+      "path": "models/goldfish-moor.glb",
+      "bytes": 99084,
+      "sha256": "3d55b2016f045890300bb8e22fc24e3611439a06338bd9c62cd941311c342f74"
+    },
+    {
+      "path": "models/goldfish-moor-black-moor-body.png",
+      "bytes": 239602,
+      "sha256": "10027c6f8e89266f3429fbde8c3c43e9e26edec37d7755680c9f45cb9c9fcf76"
+    },
+    {
+      "path": "models/goldfish-moor-black-moor-fin.png",
+      "bytes": 41023,
+      "sha256": "417517b9fd180342f6d3f23ee1a462591fac46c32767a06fd561692c1e413140"
+    },
+    {
+      "path": "models/goldfish-moor-black-moor-eye.png",
+      "bytes": 12412,
+      "sha256": "536f4c7e39cadc8b9d06f56c4909e548b4d9b91b0aa08786adee59a8dab549b6"
+    },
+    {
+      "path": "models/goldfish-calico-body.png",
+      "bytes": 362843,
+      "sha256": "d4590e5ce8abc815fecc9ce0e88dfae2d008668e1a00f44d6208342ad0cc295a"
+    },
+    {
+      "path": "models/goldfish-calico-fin.png",
+      "bytes": 68310,
+      "sha256": "5e9959941e827744d259bff2f716a07423016fd6d01714ea4e520a5134d6eba7"
+    },
+    {
+      "path": "models/goldfish-calico-eye.png",
+      "bytes": 15007,
+      "sha256": "d62c7cf0e2104cbe7c7e4d67371dff9ae499fd8681e6e37833d0255f8ea790aa"
+    },
+    {
+      "path": "models/goldfish-lionhead.glb",
+      "bytes": 101044,
+      "sha256": "cdc0584d76a2a5720317f33f7ecc3f2921cec2353db26ea78097eedebf0447e7"
+    },
+    {
+      "path": "models/goldfish-lionhead-lionhead-body.png",
+      "bytes": 279153,
+      "sha256": "1c5947445a1896e2ff53afd621eea5e254ab41a1d06ffa89f8ab61d5fad40a29"
+    },
+    {
+      "path": "models/goldfish-lionhead-lionhead-fin.png",
+      "bytes": 59637,
+      "sha256": "9a184aef4af16258c817fd5bb29daeeb997d91723caf5e812b5c6cf27b7c7c48"
+    },
+    {
+      "path": "models/goldfish-lionhead-lionhead-eye.png",
+      "bytes": 15007,
+      "sha256": "d62c7cf0e2104cbe7c7e4d67371dff9ae499fd8681e6e37833d0255f8ea790aa"
+    },
+    {
+      "path": "models/common-pleco.glb",
+      "bytes": 90272,
+      "sha256": "f53012c74e5e4a2af93ffed46914d2fed58439b7ea4af0769900b430f3b990a9"
+    },
+    {
+      "path": "models/common-pleco-wild-body.png",
+      "bytes": 374018,
+      "sha256": "718fba8cc304c295ae2d631bb13f05c456948b3e5633331fd8ea0f5600eaeed6"
+    },
+    {
+      "path": "models/common-pleco-wild-fin.png",
+      "bytes": 98354,
+      "sha256": "a0d961076e8496b8d0e82c6cc9da2f6706db09e57283515c108b9cfab2d116f9"
+    },
+    {
+      "path": "models/common-pleco-wild-eye.png",
+      "bytes": 14900,
+      "sha256": "1e0f70ef5c23683b67e240b0729124db9ce66763383d1368fcd8a1b21530c170"
+    },
+    {
+      "path": "models/common-pleco-albino-body.png",
+      "bytes": 349846,
+      "sha256": "7bd00f03e04a0011ab0ad6e08ad2be493335834aa8aeba3830353ea21640c316"
+    },
+    {
+      "path": "models/common-pleco-albino-fin.png",
+      "bytes": 14150,
+      "sha256": "7bfeb1acb0d38446a030366caac8059f1ff81bef0362ed31b9f70763d7836b52"
+    },
+    {
+      "path": "models/common-pleco-albino-eye.png",
+      "bytes": 14371,
+      "sha256": "073761cc69a0e7202042ecfd224c70bba83013f6ae9cce6db68434442981b097"
+    },
+    {
+      "path": "models/giant-gourami.glb",
+      "bytes": 81056,
+      "sha256": "76a0c5b83efada9a236fc1bb71e2aca5345a381ca4a849a81f81d8cac8dea5bc"
+    },
+    {
+      "path": "models/giant-gourami-wild-body.png",
+      "bytes": 209507,
+      "sha256": "91b25eed516cd4a52adf908adb7959bdaa55d6fac0987467dc492fa154c363df"
+    },
+    {
+      "path": "models/giant-gourami-wild-fin.png",
+      "bytes": 12335,
+      "sha256": "ccebc3481566a31d250b08ba4051701d62f99f947581fd13e0b5deddb66d5f86"
+    },
+    {
+      "path": "models/giant-gourami-wild-eye.png",
+      "bytes": 14861,
+      "sha256": "af599a5af0490a8a6ce86b7d96c3ad32a5b6c8e7cd017c37f9859e059f719b58"
+    },
+    {
+      "path": "models/giant-gourami-golden-body.png",
+      "bytes": 216037,
+      "sha256": "85e2b95f00b61b9266047b44602dfaa10e96f35687b3d469ed10ad3812b44523"
+    },
+    {
+      "path": "models/giant-gourami-golden-fin.png",
+      "bytes": 12333,
+      "sha256": "d9e9036a07fcdbdc88007c02ee535b05c1fe71a879cc5d081e55f4126b0c0daa"
+    },
+    {
+      "path": "models/giant-gourami-golden-eye.png",
+      "bytes": 14861,
+      "sha256": "af599a5af0490a8a6ce86b7d96c3ad32a5b6c8e7cd017c37f9859e059f719b58"
+    },
+    {
+      "path": "models/giant-gourami-albino-body.png",
+      "bytes": 209637,
+      "sha256": "884bffc4b9e397ea5cdc26f79d29940adf45b85d49c4105c212bc0e689a20144"
+    },
+    {
+      "path": "models/giant-gourami-albino-fin.png",
+      "bytes": 12335,
+      "sha256": "7216a612f6e2fd332afa47619043420a0cb37686a63b50579ded38385c49141e"
+    },
+    {
+      "path": "models/giant-gourami-albino-eye.png",
+      "bytes": 14904,
+      "sha256": "be00117f89896e6f6a270dae738c2307f948ac15ae8343fac1167b71833b0553"
+    },
+    {
+      "path": "models/oscar.glb",
+      "bytes": 85180,
+      "sha256": "e41b2aee04b1aa95dc512ca1ce6727e39f25b9a0af3362c7eb248578443dfaa6"
+    },
+    {
+      "path": "models/oscar-tiger-body.png",
+      "bytes": 238190,
+      "sha256": "5325a7b68537b7b9cd81670e6b3101e89f18aab7c687d8c9a3eb0280814090f2"
+    },
+    {
+      "path": "models/oscar-tiger-fin.png",
+      "bytes": 51231,
+      "sha256": "2e41fa8b0599dc5cf809c1dc090beebce183300fec71086453d3199bd7dfc171"
+    },
+    {
+      "path": "models/oscar-tiger-eye.png",
+      "bytes": 14802,
+      "sha256": "ae443447104495efac371eeb35470377e70e9fb2fb7c39e708b7398e76ce3ca7"
+    },
+    {
+      "path": "models/oscar-red-body.png",
+      "bytes": 219779,
+      "sha256": "dc42463b7492db699535d87d105f315a5dd50d59b758f2128f24656f50b5f122"
+    },
+    {
+      "path": "models/oscar-red-fin.png",
+      "bytes": 49898,
+      "sha256": "a41fcb1f3216412ba8a73722a8e44b70af0cdedacddb63d473f7145e6ed6a065"
+    },
+    {
+      "path": "models/oscar-red-eye.png",
+      "bytes": 14802,
+      "sha256": "ae443447104495efac371eeb35470377e70e9fb2fb7c39e708b7398e76ce3ca7"
+    },
+    {
+      "path": "models/oscar-albino-body.png",
+      "bytes": 248104,
+      "sha256": "c5d003e74850eedfd240889b2238dbcf96334d5f9a014adcebba69cfbfd85282"
+    },
+    {
+      "path": "models/oscar-albino-fin.png",
+      "bytes": 50216,
+      "sha256": "520722882d5008201f625e813b27725c0b970dc1a030d4594405dfa72d5cc177"
+    },
+    {
+      "path": "models/oscar-albino-eye.png",
+      "bytes": 14410,
+      "sha256": "df3ae1ae36351792c88e00c7bc801b01b807b094e1f56e104c39d51fb75d645c"
+    },
+    {
+      "path": "models/oscar-lemon-body.png",
+      "bytes": 246406,
+      "sha256": "62672308288d83e67276c775186d8c47d61907b3d487363dc8eb63c7939ede69"
+    },
+    {
+      "path": "models/oscar-lemon-fin.png",
+      "bytes": 50862,
+      "sha256": "79844a98089174ab1fd2fad82f283e4e4e4e24ea3ca3f766ebecf1a8584694bf"
+    },
+    {
+      "path": "models/oscar-lemon-eye.png",
+      "bytes": 14802,
+      "sha256": "ae443447104495efac371eeb35470377e70e9fb2fb7c39e708b7398e76ce3ca7"
+    },
+    {
+      "path": "models/oscar-wild-body.png",
+      "bytes": 220853,
+      "sha256": "6d6a1202e485a2f5962cbc38a1356e0200d45b6e407deb31a31ce7b40ae058ca"
+    },
+    {
+      "path": "models/oscar-wild-fin.png",
+      "bytes": 47803,
+      "sha256": "124ce7f432df11434bec1613b0326a1aa3ba46f7b3fd0288f29142cf01b025dd"
+    },
+    {
+      "path": "models/oscar-wild-eye.png",
+      "bytes": 14802,
+      "sha256": "ae443447104495efac371eeb35470377e70e9fb2fb7c39e708b7398e76ce3ca7"
+    },
+    {
+      "path": "models/ocellaris-clownfish.glb",
+      "bytes": 83920,
+      "sha256": "e9fc716429fe42d898aeed563ce76ed4b5941c051246cf1d26eb294a328d20c6"
+    },
+    {
+      "path": "models/ocellaris-clownfish-orange-body.png",
+      "bytes": 163092,
+      "sha256": "a393666464b2afaa2609bd001042c79c3f78f8eb991018e24543adc854e53d31"
+    },
+    {
+      "path": "models/ocellaris-clownfish-orange-fin.png",
+      "bytes": 10858,
+      "sha256": "614f0c042240e67e540309ede4770c74aa35e55baaf4d01b2b045dd358650274"
+    },
+    {
+      "path": "models/ocellaris-clownfish-orange-eye.png",
+      "bytes": 15465,
+      "sha256": "9767187c75970ab80c4d0eee9819b25cd269d8bcb366467c955dca51ba193d58"
+    },
+    {
+      "path": "models/ocellaris-clownfish-black-body.png",
+      "bytes": 127484,
+      "sha256": "312247ed7aab18f0648816ad617d2f1c1a2bfd7be1619b791a7e16f14a49c8ea"
+    },
+    {
+      "path": "models/ocellaris-clownfish-black-fin.png",
+      "bytes": 10719,
+      "sha256": "fa88869f09aa5ecafe99d070ef61b976e335d2dce9171ce8942a8e9b77626465"
+    },
+    {
+      "path": "models/ocellaris-clownfish-black-eye.png",
+      "bytes": 15038,
+      "sha256": "4e92b62b95512642d996cea7921b35dd2cf7cb20f4fc870f85e009a5427d4808"
+    },
+    {
+      "path": "models/ocellaris-clownfish-snowflake-body.png",
+      "bytes": 168836,
+      "sha256": "d1b3941440819dfc74a6a837c15fc5f206b8111219ad4916388795f70401f099"
+    },
+    {
+      "path": "models/ocellaris-clownfish-snowflake-fin.png",
+      "bytes": 10969,
+      "sha256": "aef1e6bc47e60f8e5b8ac08ba9b907e479cb027bb1847caefb96604f8787f526"
+    },
+    {
+      "path": "models/ocellaris-clownfish-snowflake-eye.png",
+      "bytes": 15465,
+      "sha256": "9767187c75970ab80c4d0eee9819b25cd269d8bcb366467c955dca51ba193d58"
+    },
+    {
+      "path": "models/ocellaris-clownfish-platinum-body.png",
+      "bytes": 224437,
+      "sha256": "410f4009eb9a4f6788c59fd153b8f7814b7aae3519897a1d5680bc9a2278ea47"
+    },
+    {
+      "path": "models/ocellaris-clownfish-platinum-fin.png",
+      "bytes": 10761,
+      "sha256": "83cc0c0818cc5aa1bdbcb11c0fbb5e32a178e2a5900ad77e150d541e70de1e05"
+    },
+    {
+      "path": "models/ocellaris-clownfish-platinum-eye.png",
+      "bytes": 15465,
+      "sha256": "9767187c75970ab80c4d0eee9819b25cd269d8bcb366467c955dca51ba193d58"
+    },
+    {
+      "path": "models/green-chromis.glb",
+      "bytes": 77980,
+      "sha256": "066fe7173d9c76ad097c676de4736de53f174f0dbf80126a768fc7e13b91279a"
+    },
+    {
+      "path": "models/green-chromis-wild-body.png",
+      "bytes": 299593,
+      "sha256": "b3b29045f42af2fa9b82c331cb8782877299c7a7832371b8a60a4e0961a498d2"
+    },
+    {
+      "path": "models/green-chromis-wild-fin.png",
+      "bytes": 66240,
+      "sha256": "cd5dcc303fa20bd6b4dc0823b1280dae425723686a813cb222438cf24bd8489f"
+    },
+    {
+      "path": "models/green-chromis-wild-eye.png",
+      "bytes": 15422,
+      "sha256": "aeb0f10901270d2545a84c4b74d0a7d3aa2340a86db56df0e82563a055514176"
+    },
+    {
+      "path": "models/yellowtail-damsel.glb",
+      "bytes": 77264,
+      "sha256": "ce69dac59efac8be93ebe084968daa70972688efedeb88d5617ebd286daa54de"
+    },
+    {
+      "path": "models/yellowtail-damsel-wild-body.png",
+      "bytes": 291572,
+      "sha256": "3190e58e93424021589f3a5abf680cc47f0d3592f1d99ad9f6150db91b30a2a8"
+    },
+    {
+      "path": "models/yellowtail-damsel-wild-fin.png",
+      "bytes": 46646,
+      "sha256": "318ff539e3606931b7b712113f0aaf325b887b29ee88a19b7182406b45009dc4"
+    },
+    {
+      "path": "models/yellowtail-damsel-wild-eye.png",
+      "bytes": 15431,
+      "sha256": "006390a6b2c11283da606a6e8b6cb1c5e658b15ab8ac0e2da52d92ef6eb1881f"
+    },
+    {
+      "path": "models/cleaner-shrimp.glb",
+      "bytes": 127564,
+      "sha256": "9ff1f1f14ed44ed9c266aedc9fe81cf5bf441189f7fc668a5fb8b10c45ea5951"
+    },
+    {
+      "path": "models/cleaner-shrimp-wild-body.png",
+      "bytes": 38190,
+      "sha256": "1b4314e4be552f7539623b0495926756666b89b0bce14b52418df860b81cfc9f"
+    },
+    {
+      "path": "models/cleaner-shrimp-wild-fin.png",
+      "bytes": 25100,
+      "sha256": "44d79912ab83f71e9db0ba8c1f32e9158a14c1e94badb1e6f562529d8a42d693"
+    },
+    {
+      "path": "models/turbo-snail.glb",
+      "bytes": 99260,
+      "sha256": "0834b548b43aa8c15163f5379e022494954f4586c325566ac0b5a647a360ef99"
+    },
+    {
+      "path": "models/turbo-snail-wild-body.png",
+      "bytes": 77432,
+      "sha256": "97eda4e1cf12db994876dd2d28310da0ca08fb8d710f1e64d5b7cd0f97983708"
+    },
+    {
+      "path": "models/turbo-snail-wild-fin.png",
+      "bytes": 40472,
+      "sha256": "cf051354ba890eaad36ceafaf5fbce3f9ebbf6e0c72c1d71c9de70607a038b63"
+    },
+    {
+      "path": "models/nassarius-snail.glb",
+      "bytes": 114980,
+      "sha256": "d1612043d7ecd05be6ec63185b21f8050dbe9c42668b7fce273304643956498c"
+    },
+    {
+      "path": "models/nassarius-snail-wild-body.png",
+      "bytes": 81369,
+      "sha256": "5391f98a52000258a72d91f121fb5d146322bf8255855397557c7f14020969c9"
+    },
+    {
+      "path": "models/nassarius-snail-wild-fin.png",
+      "bytes": 37513,
+      "sha256": "69952b0e01b5a7139f62ed39fc955d88eba2289971a980c5ba6dcf6dc6e9e045"
+    },
+    {
+      "path": "models/blue-leg-hermit.glb",
+      "bytes": 132084,
+      "sha256": "b144d2e467f24df4b84f665f3cb878a8fa80e3e4bccd6a6bc297fca295f7ea27"
+    },
+    {
+      "path": "models/blue-leg-hermit-wild-body.png",
+      "bytes": 85500,
+      "sha256": "41d1e4c87184148058dfb8f397b5cd4409e2fdd06454dea6e760613c8fdd1ad9"
+    },
+    {
+      "path": "models/blue-leg-hermit-wild-fin.png",
+      "bytes": 24917,
+      "sha256": "0325e7aa9e2c2051c1d5983988d051d3044c344d26a47c237936e502e84e8581"
+    },
+    {
+      "path": "models/royal-gramma.glb",
+      "bytes": 81780,
+      "sha256": "377033017a9fa940e5383b102ee7a2cb3fc2aa848e1c5521ad578e59a7dafee9"
+    },
+    {
+      "path": "models/royal-gramma-wild-body.png",
+      "bytes": 230499,
+      "sha256": "6fe8d578d6965862716e965ebaa7e69fbebfc631412a92ebd2f28a86ead9bdc2"
+    },
+    {
+      "path": "models/royal-gramma-wild-fin.png",
+      "bytes": 47366,
+      "sha256": "79d29d9fe86b4c630452a4e529bdf18fb49d36120da3e4d5547f3724c8d57afa"
+    },
+    {
+      "path": "models/royal-gramma-wild-eye.png",
+      "bytes": 16256,
+      "sha256": "e21f4ced123947387caf6861047fa2c8258fb684c605d7fcfd68f51b5647e46d"
+    },
+    {
+      "path": "models/firefish.glb",
+      "bytes": 82008,
+      "sha256": "03459d3e53e78764f0064b75a3b8a498034cd7986bec2bc8b9fdae720635b8da"
+    },
+    {
+      "path": "models/firefish-wild-body.png",
+      "bytes": 167318,
+      "sha256": "b0c27978b06864aebefbe9ade83f5e65a4c5ac143c119edd773ebc2024594911"
+    },
+    {
+      "path": "models/firefish-wild-fin.png",
+      "bytes": 67371,
+      "sha256": "ed58da31a1431421886e607a9b7bc350502082c0a3f8a46d30c430b2904593ec"
+    },
+    {
+      "path": "models/firefish-wild-eye.png",
+      "bytes": 15962,
+      "sha256": "32b85fc1915e278442d477eef81cd3ecafc914bfde5160025ee937f16aa91b22"
+    },
+    {
+      "path": "models/banggai-cardinal.glb",
+      "bytes": 85360,
+      "sha256": "5cdbb15950e87e79684b2be3678fe89b0a0a4b8eb67bbf05cee489908e460c67"
+    },
+    {
+      "path": "models/banggai-cardinal-wild-body.png",
+      "bytes": 248473,
+      "sha256": "7b62f533919d25316d11ead9417fdbd17700be9582116088d541a12f39d1d9cb"
+    },
+    {
+      "path": "models/banggai-cardinal-wild-fin.png",
+      "bytes": 47115,
+      "sha256": "716f262603c6d20605157bc9fd08f329cdc8b63944a5c499279e574a5008050a"
+    },
+    {
+      "path": "models/banggai-cardinal-wild-eye.png",
+      "bytes": 15735,
+      "sha256": "f3f37037bfc80c5cc16a4e2d4a12e853bcbada56224d297c1e4290f03cacc70e"
+    },
+    {
+      "path": "models/sixline-wrasse.glb",
+      "bytes": 79800,
+      "sha256": "735ef4404357ab595b1a61ac3cf809f4f5c212ccf2af1552759952287035387c"
+    },
+    {
+      "path": "models/sixline-wrasse-wild-body.png",
+      "bytes": 202821,
+      "sha256": "151837e46226192a52d19fe6fecb5055783567f8b3b73b1cb343629ed02f9dac"
+    },
+    {
+      "path": "models/sixline-wrasse-wild-fin.png",
+      "bytes": 40433,
+      "sha256": "a3d14747704cac39978ae2708a46b5519b642612b6fb447f232e51624134292d"
+    },
+    {
+      "path": "models/sixline-wrasse-wild-eye.png",
+      "bytes": 16254,
+      "sha256": "43633811a5d47b2fad5ce4339ecc2328d70dd5d75f062bcbd9f314ea578fdd78"
+    },
+    {
+      "path": "models/yellow-tang.glb",
+      "bytes": 86480,
+      "sha256": "8e5ba27678c4606b177d975d71a851b9ab9cd8801ea06ed4eb6d54346f111fdc"
+    },
+    {
+      "path": "models/yellow-tang-wild-body.png",
+      "bytes": 270488,
+      "sha256": "01291abcb3faeb422a2790f78ae9219e647b6d279edaaa10ab8076c4d53590bb"
+    },
+    {
+      "path": "models/yellow-tang-wild-fin.png",
+      "bytes": 35786,
+      "sha256": "e2f2e94fa20105fe9073aee80131f78fd85adc45283a9efcf2db6a9810a857bb"
+    },
+    {
+      "path": "models/yellow-tang-wild-eye.png",
+      "bytes": 12013,
+      "sha256": "f5e910d28b38e4bd2260ac03cf72cf526268f64c98747e2a75e3bcd05ef9df67"
+    },
+    {
+      "path": "models/peppermint-shrimp.glb",
+      "bytes": 127840,
+      "sha256": "42b885e04933e513afeffec5c57d6afad7d2af35b982ecf04515e737ba76f053"
+    },
+    {
+      "path": "models/peppermint-shrimp-wild-body.png",
+      "bytes": 59257,
+      "sha256": "3164514fa1c56de8709498aebb98d4a87255d7d5b2f1b1992e733312a2b43b64"
+    },
+    {
+      "path": "models/peppermint-shrimp-wild-fin.png",
+      "bytes": 39420,
+      "sha256": "54b71ce1892a44acb09139b7eb71d9cdfc444c7532e28b8e0a35ef64c0235bc3"
+    },
+    {
+      "path": "models/dome-wide.glb",
+      "bytes": 890424,
+      "sha256": "6eafd6d8c34fda92e79e347433c6e6200fd9bcdb5c698149edcea15c577d88bb"
+    },
+    {
+      "path": "models/leaf-round.png",
+      "bytes": 65525,
+      "sha256": "ca8ac64cdbd39ef03d4aa91e39f1cfb996637d68e73299d5ba9f4f9fb81512df"
+    },
+    {
+      "path": "models/snow-vase.glb",
+      "bytes": 495112,
+      "sha256": "918ea91227a8f73688be4ab5ac838464664120e3566e18fc7dc6d966f80d331e"
+    },
+    {
+      "path": "models/leaf-snow.png",
+      "bytes": 57715,
+      "sha256": "118afc9f78fab63071bd70413a7ac8ba151d1282cf2140ab2c27a1a1d617a83b"
+    },
+    {
+      "path": "models/snow-elm.glb",
+      "bytes": 578596,
+      "sha256": "0180ffef9a85b2f73fb7d1532768e63e0226da52cefbea73f9bd87fb1147b9df"
+    },
+    {
+      "path": "models/frost-coral.glb",
+      "bytes": 544944,
+      "sha256": "1ed420b7424b7a2e1b841cd1276b92d4d75333a769f9cfbcc70e76761f9b4147"
+    },
+    {
+      "path": "models/leaf-frost.png",
+      "bytes": 36141,
+      "sha256": "855200a1e29e2007c082bc2736dd9ae807a6331d5b66b152398fe006ce472f76"
+    },
+    {
+      "path": "models/drift-bonsai.glb",
+      "bytes": 644732,
+      "sha256": "d765f11cf8c0808157855a736aa8e37a9c99a3e1514aa932d74963d1717697df"
+    },
+    {
+      "path": "models/leaf-twig.png",
+      "bytes": 19140,
+      "sha256": "1319a6e9747dc76e40d5c0d86e5a4fa1e36cdd36bbf612820270c5218460533d"
+    },
+    {
+      "path": "models/dome-tall.glb",
+      "bytes": 697864,
+      "sha256": "12eb3b5156796d0db9226f820d9094ca8e96f8db20388a16e5cc59399588deb0"
+    },
+    {
+      "path": "models/dome-lean.glb",
+      "bytes": 1406880,
+      "sha256": "5fadc83dd78fe5e8494e32b0e52d4c81e8d90e40e382f8bc08d496705d52b23c"
+    },
+    {
+      "path": "models/snow-house.glb",
+      "bytes": 47368,
+      "sha256": "6283050ae0158b11301cb6e88621e926bc5f5b9231debac0457977e38a835395"
+    },
+    {
+      "path": "models/cat.glb",
+      "bytes": 514412,
+      "sha256": "2d8d16c5dcc3e4ddcbe86eb5968f6964cbd006ff946b1abf5ed012b44c7f63e5"
+    },
+    {
+      "path": "brand/icon-192.png",
+      "bytes": 50072,
+      "sha256": "6e4840c69ada9a9f67764f585e3856f0879ff71c1924185ae1dbe00d41fd80a1"
+    },
+    {
+      "path": "brand/icon-512.png",
+      "bytes": 242986,
+      "sha256": "86fabb64de6049bac5adae06bf4108facd4bbf9931fc72f9e677a8a1f6d290c0"
+    },
+    {
+      "path": "brand/icon-maskable-512.png",
+      "bytes": 231975,
+      "sha256": "02d36d84fa433b4a2884eaa232ac074c10ad158ba52f2464d8c29a27da1dce17"
+    }
+  ],
+  "failures": [],
+  "external": [
+    "https://www.petsmart.com/fish/decor-gravel-and-substrate/aquarium-substrate/fluval-plant-and-shrimp-stratum-83062.html",
+    "https://www.bulkreefsupply.com/florinbase-laterin-substrat-f-fine-brightwell-aquatics.html"
+  ]
+}

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 185" width="240" height="185">
+  <defs>
+    <linearGradient id="fcb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd766"/><stop offset=".5" stop-color="#ffa63c"/><stop offset="1" stop-color="#ec6a26"/></linearGradient>
+    <linearGradient id="fcf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffa3bd"/><stop offset="1" stop-color="#ff5a7d"/></linearGradient>
+    <radialGradient id="fci" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#5ff0e0"/><stop offset=".6" stop-color="#1497b0"/><stop offset="1" stop-color="#0b4f74"/></radialGradient>
+    <radialGradient id="fcs" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#dbeefc"/></radialGradient>
+    <linearGradient id="fcw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#fff"/><stop offset="1" stop-color="#d6ecfb"/></linearGradient>
+    <clipPath id="fcc"><path d="M60 95C60 55 100 35 140 35C185 35 215 65 215 95C215 128 185 155 140 155C100 155 60 135 60 95Z"/></clipPath>
+    <pattern id="fcp" width="18" height="13" patternUnits="userSpaceOnUse"><path d="M0 13Q9 2 18 13" fill="none" stroke="#b4501c" stroke-width="1.6"/></pattern>
+    <filter id="fcblur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3"/></filter>
+  </defs>
+  <g stroke="#13284d" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M72 95C52 70 32 50 10 48C20 68 22 82 17 95C22 108 20 122 10 142C32 140 52 120 72 95Z" fill="url(#fcf)" stroke-width="5"/>
+    <g stroke="#fff" stroke-opacity=".45" stroke-width="2.4" fill="none"><path d="M64 92L24 60"/><path d="M62 94L22 80"/><path d="M62 97L22 110"/><path d="M64 99L24 130"/></g>
+    <path d="M96 46C104 18 146 4 178 24C164 30 150 38 146 44Z" fill="url(#fcf)" stroke-width="5"/>
+    <g stroke="#fff" stroke-opacity=".4" stroke-width="2" fill="none"><path d="M112 40L118 20"/><path d="M128 38L140 14"/><path d="M142 40L160 18"/></g>
+    <path d="M120 150C116 170 134 180 150 172C142 164 140 158 140 152Z" fill="url(#fcf)" stroke-width="4.5"/>
+    <path d="M60 95C60 55 100 35 140 35C185 35 215 65 215 95C215 128 185 155 140 155C100 155 60 135 60 95Z" fill="url(#fcb)" stroke="none"/>
+    <g clip-path="url(#fcc)" stroke="none">
+      <rect x="60" y="80" width="80" height="80" fill="url(#fcp)" opacity=".2"/>
+      <path d="M110 30C96 68 96 124 110 160L134 160C120 124 120 68 134 30Z" fill="url(#fcw)"/>
+      <path d="M110 30C96 68 96 124 110 160" fill="none" stroke="#13284d" stroke-width="3.5"/>
+      <path d="M134 30C120 68 120 124 134 160" fill="none" stroke="#13284d" stroke-width="3.5"/>
+      <path d="M70 60C64 82 64 110 70 132L80 132C74 110 74 82 80 60Z" fill="url(#fcw)"/>
+      <path d="M80 60C74 82 74 110 80 132" fill="none" stroke="#13284d" stroke-width="3"/>
+      <ellipse cx="150" cy="140" rx="60" ry="18" fill="#ffe6a0" opacity=".55"/>
+      <ellipse cx="160" cy="56" rx="40" ry="12" fill="#fff" opacity=".55" filter="url(#fcblur)"/>
+      <ellipse cx="164" cy="50" rx="18" ry="4.5" fill="#fff" opacity=".85"/>
+    </g>
+    <path d="M60 95C60 55 100 35 140 35C185 35 215 65 215 95C215 128 185 155 140 155C100 155 60 135 60 95Z" fill="none" stroke-width="5.5"/>
+    <path d="M136 112C124 128 106 134 94 130C104 118 120 110 136 112Z" fill="url(#fcf)" stroke-width="4" opacity=".95"/>
+    <circle cx="172" cy="80" r="23" fill="url(#fcs)" stroke-width="4.5"/>
+    <circle cx="176" cy="83" r="15" fill="url(#fci)" stroke="none"/>
+    <circle cx="177" cy="84" r="8" fill="#0a1a33" stroke="none"/>
+    <circle cx="183" cy="76" r="5" fill="#fff" stroke="none"/>
+    <circle cx="171" cy="91" r="2.2" fill="#fff" stroke="none" opacity=".9"/>
+    <path d="M152 62Q170 52 192 60" fill="none" stroke-width="4"/>
+    <ellipse cx="182" cy="114" rx="10" ry="5.5" fill="#ff5d7e" stroke="none" opacity=".45" filter="url(#fcblur)"/>
+    <path d="M194 104Q205 122 214 102Q204 108 194 104Z" fill="#7d1d3c" stroke-width="3.5"/>
+    <ellipse cx="205" cy="112" rx="4.5" ry="2.6" fill="#ff7aa2" stroke="none"/>
+  </g></svg>
