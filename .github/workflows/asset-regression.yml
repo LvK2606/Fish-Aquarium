@@ -1,4 +1,4 @@
-name: Fish Aquarium lossless asset regression
+name: Fish Aquarium lossless assets and High Adaptive validation
 
 on:
   pull_request:
