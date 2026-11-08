@@ -4,6 +4,7 @@ import {createServer} from 'node:net';
 import {once} from 'node:events';
 import {setTimeout as delay} from 'node:timers/promises';
 import {fileURLToPath} from 'node:url';
+import {mkdir,writeFile} from 'node:fs/promises';
 import {chromium} from 'playwright';
 
 // Run against an isolated local memory backend by default. Remote account writes
@@ -23,7 +24,17 @@ async function check(name,run){
   if(process.env.TEST_FILTER&&!new RegExp(process.env.TEST_FILTER).test(name)){console.log(`UNRUN ${name}`);return;}
   console.log(`RUN ${name}`);
   try{await run();completed++;console.log(`PASS ${name}`);}
-  catch(error){error.message=`${name}: ${error.message}`;throw error;}
+  catch(error){
+    if(browser){
+      const pages=browser.contexts().flatMap(ctx=>ctx.pages());
+      const current=pages.at(-1);
+      if(current){
+        await current.screenshot({path:fileURLToPath(new URL('../test-results/failure.png',import.meta.url)),timeout:30000}).catch(()=>{});
+        console.error('Visible panels:',await current.locator('.modal').evaluateAll(nodes=>nodes.map(node=>({classes:node.className,title:node.querySelector('h2')?.textContent,activeTab:node.querySelector('.tab.active')?.textContent}))).catch(()=>[]));
+      }
+    }
+    error.message=`${name}: ${error.message}`;throw error;
+  }
 }
 
 async function startServer(){
@@ -61,6 +72,9 @@ function proxyForRemote(){
 async function context(options={}){
   const ctx=await browser.newContext({locale:'en-US',viewport:{width:1120,height:760},deviceScaleFactor:.5,...options});
   await ctx.addInitScript(()=>{
+    // newPage first creates an opaque about:blank document, where storage is
+    // unavailable. Initialize preferences only once an app origin is loaded.
+    if(!['http:','https:'].includes(location.protocol))return;
     // Software WebGL is deliberately tested at the supported low quality setting.
     if(!localStorage.getItem('aquaverse-prefs'))localStorage.setItem('aquaverse-prefs',JSON.stringify({quality:'low',tempo:'normal',plantSway:1,leftWide:false}));
     if(!localStorage.getItem('aquaverse.lang'))localStorage.setItem('aquaverse.lang','en');
@@ -72,10 +86,11 @@ async function context(options={}){
     return route.abort('blockedbyclient');
   });
   ctx.on('page',page=>{
-    page.setDefaultTimeout(25000);
+    page.setDefaultTimeout(60000);
     page.on('pageerror',error=>problems.pageErrors.push(error.message));
     page.on('response',response=>{
       const url=new URL(response.url());
+      if(process.env.TEST_DEBUG&&url.pathname.startsWith('/api/'))console.log(`API ${response.request().method()} ${url.pathname} ${response.status()}`);
       if(url.origin!==new URL(base).origin||url.pathname.startsWith('/api/'))return;
       if(response.status()>=400)problems.failedAssets.push(`${response.status()} ${url.pathname}`);
       else{
@@ -113,9 +128,20 @@ async function openSettings(page){
   await page.locator('.settings-modal').waitFor({state:'visible'});
 }
 
+async function feedOnce(page){
+  const feed=page.locator('.tool').filter({hasText:/^Feed/});
+  const before=Number(await feed.locator('.tool-count').innerText());
+  await feed.click();
+  // A full tank first asks for confirmation through a warning. A second user
+  // click confirms feeding; check the inventory change rather than the toast.
+  if(Number(await feed.locator('.tool-count').innerText())===before)await feed.click();
+  await page.waitForFunction(previous=>Number(document.querySelector('[data-tour="feed"] .tool-count')?.textContent)<previous,before);
+}
+
 async function run(){
   if(!base)await startServer();
   base=base.replace(/\/$/,'');
+  await mkdir(new URL('../test-results/',import.meta.url),{recursive:true});
   browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',proxy:proxyForRemote(),
     args:['--no-sandbox','--disable-dev-shm-usage','--enable-unsafe-swiftshader']});
 
@@ -136,6 +162,7 @@ async function run(){
       const frame1=await page.screenshot({clip,timeout:30000});
       await page.waitForTimeout(650);
       const frame2=await page.screenshot({clip,timeout:30000});
+      await writeFile(new URL(`../test-results/${design}.png`,import.meta.url),frame2);
       assert.ok(frame1.length>5000,'WebGL frame is unexpectedly empty');
       assert.notDeepEqual(frame1,frame2,'Fish/water/plant animation did not change the rendered frame');
       if(design==='cong-lua'){
@@ -240,6 +267,12 @@ async function run(){
   // Account integration is isolated to the automatically started memory server.
   // TEST_ACCOUNT=1 also enables it against a deliberately selected test deployment.
   if(!external||process.env.TEST_ACCOUNT==='1')await check('Account UI registration, cloud save, logout/login and published snapshot visit',async()=>{
+    // The exploratory page uses luu=0, intentionally disabling all snapshots.
+    // Exercise accounts on a normal game with a persisted local snapshot.
+    await ready(page,'/?hocviec=0&hoithoai=0');
+    await feedOnce(page);
+    await page.waitForFunction(()=>JSON.parse(localStorage.getItem('aquaverse-save')||'null')?.stats?.feeds>=1,undefined,{timeout:15000});
+    console.log('Account step: local game persisted');
     const email=`frontend-${Date.now()}@example.invalid`;
     const password='FishAquarium-test-2026!';
     await openSettings(page);
@@ -251,9 +284,15 @@ async function run(){
     await account.getByLabel('Email',{exact:true}).fill(email);
     await account.getByLabel('Password',{exact:true}).fill(password);
     const registerResponse=page.waitForResponse(response=>new URL(response.url()).pathname==='/api/auth/register'&&response.request().method()==='POST');
+    const firstCloudResponse=page.waitForResponse(response=>/\/api\/saves\/\d+$/.test(new URL(response.url()).pathname)&&response.request().method()==='PUT');
     await account.getByRole('button',{name:'Create account',exact:true}).click();
     assert.equal((await registerResponse).status(),201);
+    assert.equal((await firstCloudResponse).status(),200,'Registration must upload the existing game snapshot');
     await account.waitFor({state:'detached'});
+    console.log('Account step: registration and initial cloud upload passed');
+    const previousFeeds=await page.evaluate(()=>JSON.parse(localStorage.getItem('aquaverse-save')).stats.feeds);
+    await feedOnce(page);
+    await page.waitForFunction(previous=>JSON.parse(localStorage.getItem('aquaverse-save')||'null')?.stats?.feeds>previous,previousFeeds,{timeout:15000});
     await openSettings(page);
     await page.locator('.settings-tab').filter({hasText:'Account & saves'}).click();
     assert.match(await page.locator('.settings-modal').textContent(),/Frontend Test/);
@@ -261,8 +300,15 @@ async function run(){
     account=page.locator('.account-modal');
     const cloudResponse=page.waitForResponse(response=>/\/api\/saves\/\d+$/.test(new URL(response.url()).pathname)&&response.request().method()==='PUT');
     await account.getByRole('button',{name:'Save to cloud now',exact:true}).click();
-    assert.equal((await cloudResponse).status(),200);
-    await account.getByRole('button',{name:'Sign out',exact:true}).click();
+    const upload=await cloudResponse;
+    assert.equal(upload.status(),200);
+    const cloudSnapshot=await ctx.request.get(upload.url());
+    assert.equal(cloudSnapshot.status(),200);
+    const restored=(await cloudSnapshot.json()).data;
+    assert.equal(restored.version,2);
+    assert.ok(restored.stats.feeds>previousFeeds,'Cloud storage must contain the game change made before manual save');
+    console.log('Account step: manual cloud save passed');
+    await account.getByRole('button',{name:'Sign out…',exact:true}).click();
     const logout=page.waitForResponse(response=>new URL(response.url()).pathname==='/api/auth/logout');
     await account.locator('.btn.primary').click();
     assert.equal((await logout).status(),204);
@@ -277,6 +323,7 @@ async function run(){
     await account.getByRole('button',{name:'Sign in',exact:true}).click();
     assert.equal((await login).status(),200);
     await account.waitFor({state:'detached'});
+    console.log('Account step: logout and login passed');
     await page.locator('.tool').filter({hasText:/^Visit$/}).click();
     const showcase=page.locator('.showcase-panel');
     await showcase.getByRole('tab',{name:'My tanks',exact:true}).click();
@@ -286,6 +333,7 @@ async function run(){
     assert.equal(publication.status(),200,'Publishing the real game snapshot must succeed');
     const publishedCard=(await publication.json()).showcase;
     assert.ok(publishedCard.id);
+    console.log('Account step: published game snapshot');
     const visitor=await ctx.newPage();
     await ready(visitor,`/?xem=${encodeURIComponent(publishedCard.id)}`);
     await visitor.locator('.visit-bar .visit-title').waitFor({state:'visible'});
@@ -296,8 +344,13 @@ async function run(){
   });
 
   await check('Shop: fish catalog, equipment and three design previews',async()=>{
+    // The original catalog renders all species thumbnails synchronously. The
+    // software WebGL renderer can need substantially longer than hardware GPUs.
+    page.setDefaultTimeout(180000);
     await page.locator('.tool').filter({hasText:/^Shop$/}).click();
-    const modal=page.locator('.modal');
+    const modal=page.locator('.shop-modal');
+    if(process.env.TEST_DEBUG)console.log('Shop DOM:',await modal.evaluate(node=>({text:node.innerText.slice(0,1000),bounds:node.getBoundingClientRect().toJSON(),buttons:[...node.querySelectorAll('.tabs .tab')].map(button=>({text:button.textContent,role:button.getAttribute('role'),display:getComputedStyle(button).display,visibility:getComputedStyle(button).visibility,bounds:button.getBoundingClientRect().toJSON()}))})));
+    await modal.locator('.tabs .tab').filter({hasText:/Fish & shrimp/}).click();
     await modal.locator('.shop-name').first().waitFor({state:'visible'});
     assert.ok(await modal.locator('.shop-name').count()>=40,'Fish catalog is incomplete');
     await modal.locator('.tabs .tab').filter({hasText:'Equipment'}).click();
@@ -309,6 +362,7 @@ async function run(){
       await page.waitForFunction(()=>[...document.querySelectorAll('.design-shop img')].every(img=>img.complete&&img.naturalWidth>0));
     }
     await closeModal(page);
+    page.setDefaultTimeout(60000);
   });
   await ctx.close();
 
@@ -316,8 +370,8 @@ async function run(){
     const persistent=await context();
     const saved=await persistent.newPage();
     await ready(saved,'/?hocviec=0&hoithoai=0');
-    await saved.locator('.tool').filter({hasText:/^Feed/}).click();
-    await saved.waitForFunction(()=>Boolean(localStorage.getItem('aquaverse-save')),undefined,{timeout:15000});
+    await feedOnce(saved);
+    await saved.waitForFunction(()=>JSON.parse(localStorage.getItem('aquaverse-save')||'null')?.stats?.feeds>=1,undefined,{timeout:15000});
     const before=await saved.evaluate(()=>JSON.parse(localStorage.getItem('aquaverse-save')));
     assert.equal(before.version,2);
     assert.ok(before.stats.feeds>=1);
@@ -333,6 +387,7 @@ async function run(){
     const mobile=await context({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
     const phone=await mobile.newPage();
     await ready(phone);
+    await phone.screenshot({path:fileURLToPath(new URL('../test-results/mobile.png',import.meta.url)),timeout:30000});
     assert.ok(await phone.locator('canvas').first().isVisible());
     assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+2),'Mobile page overflows horizontally');
     await phone.getByRole('button',{name:'Settings',exact:true}).tap();

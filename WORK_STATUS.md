@@ -18,23 +18,34 @@ Các công việc trước đã kết thúc: `Fish-Tank` mirror ZenAqua tại co
 - Build xác minh hash, GLB/PNG đã đạt; font Việt/Anh/Nhật/Trung đã cục bộ hóa. Hai URL font trong bundle được đổi có kiểm soát và khôi phục trong bộ nhớ khi xác minh hash gốc.
 - Đã viết backend riêng trong `server/`, route Vercel `api/[...path].js`.
 - 9 kiểm thử backend đạt: auth/cookie, CSRF, quyền sở hữu, xung đột revision, lịch sử/khôi phục, cộng đồng, email token, Blob CAS và telemetry. Một agent khác đã rà soát bảo mật độc lập.
+- Lượt frontend cuối không filter đã đạt **13/13**, exit 0: 60 GLB và 272 tài nguyên cục bộ; không asset lỗi, request tài nguyên ngoài hay lỗi JavaScript. Log `/tmp/frontend-full-final.log`; ảnh trong `test-results/{cong-lua,tuyet-trang,lang-tuyet,mobile}.png` (ignored). Đã xem ảnh preset và mobile thực tế.
+- Browser đã kiểm tra 3 cảnh/animation/cho ăn, đo nước, kho/thiết bị, bày trí, minigame, ngôn ngữ/font/đồ họa/âm thanh, đăng ký → upload đầu → thay đổi bể/lưu cloud → GET xác minh dữ liệu → logout/login → publish snapshot thật → visit/render/title, cửa hàng/3 thiết kế, reload và điện thoại 390px.
 - Vercel project `fish-aquarium`: `prj_avJZep2EwHRfEIdh1rXIUPHKAPuL`, GitHub repo ID `1449604314`.
 - Private Blob store `fish-aquarium-data`: `store_Qsbz7n2XRVnS5AoL`, đã kết nối project.
 - Metadata Vercel xác nhận `AUTH_SECRET`, `BLOB_READ_WRITE_TOKEN` encrypted và `APP_ORIGIN` đã cấu hình. Không lưu giá trị secret trong repository.
-- Tên miền project đã được Vercel cấp: `fish-aquarium-five.vercel.app`. Deployment đầu `dpl_EVa8FKSFFJczcwQNYEQuQQR4nhYs` dừng ở build kiểm tra cạnh tranh Blob; chưa có production READY.
+- Production `https://fish-aquarium-five.vercel.app` đã READY tại deployment `dpl_GzP6PiZYJ2HnjaB5Y12nokj6AWmQ`, commit `53d05f6d955ecb41368678f12acafb559b492579`.
+- Build Vercel Node 22 đã đạt kiểm tra Blob thật: private persistence, hai ghi cùng ETag chỉ một thắng, tài khoản/phiên đăng nhập, lưu/đọc từ handler mới và xung đột revision 409. Object kiểm thử đã xóa. Log có `CLOUD STORAGE CHECK PASSED`.
+- Project Settings đã đồng bộ Node 22.x và `ssoProtection: null` để website công khai, không bắt người chơi đăng nhập Vercel.
 
-## Đang làm / chưa hoàn thành
+## Đợt chốt và phần còn lại
 
-1. Font Nhật/Trung đã hoàn tất. Đã thêm CSS riêng để nút tài khoản không che nút chăm sóc trên laptop.
-2. Cả 3 preset đã đạt GLB/animation; đo nước, kho/thiết bị, bày trí và minigame đã đạt. Đang hoàn tất settings, tài khoản/lưu đám mây, publish → visit, cửa hàng, reload và mobile. Những lần dừng vừa qua là selector kiểm thử sai (role radio, nhãn Sound on, nhấp label công tắc), đã sửa.
-3. Đã thêm `scripts/check-cloud-storage.mjs` và bật `RUN_CLOUD_STORAGE_CHECK=1` trên Vercel. Build thật đã đọc/ghi Blob được nhưng assertion loại lỗi khi hai ghi cùng ETag chưa đạt; đang ghi chẩn đoán lỗi để sửa. Object kiểm thử riêng đã được xóa. Không chạm dữ liệu ứng dụng.
-4. Đã pin Node 22.x. Build/check cuối; đẩy bản sửa GitHub `main`; theo dõi deployment đúng SHA đến READY.
-5. Báo URL và giới hạn email chưa cấu hình; cập nhật bản ghi này ở từng mốc.
+- Font Nhật/Trung đã hoàn tất. CSS riêng đã sửa nút tài khoản che nút chăm sóc trên laptop. Không còn tính năng cần sửa từ các kiểm thử đã chạy.
+- Các thay đổi cuối là bộ kiểm thử, tài liệu và nhãn log chẩn đoán build. Mã frontend/backend sản phẩm giống điểm production đã kiểm chứng `53d05f6`; đẩy commit chốt lên `main` kích hoạt deployment mới. Khi tiếp tục, đối chiếu `git log -1` với `meta.githubCommitSha` và trạng thái READY của deployment mới nhất, không tải lại hay xây lại dự án từ đầu.
+- Email xác minh/khôi phục mật khẩu **chưa bật theo quyết định của người dùng**. Mã và kiểm thử token/provider đã có; hướng dẫn `README.md` mục “Bật email sau”. Chỉ thêm `RESEND_API_KEY` và `EMAIL_FROM` vào Vercel khi có dịch vụ, rồi redeploy và thử gửi thật.
+- HTTP/browser production trực tiếp chưa kiểm tra được vì Cloud proxy chặn hostname mới (CONNECT 403). Vercel READY, function đã build và Blob thật đã kiểm chứng trong Vercel build. Browser 13/13 chạy ở localhost với backend kiểm thử riêng; không được gộp hai loại bằng chứng thành tuyên bố browser production đã đạt. Nếu cần kiểm tra trực tiếp từ Cloud, cho phép `fish-aquarium-five.vercel.app` trong Environment settings rồi thử lại.
+
+## Lịch sử lỗi đã xử lý / bằng chứng
+
+Deployment đầu Node 26 (`a458a6d`, `dpl_EVa8FKSFFJczcwQNYEQuQQR4nhYs`) chưa đạt assertion loại lỗi cạnh tranh Blob. Bản pin Node 22 kế tiếp đã đạt toàn bộ smoke trên dữ liệu thật. Giữ build smoke để phát hiện tái diễn; chưa đủ bằng chứng quy lỗi riêng cho Node 26.
+
+Các lần dừng ở test UI là selector/chế độ kiểm thử: `luu=0` không tạo snapshot; bể no cần nhấp xác nhận lần hai; category dùng nhãn `Fish & shrimp`. Shop gốc tạo toàn bộ thumbnail đồng bộ bằng WebGL nên máy kiểm thử GPU phần mềm cần thời gian dài hơn 25 giây; tăng timeout riêng test Shop lên 180 giây, không sửa mã mô phỏng. Ảnh preset và mobile lưu ở `test-results/` (không commit).
+
+Lượt tổng hợp đầu đạt 12 nhóm tính năng nhưng bắt `SecurityError` do initScript kiểm thử truy cập localStorage trên `about:blank`. Repro tối thiểu xác nhận stack; thêm guard chỉ khởi tạo trên HTTP(S), giữ nguyên kiểm tra lỗi của ứng dụng. Lượt cuối sau sửa đã đạt 13/13, không bỏ qua assertion nào.
 
 ## Lưu ý khi tiếp tục
 
-- Không cài hay tải lại 588 tệp đã có; chỉ bổ sung font còn thiếu.
-- `npm run test:backend` dùng memory/injected provider; chưa chứng minh Blob thật.
+- Không cài hay tải lại 588 tệp hay font đã có và đã kiểm chứng.
+- `npm run test:backend` dùng memory/injected provider; Blob thật được kiểm tra riêng trong Vercel build, đã đạt ở deployment nêu trên.
 - `NODE_ENV=test BACKEND_TEST_MODE=1` là chế độ test được chọn rõ ràng; production tuyệt đối không tự chuyển sang memory storage.
 - Mô phỏng gốc: `hocviec=0` mở khóa tính năng nhưng tạo bể trống; muốn kiểm tra cá ở preset dùng `?moi=1&hoithoai=0&luu=0&bocuc=cong-lua` (không thêm `hocviec=0`).
-- Cloud proxy hiện cho phép API Vercel và Aqualator nguồn; chưa cho phép hostname deployment mới để kiểm tra HTTP công khai từ môi trường này.
+- Cloud proxy hiện cho phép API Vercel và Aqualator nguồn; request trực tiếp `https://fish-aquarium-five.vercel.app/api/health` đã bị proxy từ chối CONNECT 403. Không được báo rằng đã kiểm thử HTTP/browser production từ môi trường này. Có bằng chứng Vercel READY và Blob build smoke; đang kiểm thử browser ở localhost.

@@ -16,7 +16,7 @@ Bản sao tự chứa của giao diện công khai [Aqualator](https://www.aqual
 
 ## Phát triển
 
-Yêu cầu Node.js 22 trở lên.
+Yêu cầu Node.js 22.x.
 
 ```sh
 npm ci
@@ -37,6 +37,8 @@ npm run test:frontend
 ## Vercel
 
 Project: `fish-aquarium`, repository: `LvK2606/Fish-Aquarium`. `vercel.json` đặt framework Other, build `npm run build`, output `public/`, và một Vercel Function cho `/api/*`. Push lên `main` kích hoạt production deployment khi Git integration đã kết nối.
+
+Website: **https://fish-aquarium-five.vercel.app**. Production đã READY, backend dùng private Blob store riêng. Project dùng Node 22.x và đã tắt lớp Vercel Authentication để người chơi truy cập website công khai; đăng nhập tài khoản trong ứng dụng vẫn do backend xử lý.
 
 Các biến server cần thiết trong Vercel → Project → Settings → Environment Variables:
 
