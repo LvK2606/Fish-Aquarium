@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - perf/shop-culling-adaptive-dpr-20261108
+      - perf/cpu-raycast-memory-20261108
   pull_request:
     paths:
       - 'public/assets/*.js'
@@ -10,6 +11,7 @@ on:
       - 'scripts/**'
       - 'package.json'
       - '.github/workflows/performance-hotfix.yml'
+      - 'package-lock.json'
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -35,4 +37,39 @@ jobs:
         with:
           name: shop-performance-results
           path: test-results/
+          if-no-files-found: ignore
+
+  compare-cpu:
+    if: github.ref == 'refs/heads/perf/cpu-raycast-memory-20261108'
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.57.0-noble
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Keep identical measurement script for both revisions
+        run: cp tests/cpu-browser.mjs /tmp/aquarium-cpu-browser.mjs
+      - uses: actions/checkout@v4
+        with:
+          ref: 5db5ebcb44e0e78ae7e289284a976adc559c5983
+          clean: true
+      - run: npm ci
+      - name: Measure baseline
+        env:
+          PERF_LABEL: before
+        run: cp /tmp/aquarium-cpu-browser.mjs tests/cpu-browser.mjs && node tests/cpu-browser.mjs
+      - uses: actions/checkout@v4
+        with:
+          ref: perf/cpu-raycast-memory-20261108
+          clean: true
+      - run: npm ci
+      - name: Measure optimized
+        env:
+          PERF_LABEL: after
+        run: npm run test:cpu-benchmark
+      - name: Upload side-by-side CPU metrics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cpu-mobile-high-before-after
+          path: test-results/cpu-benchmark-*.json
           if-no-files-found: ignore
