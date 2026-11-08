@@ -6255,6 +6255,7 @@ ${e})`,cE=({functionName:t,scaleName:e,weights:n,bias:i,width:s=8,relu:a=!1})=>{
   uniform float uTime;
   uniform float uCaustics;
   uniform float uLamp;
+  vec2 hash22(vec2 p) { vec3 q = fract(vec3(p.xyx)*vec3(0.1031,0.103,0.0973)); q += dot(q,q.yzx+33.33); return fract((q.xx+q.yz)*q.zy); }
   float caustics(vec3 world) {
     vec2 p = world.xz * 1.5;
     float a = abs(sin(p.x * 2.8 + sin(p.y * 1.1 + uTime * 0.3) - uTime * 0.47));
@@ -6265,6 +6266,7 @@ ${e})`,cE=({functionName:t,scaleName:e,weights:n,bias:i,width:s=8,relu:a=!1})=>{
   uniform float uTime;
   uniform float uCaustics;
   uniform float uLamp;
+  vec2 hash22(vec2 p) { vec3 q = fract(vec3(p.xyx)*vec3(0.1031,0.103,0.0973)); q += dot(q,q.yzx+33.33); return fract((q.xx+q.yz)*q.zy); }
   float caustics(vec3 world) {return 0.12 * uCaustics * uLamp;}
 `,DZ=`
   uniform vec3 uPal[8];
