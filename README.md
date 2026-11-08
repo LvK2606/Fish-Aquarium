@@ -79,3 +79,16 @@ Theo lựa chọn hiện tại, mã xác minh email và khôi phục mật khẩ
 4. Kiểm tra gửi lại thư xác minh và luồng quên mật khẩu trên bản sao.
 
 Khi chưa có dịch vụ email, API báo thiếu cấu hình cho thao tác gửi thư; không trả token khôi phục công khai và không giả vờ đã gửi email.
+
+## High Adaptive (mobile GPU optimization)
+
+The deployed **High** setting uses an adaptive render budget on mobile while preserving all original PNG pixels, source GLBs, fish animations and materials:
+
+- Mobile DPR starts no higher than 1.5, and never higher than the device's native DPR. The FPS governor reads actual React Three Fiber render cadence, stepping DPR down by 0.15 after repeated below-44 FPS windows, down to 1.0. It restores 0.1 DPR after sustained above-56 FPS up to the device-aware cap. Background-tab stalls do not count.
+- Mobile High retains Bloom at a smaller intermediate resolution (0.35 scale, five mip levels) and disables composer multisampling. Desktop High changes composer multisampling from 4 to 2, retaining its original Bloom quality. Low stays unchanged.
+- Dense planted tanks use camera-orientation-dependent far-side leaf-density LOD in mobile High. Near-side plants retain all leaves. The camera angle is checked at most every 1.3 seconds; mesh materials, textures and picking IDs are preserved.
+- All original assets under public/ are verified before any optimization. The built dist/ gets a separately patched JS bundle, content-fingerprinted filename and updated HTML reference, avoiding stale immutable-script caches.
+
+The strategy improves GPU headroom; it does not guarantee 60 FPS on every phone. Validate performance on real low-end devices before promoting to production.
+
+Run npm run build && npm run test:backend to verify source hashes, adaptive governor logic and generated JavaScript syntax. Run npm run test:frontend:deploy after building for full browser regressions.
