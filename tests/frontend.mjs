@@ -347,8 +347,20 @@ async function run(){
     // The original catalog renders all species thumbnails synchronously. The
     // software WebGL renderer can need substantially longer than hardware GPUs.
     page.setDefaultTimeout(180000);
+    // Measure actual browser main-thread long tasks while opening the Shop.
+    await page.evaluate(()=>{
+      window.__aqShopLongTasks=[];
+      if(PerformanceObserver.supportedEntryTypes?.includes('longtask')){
+        window.__aqShopObserver=new PerformanceObserver(list=>{
+          for(const task of list.getEntries())window.__aqShopLongTasks.push(task.duration);
+        });
+        window.__aqShopObserver.observe({entryTypes:['longtask']});
+      }
+    });
+    const shopStarted=Date.now();
     await page.locator('.tool').filter({hasText:/^Shop$/}).click();
     const modal=page.locator('.shop-modal');
+    const shopOpenMs=Date.now()-shopStarted;
     if(process.env.TEST_DEBUG)console.log('Shop DOM:',await modal.evaluate(node=>({text:node.innerText.slice(0,1000),bounds:node.getBoundingClientRect().toJSON(),buttons:[...node.querySelectorAll('.tabs .tab')].map(button=>({text:button.textContent,role:button.getAttribute('role'),display:getComputedStyle(button).display,visibility:getComputedStyle(button).visibility,bounds:button.getBoundingClientRect().toJSON()}))})));
     await modal.locator('.tabs .tab').filter({hasText:/Fish & shrimp/}).click();
     await modal.locator('.shop-name').first().waitFor({state:'visible'});
@@ -361,6 +373,13 @@ async function run(){
       await modal.locator('.design-pick').nth(index).click();
       await page.waitForFunction(()=>[...document.querySelectorAll('.design-shop img')].every(img=>img.complete&&img.naturalWidth>0));
     }
+    const longTasks=await page.evaluate(()=>{
+      window.__aqShopObserver?.disconnect();
+      return {supported:Boolean(window.__aqShopObserver),durations:window.__aqShopLongTasks||[]};
+    });
+    const durations=longTasks.durations;
+    console.log('SHOP_LONG_TASKS '+JSON.stringify({supported:longTasks.supported,shopOpenMs,count:durations.length,maxMs:Math.round(Math.max(0,...durations)),totalMs:Math.round(durations.reduce((sum,ms)=>sum+ms,0))}));
+    assert.ok(shopOpenMs>=0,'Shop opening time was not recorded');
     await closeModal(page);
     page.setDefaultTimeout(60000);
   });

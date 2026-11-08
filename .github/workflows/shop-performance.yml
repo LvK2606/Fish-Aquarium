@@ -1,0 +1,24 @@
+name: Shop performance hotfix
+on:
+  pull_request:
+  push:
+    branches:
+      - hotfix/shop-longtasks-adaptive-dpr
+jobs:
+  performance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test:backend
+      - run: npm run test:performance
+      - run: npx playwright install --with-deps chromium
+      - name: Browser Shop long-task measurement
+        run: |
+          CHROMIUM_PATH="$(node -p "require('playwright').chromium.executablePath()")" TEST_FILTER="Shop" npm run test:frontend
