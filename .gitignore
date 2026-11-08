@@ -5,3 +5,5 @@ node_modules/
 !.env.example
 test-results/
 .local-data/
+# Generated at build time; source bundle remains hash-verified.
+public/assets/main-mobile-optimized.js
