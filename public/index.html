@@ -23,6 +23,39 @@
     <link rel="preload" href="/brand/scene.svg" as="image" />
     <link rel="preload" href="/brand/wordmark.png" as="image" />
     <link rel="stylesheet" href="/brand/splash.css" />
+    <!-- Preview-only convenience: ?shop=1 skips onboarding and opens Shop without changing saved aquariums. -->
+    <script>
+      (() => {
+        const directShopUrl = new URL(window.location.href);
+        if (directShopUrl.searchParams.get('shop') !== '1') return;
+
+        // Apply existing in-app tutorial/dialogue flags before the main bundle boots.
+        directShopUrl.searchParams.set('hocviec', '0');
+        directShopUrl.searchParams.set('hoithoai', '0');
+        history.replaceState(history.state, '', directShopUrl.pathname + directShopUrl.search + directShopUrl.hash);
+
+        window.addEventListener('DOMContentLoaded', () => {
+          let checks = 0;
+          const timer = window.setInterval(() => {
+            const splash = document.getElementById('boot');
+            if (splash && !splash.classList.contains('is-done')) return;
+            if (document.querySelector('.shop-modal')) {
+              window.clearInterval(timer);
+              return;
+            }
+            const shop = Array.from(document.querySelectorAll('#root .tool')).find(button =>
+              button.matches('[data-tour="shop"]') ||
+              /^(Shop|Cửa hàng|商店|ショップ)$/i.test(button.textContent.trim())
+            );
+            if (shop && !shop.hasAttribute('disabled') && shop.getClientRects().length) {
+              shop.click();
+              window.clearInterval(timer);
+            }
+            if (++checks >= 200) window.clearInterval(timer);
+          }, 300);
+        }, { once: true });
+      })();
+    </script>
     <script type="module" crossorigin src="/assets/main-CvOo3B9w.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/tokens-CRUX-1Pp.js">
     <link rel="stylesheet" crossorigin href="/assets/tokens-CaFZIQom.css">
