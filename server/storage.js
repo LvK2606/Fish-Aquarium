@@ -27,7 +27,7 @@ export function createBlobStore({ token = process.env.BLOB_READ_WRITE_TOKEN, pat
         });
         return result.etag;
       } catch (error) {
-        if (/Precondition|already exists|condition.*fail/i.test(`${error.name} ${error.message}`)) throw new StorageConflict();
+        if (/Precondition|already exists|condition.*fail|conflicting operation|conditional request cannot succeed/i.test(`${error.name} ${error.message}`)) throw new StorageConflict();
         throw error;
       }
     },
