@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {existsSync} from 'node:fs';
 import {spawn} from 'node:child_process';
 import {createServer} from 'node:net';
 import {once} from 'node:events';
@@ -142,7 +143,7 @@ async function run(){
   if(!base)await startServer();
   base=base.replace(/\/$/,'');
   await mkdir(new URL('../test-results/',import.meta.url),{recursive:true});
-  browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',proxy:proxyForRemote(),
+  browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||(existsSync('/usr/bin/chromium')?'/usr/bin/chromium':chromium.executablePath()),proxy:proxyForRemote(),
     args:['--no-sandbox','--disable-dev-shm-usage','--enable-unsafe-swiftshader']});
 
   const presets=await context();
@@ -344,8 +345,19 @@ async function run(){
   });
 
   await check('Shop: fish catalog, equipment and three design previews',async()=>{
-    // The original catalog renders all species thumbnails synchronously. The
-    // software WebGL renderer can need substantially longer than hardware GPUs.
+    // Observe actual browser main-thread stalls while opening and using Shop.
+    // Software WebGL timings vary by runner; an optional budget makes this a gate.
+    await page.evaluate(()=>{
+      window.__shopLongTasks=[];
+      window.__shopStart=performance.now();
+      if(PerformanceObserver.supportedEntryTypes?.includes('longtask')){
+        window.__shopObserver=new PerformanceObserver(list=>{
+          for(const entry of list.getEntries())if(entry.startTime>=window.__shopStart)
+            window.__shopLongTasks.push({startTime:entry.startTime,duration:entry.duration});
+        });
+        window.__shopObserver.observe({type:'longtask'});
+      }
+    });
     page.setDefaultTimeout(180000);
     await page.locator('.tool').filter({hasText:/^Shop$/}).click();
     const modal=page.locator('.shop-modal');
@@ -353,6 +365,7 @@ async function run(){
     await modal.locator('.tabs .tab').filter({hasText:/Fish & shrimp/}).click();
     await modal.locator('.shop-name').first().waitFor({state:'visible'});
     assert.ok(await modal.locator('.shop-name').count()>=40,'Fish catalog is incomplete');
+    assert.ok(await modal.locator('.shop-art.thumb > img').count()<await modal.locator('.shop-card').count(),'Shop must lazy-load only visible thumbnail images');
     await modal.locator('.tabs .tab').filter({hasText:'Equipment'}).click();
     assert.ok(await modal.locator('.shop-card').count()>=5,'Equipment catalog is incomplete');
     await modal.locator('.tabs .tab').filter({hasText:'Tank designs'}).click();
@@ -361,6 +374,24 @@ async function run(){
       await modal.locator('.design-pick').nth(index).click();
       await page.waitForFunction(()=>[...document.querySelectorAll('.design-shop img')].every(img=>img.complete&&img.naturalWidth>0));
     }
+    await page.waitForTimeout(1000);
+    const longTaskReport=await page.evaluate(()=>{
+      window.__shopObserver?.disconnect();
+      const entries=window.__shopLongTasks||[];
+      const durations=entries.map(t=>t.duration).sort((a,b)=>a-b);
+      const percentile=p=>durations.length?durations[Math.min(durations.length-1,Math.ceil(p*durations.length)-1)]:0;
+      return {supported:PerformanceObserver.supportedEntryTypes?.includes('longtask')??false,
+        sampleWindowMs:Math.round(performance.now()-window.__shopStart),count:durations.length,
+        totalBlockingMs:Math.round(durations.reduce((sum,ms)=>sum+Math.max(0,ms-50),0)),
+        p50Ms:percentile(.5),p95Ms:percentile(.95),maxMs:durations.at(-1)||0};
+    });
+    await writeFile(new URL('../test-results/shop-longtasks.json',import.meta.url),JSON.stringify(longTaskReport,null,2));
+    console.log('SHOP LONG TASKS',JSON.stringify(longTaskReport));
+    assert.ok(longTaskReport.supported,'Long Tasks API unavailable in Chromium test browser');
+    const budget=Number(process.env.SHOP_LONGTASK_MAX_MS||0);
+    if(budget>0)assert.ok(longTaskReport.maxMs<=budget,`Shop max long task ${longTaskReport.maxMs}ms exceeds ${budget}ms budget`);
+    const totalBudget=Number(process.env.SHOP_LONGTASK_MAX_TOTAL_MS||0);
+    if(totalBudget>0)assert.ok(longTaskReport.totalBlockingMs<=totalBudget,`Shop total blocking ${longTaskReport.totalBlockingMs}ms exceeds ${totalBudget}ms budget`);
     await closeModal(page);
     page.setDefaultTimeout(60000);
   });
@@ -394,6 +425,22 @@ async function run(){
     await phone.locator('.settings-modal').waitFor({state:'visible'});
     await phone.locator('.settings-modal').getByRole('button',{name:'Back to the tank',exact:true}).tap();
     await phone.locator('.settings-modal').waitFor({state:'detached'});
+    await mobile.close();
+  });
+
+  await check('Mobile high quality: render DPR does not exceed 1.5',async()=>{
+    const mobile=await context({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:3});
+    await mobile.addInitScript(()=>{
+      if(['http:','https:'].includes(location.protocol))
+        localStorage.setItem('aquaverse-prefs',JSON.stringify({quality:'high',tempo:'normal',plantSway:1,leftWide:false}));
+    });
+    const phone=await mobile.newPage();
+    await ready(phone);
+    const dpr=await phone.evaluate(()=>{
+      const canvas=document.querySelector('#root canvas');
+      return canvas.width/canvas.getBoundingClientRect().width;
+    });
+    assert.ok(dpr>=.95&&dpr<=1.55,`Mobile render DPR must remain between 1 and 1.5, got ${dpr}`);
     await mobile.close();
   });
 

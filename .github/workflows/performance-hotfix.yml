@@ -1,0 +1,38 @@
+name: Aquarium performance hotfix checks
+on:
+  push:
+    branches:
+      - perf/shop-culling-adaptive-dpr-20261108
+  pull_request:
+    paths:
+      - 'public/assets/*.js'
+      - 'tests/**'
+      - 'scripts/**'
+      - 'package.json'
+      - '.github/workflows/performance-hotfix.yml'
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.57.0-noble
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test:backend
+      - name: Measure Shop long tasks and check mobile
+        env:
+          TEST_FILTER: 'Shop:|Mobile'
+          SHOP_LONGTASK_MAX_TOTAL_MS: '30000'
+        run: npm run test:frontend
+      - name: Upload browser perf artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shop-performance-results
+          path: test-results/
+          if-no-files-found: ignore

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
 import { randomUUID } from 'node:crypto';
 import { createHandler } from '../server/handler.js';
-import { createMemoryStore, createBlobStore, StorageUnavailable } from '../server/storage.js';
+import { createMemoryStore, createBlobStore, StorageUnavailable, StorageConflict } from '../server/storage.js';
 
 const secret = 'test-only-auth-secret-32-characters-at-least';
 async function fixture(options = {}) {
@@ -158,6 +158,11 @@ test('Blob adapter disables cached reads and uses conditional private writes', a
   assert.equal(calls[2].options.addRandomSuffix, false);
   assert.ok(calls[2].options.cacheControlMaxAge >= 60);
   await assert.rejects(createBlobStore({ token: '' }).read(), StorageUnavailable);
+  const conflictStore = createBlobStore({token:'test-token',sdk:{
+    async put(){const error=new Error('Vercel Blob: The conditional request cannot succeed due to a conflicting operation against this resource.');error.name='BlobError';throw error;}
+  }});
+  await assert.rejects(conflictStore.write({},'stale-etag'),StorageConflict);
+
 });
 
 test('forgot-password does not enumerate accounts when email provider fails', async t => {

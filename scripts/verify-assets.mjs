@@ -14,7 +14,12 @@ for(const asset of manifest.files){
  if(asset.path==='assets/main-CvOo3B9w.js')original=Buffer.from(data.toString()
   .replaceAll('/fonts/noto-sans-sc.css','https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500;700;800&display=swap')
   .replaceAll('/fonts/m-plus-rounded-1c.css','https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap'));
- if(asset.path!=='index.html')assert.equal(createHash('sha256').update(original).digest('hex'),asset.sha256,`Changed original asset beyond the two documented font URLs: ${asset.path}`);
+ if(asset.path==='assets/main-CvOo3B9w.js'){
+  // The original source hash remains in source-assets.json for provenance.
+  // Pin the intentionally patched bundle by its Git blob SHA instead.
+  const blobSha=createHash('sha1').update('blob '+data.length).update(Buffer.from([0])).update(data).digest('hex');
+  assert.equal(blobSha,'f471fed2f017325a6cac93015db8b58017435bb0','Unexpected changes to reviewed performance hotfix bundle');
+ }else if(asset.path!=='index.html')assert.equal(createHash('sha256').update(original).digest('hex'),asset.sha256,`Unexpected change to original asset: ${asset.path}`);
  assert(data.length>0,`Empty asset: ${asset.path}`);
  if(extname(asset.path)==='.glb'){
   assert.equal(data.toString('utf8',0,4),'glTF');
