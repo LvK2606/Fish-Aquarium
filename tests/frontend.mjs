@@ -361,6 +361,8 @@ async function run(){
     await page.locator('.tool').filter({hasText:/^Shop$/}).click();
     const modal=page.locator('.shop-modal');
     const shopOpenMs=Date.now()-shopStarted;
+    const openingDurations=await page.evaluate(()=>window.__aqShopLongTasks?.slice()||[]);
+    console.log('SHOP_OPEN_LONG_TASKS '+JSON.stringify({shopOpenMs,count:openingDurations.length,maxMs:Math.round(Math.max(0,...openingDurations)),totalMs:Math.round(openingDurations.reduce((sum,ms)=>sum+ms,0))}));
     if(process.env.TEST_DEBUG)console.log('Shop DOM:',await modal.evaluate(node=>({text:node.innerText.slice(0,1000),bounds:node.getBoundingClientRect().toJSON(),buttons:[...node.querySelectorAll('.tabs .tab')].map(button=>({text:button.textContent,role:button.getAttribute('role'),display:getComputedStyle(button).display,visibility:getComputedStyle(button).visibility,bounds:button.getBoundingClientRect().toJSON()}))})));
     await modal.locator('.tabs .tab').filter({hasText:/Fish & shrimp/}).click();
     await modal.locator('.shop-name').first().waitFor({state:'visible'});

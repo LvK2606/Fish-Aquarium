@@ -1,9 +1,6 @@
 name: Shop performance hotfix
 on:
   pull_request:
-  push:
-    branches:
-      - hotfix/shop-longtasks-adaptive-dpr
 jobs:
   performance:
     runs-on: ubuntu-24.04
@@ -21,4 +18,4 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Browser Shop long-task measurement
         run: |
-          CHROMIUM_PATH="$(node -p "require('playwright').chromium.executablePath()")" TEST_FILTER="Shop" npm run test:frontend
+          CHROMIUM_PATH="$(node -p "require('playwright').chromium.executablePath()")" TEST_FILTER="Shop|Mobile|3D preset cong-lua" npm run test:frontend
