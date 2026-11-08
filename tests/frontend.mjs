@@ -111,7 +111,12 @@ async function context(options={}){
 
 async function ready(page,path='/?moi=1&hocviec=0&hoithoai=0&luu=0'){
   await page.goto(new URL(path,base).href,{waitUntil:'domcontentloaded'});
-  await page.locator('#root canvas').first().waitFor({state:'visible',timeout:60000});
+  try{await page.locator('#root canvas').first().waitFor({state:'visible',timeout:60000});}
+  catch(error){console.error('AQUARIUM BOOT DIAGNOSTIC',JSON.stringify({
+    pageErrors:problems.pageErrors.slice(-10),failedAssets:problems.failedAssets.slice(-10),
+    url:page.url(),root:await page.locator('#root').innerHTML().catch(()=>null),
+    heading:await page.locator('.aq-problem').innerText().catch(()=>null)
+  }).slice(0,4500));throw error;}
   await page.waitForFunction(()=>!document.querySelector('.aq-boot:not(.is-done)'),undefined,{timeout:60000});
   await page.locator('.aq-boot').waitFor({state:'detached',timeout:10000});
   assert.equal(await page.title(),'Aqualator');
