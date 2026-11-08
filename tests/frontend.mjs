@@ -112,7 +112,9 @@ async function ready(page,path='/?moi=1&hocviec=0&hoithoai=0&luu=0'){
   await page.goto(new URL(path,base).href,{waitUntil:'domcontentloaded'});
   await page.locator('#root canvas').first().waitFor({state:'visible',timeout:60000});
   await page.waitForFunction(()=>!document.querySelector('.aq-boot:not(.is-done)'),undefined,{timeout:60000});
-  await page.locator('.aq-boot').waitFor({state:'detached',timeout:10000});
+  // The boot overlay is intentionally retained in the DOM and hidden by CSS.
+  // Check the actual user-visible state, not DOM removal.
+  await page.locator('.aq-boot').waitFor({state:'hidden',timeout:15000});
   assert.equal(await page.title(),'Aqualator');
   assert.ok(await page.locator('canvas').first().evaluate(canvas=>canvas.width>0&&canvas.height>0));
 }
