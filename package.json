@@ -11,7 +11,8 @@
     "test": "node --test tests/backend*.mjs && node tests/frontend.mjs",
     "test:backend": "node --test tests/backend*.mjs tests/png-lossless.mjs tests/adaptive-graphics.mjs",
     "test:frontend": "node tests/frontend.mjs",
-    "test:frontend:deploy": "SERVE_DEPLOY_OUTPUT=1 node tests/frontend.mjs"
+    "test:frontend:deploy": "SERVE_DEPLOY_OUTPUT=1 node tests/frontend.mjs",
+    "test:performance": "node tests/mobile-performance.mjs"
   },
   "dependencies": {
     "@vercel/blob": "2.8.0"
