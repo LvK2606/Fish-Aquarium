@@ -1,83 +1,81 @@
-// Production-safe High Adaptive patch for the mirrored, verified Aqualator bundle.
-// Applied ONLY to dist/ after the immutable source hash verification succeeds.
-// All anchors are strict: if the upstream bundle changes, fail instead of
-// silently shipping an unoptimized or partially modified build.
-
-export function createAdaptiveGovernor({
-  max = 1.5, min = 1, windowMs = 1400, slowBelow = 44, fastAbove = 56,
+/**
+ * Aqualator High "sharp first" mobile adaptation.
+ * Original assets and the source JS under public/ are not modified.
+ * Applied only to the content-fingerprinted dist/ JS output.
+ * Build fails closed if a minified source anchor differs.
+ */
+export function createInteractionGovernor({
+  max = 2, min = 1.55, windowMs = 1200, slowBelow = 25, dragThreshold = 10
 } = {}) {
-  const ceiling = Math.max(1, Number.isFinite(max) ? max : 1.5);
-  const floor = Math.max(1, Math.min(ceiling, Number.isFinite(min) ? min : 1));
+  const ceiling = Math.max(1, Math.min(2, Number.isFinite(max) ? max : 2));
+  const floor = Math.max(1, Math.min(ceiling, Number.isFinite(min) ? min : 1.55));
   let dpr = ceiling;
-  let lastFrame = null;
-  let start = null;
-  let frames = 0;
-  let slowWindows = 0;
-  let fastWindows = 0;
-  let cooldown = 0;
+  let start = null, last = null, frames = 0, fps = null;
+  let pointer = null, dragging = false;
 
   return {
     getDpr() { return dpr; },
+    getFps() { return fps; },
+    isDragging() { return dragging; },
     sample(now) {
       if (!Number.isFinite(now)) return null;
-      // Don't interpret background-tab pauses, camera resets or GC stalls
-      // as sustained low FPS; resume with a fresh measurement window.
-      if (lastFrame !== null && (now - lastFrame > 600 || now < lastFrame)) {
+      // A 30 Hz on-demand scene is intentional. Never downscale just because
+      // idle renders arrive at 30 Hz; only act during a slow, real gesture.
+      if (last !== null && (now - last > 800 || now <= last)) {
         start = now;
         frames = 0;
-        slowWindows = 0;
-        fastWindows = 0;
-        cooldown = 0;
+        fps = null;
       }
-      lastFrame = now;
+      last = now;
       if (start === null) start = now;
       frames++;
       const elapsed = now - start;
-      if (elapsed < windowMs) return null;
-      const fps = frames * 1000 / Math.max(1, elapsed);
-      start = now;
-      frames = 0;
-      if (cooldown > 0) {
-        cooldown--;
-        return null;
+      if (elapsed >= windowMs) {
+        fps = frames * 1000 / Math.max(1, elapsed);
+        start = now;
+        frames = 0;
       }
-      if (fps < slowBelow) {
-        slowWindows++;
-        fastWindows = 0;
-      } else if (fps > fastAbove) {
-        fastWindows++;
-        slowWindows = 0;
-      } else {
-        slowWindows = 0;
-        fastWindows = 0;
-      }
-      if (slowWindows >= 2 && dpr > floor + 0.02) {
-        dpr = Math.max(floor, Math.round((dpr - 0.15) * 100) / 100);
-        slowWindows = 0;
-        cooldown = 1;
-        return dpr;
-      }
-      if (fastWindows >= 4 && dpr < ceiling - 0.02) {
-        dpr = Math.min(ceiling, Math.round((dpr + 0.1) * 100) / 100);
-        fastWindows = 0;
-        cooldown = 1;
+      if (dragging && fps !== null && fps < slowBelow && dpr > floor) {
+        dpr = floor;
         return dpr;
       }
       return null;
     },
+    pointerDown(x, y) {
+      if (!Number.isFinite(x) || !Number.isFinite(y)) return;
+      pointer = { x, y };
+      dragging = false;
+    },
+    pointerMove(x, y) {
+      if (!pointer || !Number.isFinite(x) || !Number.isFinite(y)) return null;
+      if (Math.hypot(x - pointer.x, y - pointer.y) >= dragThreshold) dragging = true;
+      if (dragging && fps !== null && fps < slowBelow && dpr > floor) {
+        dpr = floor;
+        return dpr;
+      }
+      return null;
+    },
+    pointerUp() {
+      pointer = null;
+      dragging = false;
+      if (dpr !== ceiling) {
+        dpr = ceiling;
+        return ceiling;
+      }
+      return null;
+    }
   };
 }
 
 function replaceExactlyOnce(source, before, after, reason) {
-  const first = source.indexOf(before);
-  if (first === -1 || source.indexOf(before, first + before.length) !== -1) {
-    throw new Error('High Adaptive patch anchor missing or ambiguous: ' + reason);
-  }
-  return source.slice(0, first) + after + source.slice(first + before.length);
+  const index = source.indexOf(before);
+  if (index < 0 || source.indexOf(before, index + before.length) !== -1)
+    throw new Error('High Adaptive sharp-first patch anchor missing or ambiguous: ' + reason);
+  return source.slice(0, index) + after + source.slice(index + before.length);
 }
 
 const browserRuntime = `
-const __aquaverseCreateGovernor = ${createAdaptiveGovernor.toString()};
+const __aquaverseMakeInteractionGovernor = ${createInteractionGovernor.toString()};
 function __aquaverseMobile(){
   if(typeof window==="undefined")return false;
   try{
@@ -87,13 +85,48 @@ function __aquaverseMobile(){
   }catch{return false}
 }
 function __aquaverseInitialDpr(){
-  return Math.max(1,Math.min(1.5,typeof window==="undefined"?1.5:window.devicePixelRatio||1));
+  // Match the original game's full-res High DPR (up to 2x), never 1.5x.
+  return Math.max(1,Math.min(2,typeof window==="undefined"?2:window.devicePixelRatio||1));
 }
-function __AquaverseAdaptiveDpr(){
-  const setDpr=zi(state=>state.setDpr);
-  const ceiling=__aquaverseInitialDpr();
-  const governor=B.useMemo(()=>__aquaverseCreateGovernor({max:ceiling,min:1}),[ceiling]);
-  B.useEffect(()=>{setDpr(ceiling)},[ceiling,setDpr]);
+function __AquaverseSharpInteraction(){
+  const renderer=zi(s=>s.gl),setDpr=zi(s=>s.setDpr);
+  const full=__aquaverseInitialDpr();
+  const governor=B.useMemo(()=>__aquaverseMakeInteractionGovernor({max:full,min:Math.min(full,1.55)}),[full]);
+  B.useEffect(()=>{
+    setDpr(full);
+    const canvas=renderer.domElement;
+    if(!canvas)return;
+    let restore=0;
+    const onDown=e=>{
+      if(e.isPrimary===false)return;
+      if(restore)cancelAnimationFrame(restore);
+      governor.pointerDown(e.clientX,e.clientY);
+      // A new gesture always begins from full-resolution High.
+      setDpr(governor.getDpr());
+    };
+    const onMove=e=>{
+      if(e.isPrimary===false)return;
+      const next=governor.pointerMove(e.clientX,e.clientY);
+      if(next!==null)setDpr(next);
+    };
+    const onUp=()=>{
+      const next=governor.pointerUp();
+      if(next!==null)restore=requestAnimationFrame(()=>{restore=0;setDpr(next)});
+    };
+    canvas.addEventListener("pointerdown",onDown,{passive:true});
+    window.addEventListener("pointermove",onMove,{passive:true});
+    window.addEventListener("pointerup",onUp,{passive:true});
+    window.addEventListener("pointercancel",onUp,{passive:true});
+    window.addEventListener("blur",onUp);
+    return ()=>{
+      canvas.removeEventListener("pointerdown",onDown);
+      window.removeEventListener("pointermove",onMove);
+      window.removeEventListener("pointerup",onUp);
+      window.removeEventListener("pointercancel",onUp);
+      window.removeEventListener("blur",onUp);
+      if(restore)cancelAnimationFrame(restore);
+    };
+  },[renderer,setDpr,full,governor]);
   On(()=>{
     if(typeof document!=="undefined"&&document.visibilityState!=="visible")return;
     const next=governor.sample(performance.now());
@@ -101,65 +134,42 @@ function __AquaverseAdaptiveDpr(){
   });
   return null;
 }
-// View-dependent plant instance LOD: full near-side leaves, fewer leaves on
-// the far side of dense clusters. Keeps all species, meshes, textures and
-// picking IDs; recalculates only after meaningful camera orbit changes.
-function __aquaverseFarLeaves(leaves,sector){
-  if(leaves.length<72)return leaves;
-  const angle=sector*Math.PI/4,dx=Math.sin(angle),dz=Math.cos(angle);
-  const far=item=>(item.position[0]*dx+item.position[2]*dz)<-.03;
-  const counts=new Map();
-  for(const leaf of leaves)if(far(leaf))counts.set(leaf.clusterId,(counts.get(leaf.clusterId)||0)+1);
-  const seen=new Map(),kept=[];
-  for(const leaf of leaves){
-    if(!far(leaf)||(counts.get(leaf.clusterId)||0)<18){kept.push(leaf);continue}
-    const index=seen.get(leaf.clusterId)||0;
-    seen.set(leaf.clusterId,index+1);
-    if(index%4!==3)kept.push(leaf);
-  }
-  return kept;
-}
 `;
 
 export function patchAquariumBundle(source) {
-  if (typeof source !== 'string' || source.length < 100000) {
-    throw new Error('Expected complete, verified Aqualator JavaScript bundle');
-  }
-  let result = replaceExactlyOnce(
-    source,
+  if (typeof source !== 'string' || source.length < 100000)
+    throw new Error('Expected complete source-verified Aqualator JavaScript bundle');
+  let result = replaceExactlyOnce(source,
     'function U4e({parked:t=!1})',
     browserRuntime + 'function U4e({parked:t=!1})',
-    'WebGL tank renderer',
-  );
-  result = replaceExactlyOnce(
-    result,
+    'main aquarium renderer');
+  result = replaceExactlyOnce(result,
     'dpr:i?1:[1,2],frameloop:t?',
     'dpr:i?1:__aquaverseMobile()?__aquaverseInitialDpr():[1,2],frameloop:t?',
-    'High mode render resolution',
-  );
-  result = replaceExactlyOnce(
-    result,
+    'crisp original DPR on mobile High');
+  result = replaceExactlyOnce(result,
     'children:[u.jsx("color",{attach:"background",args:["#0b0f24"]}),u.jsx(z4e,{})',
-    'children:[u.jsx("color",{attach:"background",args:["#0b0f24"]}),!i&&__aquaverseMobile()&&u.jsx(__AquaverseAdaptiveDpr,{}),u.jsx(z4e,{})',
-    'Adaptive controller inside Canvas',
-  );
-  result = replaceExactlyOnce(
-    result,
-    'd=Qa(x=>x.quality==="low"),f=B.useMemo(()=>d?V5e(h):h,[h,d]),p=B.useMemo',
-    'd=Qa(x=>x.quality==="low"),__mobile=__aquaverseMobile(),__camera=zi(x=>x.camera),[__sector,__setSector]=B.useState(()=>Math.round(Math.atan2(__camera.position.x,__camera.position.z)*4/Math.PI)),__lodPoll=B.useRef(0),f=B.useMemo(()=>d?V5e(h):__mobile?__aquaverseFarLeaves(h,__sector):h,[h,d,__mobile,__sector]),p=B.useMemo',
-    'Far-side vegetation density LOD',
-  );
-  result = replaceExactlyOnce(
-    result,
-    'v.tick(k,a)});const b=x=>',
-    'v.tick(k,a);if(__mobile&&!d&&performance.now()-__lodPoll.current>1300){__lodPoll.current=performance.now();const sector=Math.round(Math.atan2(x.camera.position.x,x.camera.position.z)*4/Math.PI);__setSector(old=>old===sector?old:sector)}});const b=x=>',
-    'LOD camera orbit updates',
-  );
-  result = replaceExactlyOnce(
-    result,
+    'children:[u.jsx("color",{attach:"background",args:["#0b0f24"]}),!i&&__aquaverseMobile()&&u.jsx(__AquaverseSharpInteraction,{}),u.jsx(z4e,{})',
+    'gesture-aware controller inside main Canvas');
+  result = replaceExactlyOnce(result,
+    'enableDamping:!0,dampingFactor:.08,onStart:()=>{p.current=null}',
+    'enableDamping:!__aquaverseMobile(),dampingFactor:.08,onStart:()=>{p.current=null}',
+    'remove mobile touch inertia');
+  result = replaceExactlyOnce(result,
+    'f.pointer.set((d.clientX-p.left)/p.width*2-1,-((d.clientY-p.top)/p.height)*2+1),f.raycaster.setFromCamera(f.pointer,f.camera)',
+    'f.pointer.set((d.clientX-p.left)/p.width*2-1,-((d.clientY-p.top)/p.height)*2+1),f.raycaster.layers.set(__aquaverseMobile()&&d.type==="pointermove"&&d.pointerType==="touch"&&!F.getState().layoutMode&&!F.getState().dragPreview?31:0),f.raycaster.setFromCamera(f.pointer,f.camera)',
+    'avoid costly hover raycasts while finger drags the tank, keep tap/edit picking');
+  result = replaceExactlyOnce(result,
     'multisampling:4,children:[u.jsx(G0e,{mipmapBlur:!0,luminanceThreshold:.92,luminanceSmoothing:.3,intensity:.6,radius:.8})',
-    'multisampling:__aquaverseMobile()?0:2,children:[u.jsx(G0e,{mipmapBlur:!0,luminanceThreshold:.92,luminanceSmoothing:.3,intensity:.6,radius:.8,levels:__aquaverseMobile()?5:8,resolutionScale:__aquaverseMobile()?.35:.5})',
-    'High mode Bloom and MSAA budget',
-  );
+    'multisampling:__aquaverseMobile()?0:4,children:[u.jsx(G0e,{mipmapBlur:!0,luminanceThreshold:.92,luminanceSmoothing:.3,intensity:.6,radius:.8,levels:__aquaverseMobile()?4:8,resolutionScale:__aquaverseMobile()?.3:.5})',
+    'lighter bloom without texture blur; full desktop High preserved');
+  result = replaceExactlyOnce(result,
+    'new Jr(1,1,1,a?3:6)',
+    'new Jr(1,1,1,a?3:__aquaverseMobile()&&t.position[2]<-.15?4:6)',
+    'static far-side moss strand geometry only, no foliage deletion or redraw');
+  result = replaceExactlyOnce(result,
+    'function F4e(){const t=zi(n=>n.invalidate),e=F(n=>n.ambient);return B.useEffect(()=>{if(!e)return;const n=window.setInterval(()=>t(),1e3/30);return()=>window.clearInterval(n)},[e,t]),null}',
+    'function F4e(){const t=zi(n=>n.invalidate),e=F(n=>n.ambient);return B.useEffect(()=>{if(!e)return;const n=window.setInterval(()=>{if(document.visibilityState==="visible")t()},1e3/30);return()=>window.clearInterval(n)},[e,t]),null}',
+    'no rendering work while the document is hidden');
   return result;
 }

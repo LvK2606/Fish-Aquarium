@@ -397,7 +397,7 @@ async function run(){
     await phone.waitForFunction(()=>JSON.parse(localStorage.getItem('aquaverse-prefs')||'{}').quality==='high');
     await phone.waitForTimeout(1200);
     const resolution = await phone.locator('#root canvas').first().evaluate(canvas=>canvas.width/canvas.getBoundingClientRect().width);
-    assert.ok(resolution>=0.95&&resolution<=1.55,`High Adaptive must cap mobile DPR at 1.5, got ${resolution}`);
+    assert.ok(resolution>=1.85&&resolution<=2.05,`Mobile High must preserve original sharp 2x DPR, got ${resolution}`);
     await phone.locator('.settings-modal').getByRole('button',{name:'Back to the tank',exact:true}).tap();
     await phone.locator('.settings-modal').waitFor({state:'detached'});
     await mobile.close();

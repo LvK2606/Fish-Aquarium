@@ -80,15 +80,15 @@ Theo lựa chọn hiện tại, mã xác minh email và khôi phục mật khẩ
 
 Khi chưa có dịch vụ email, API báo thiếu cấu hình cho thao tác gửi thư; không trả token khôi phục công khai và không giả vờ đã gửi email.
 
-## High Adaptive (mobile GPU optimization)
+## High: sharp-first mobile performance
 
-The deployed **High** setting uses an adaptive render budget on mobile while preserving all original PNG pixels, source GLBs, fish animations and materials:
+- High on mobile starts at the **same full 2x pixel ratio** as original High (or the native device ratio, whichever is lower). It does not lower DPR while the phone is idle, and a deliberate 30 Hz demand-render loop is no longer mistaken for an overloaded GPU.
+- Only when an actual drag is underway **and** the observed render rate is below 25 Hz does the renderer temporarily fall back to DPR 1.55. Original full resolution returns as soon as the drag ends. A tap or a fast phone never triggers fallback.
+- Mobile OrbitControls damping is disabled so direct touch movements are reflected without synthetic inertia. Non-editing touch pointer moves skip unnecessary 3D hover raycasts; taps and Aquascape editing retain raycast picking.
+- High foliage preserves **every original plant leaf**, with no camera-sector rebuilding that could interrupt gestures. Only far-side moss strands use a lower tessellation mesh (4 vs 6 sides) while close-side moss keeps its original high mesh.
+- Mobile High keeps Bloom at a smaller intermediate resolution and has no additional multisampling; the main 3D scene remains crisp at full DPR. Desktop High still has original 4x multisampling.
+- All original sources are hash-verified first. The optimized copy is written to dist/ with a unique content-hashed bundle name. Original PNG pixels, fish GLBs, materials and fish animations are untouched.
 
-- Mobile DPR starts no higher than 1.5, and never higher than the device's native DPR. The FPS governor reads actual React Three Fiber render cadence, stepping DPR down by 0.15 after repeated below-44 FPS windows, down to 1.0. It restores 0.1 DPR after sustained above-56 FPS up to the device-aware cap. Background-tab stalls do not count.
-- Mobile High retains Bloom at a smaller intermediate resolution (0.35 scale, five mip levels) and disables composer multisampling. Desktop High changes composer multisampling from 4 to 2, retaining its original Bloom quality. Low stays unchanged.
-- Dense planted tanks use camera-orientation-dependent far-side leaf-density LOD in mobile High. Near-side plants retain all leaves. The camera angle is checked at most every 1.3 seconds; mesh materials, textures and picking IDs are preserved.
-- All original assets under public/ are verified before any optimization. The built dist/ gets a separately patched JS bundle, content-fingerprinted filename and updated HTML reference, avoiding stale immutable-script caches.
+Real Android performance still depends on GPU load, fish population and thermal state. This quality-first tradeoff may run at less than 60 FPS on extremely low-end hardware; do not claim a guaranteed frame rate.
 
-The strategy improves GPU headroom; it does not guarantee 60 FPS on every phone. Validate performance on real low-end devices before promoting to production.
-
-Run npm run build && npm run test:backend to verify source hashes, adaptive governor logic and generated JavaScript syntax. Run npm run test:frontend:deploy after building for full browser regressions.
+Run npm run build, npm run test:backend and npm run test:frontend:deploy before approval. The unit tests cover native-DPR stability at 30 Hz, temporary drag fallback, instant pixel restoration and preserved leaf geometry.
