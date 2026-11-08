@@ -80,24 +80,16 @@ Theo lựa chọn hiện tại, mã xác minh email và khôi phục mật khẩ
 
 Khi chưa có dịch vụ email, API báo thiếu cấu hình cho thao tác gửi thư; không trả token khôi phục công khai và không giả vờ đã gửi email.
 
-## GPU-optimized High: sharp image, fewer wasted frames
+## Mobile High Adaptive — experimental Preview
 
-- **Original sharpness at rest:** mobile High renders at native DPR up to 2x and preserves all original PNG texture pixels, GLB fish models, fish animation and every plant leaf. The normal view is not upscaled from a permanently blurred image.
-- **Demand-scheduled GPU frames:** mobile High requests roughly **30 frames/second** at rest and up to **60 during touch dragging**. Touch events trigger immediate invalidation to improve response. Other game invalidations and the device refresh rate may affect actual FPS.
-- **Only overloaded gestures reduce the number of pixels:** after approximately 450 ms of a demonstrably slow (<41 FPS) drag, a temporary 1.55 DPR render budget becomes available. DPR returns to the original full resolution when the gesture ends. Idle 30 FPS and taps never downscale.
-- **Plant geometry budget:** unusually dense tanks (600+ leaves) use 8 rather than 10 leaf-curve segments on mobile High, retaining all original leaf instances, shading, shapes and selection IDs. Normal-density tanks and desktop High keep 10 segments. Only far moss uses a simpler strand.
-- **Compositor:** mobile High retains Bloom on a lower-resolution intermediate buffer and avoids extra composer MSAA; the main 3D render retains its original full resolution outside slow interactions.
-- **Less redundant processing:** prevent a second invalidation timer in mobile High, pause render requests on hidden tabs, and avoid touch hover raycasts when not editing scenery.
-- **Verify on your device:** append `?perf=1` to the Preview URL to display current DPR, observed frame rate, GPU draw calls, triangle count and drag/idle state. The overlay is entirely opt-in.
+The source-verified bundle under `public/` remains unchanged. The build patches a fingerprinted copy in `dist/` and verifies the original 588 asset hashes first.
 
-Build verification still hashes original assets before patching only the fingerprinted `dist/` bundle. GPU gains are device- and scene-dependent, not a promise of 60 FPS. Test real Android interaction before merging to production.
+- **Continuous adaptive DPR:** Mobile High starts at up to **1.8 DPR** on stronger devices, or **1.5 DPR** on devices reporting <=4 GB RAM / <=4 CPU threads. Rendered frames are sampled over ~650 ms windows and DPR gradually decreases to **1.0** after sustained FPS below 47. With sustained FPS above 57, DPR increases again in smaller steps. This works while idle as well as during touch and never jumps straight to full resolution on finger release.
+- **Render cadence and input:** Up to **60 frame requests/sec** while visible, not a hard 30 FPS idle limit. When modal overlays cover the tank, requests drop to around 12 Hz; interactions trigger immediate canvas invalidation. Turning off camera damping on mobile reduces the feeling of post-touch inertia. Expensive hover raycasts are bypassed while dragging except during aquascape edit.
+- **GPU budget:** Mobile High uses MSAA 0, a cheaper caustics shader and skips the expensive fullscreen Bloom/Vignette postprocessor by default. Desktop High retains original graphics. Add `?effects=on` in the preview to inspect the legacy mobile effects.
+- **Geometry:** All GLB fish models and original texture pixels are retained. A very dense mobile planting scene reduces leaf tessellation (not leaf population); static foliage groups use conservative computed instance bounds for group-level frustum culling. Moving fish instance groups remain uncullable to avoid disappearing fish from stale bounding volumes. This is not per-instance culling.
+- **Shop thumbnails:** The preview renderer now draws **320x192**, encodes via asynchronous `canvas.toBlob('image/webp', .85)`, schedules work in a serialized queue and uses blob URLs for image display. Geometry/material cleanup is applied after each capture, and URLs are revoked on page exit. Browser support may fall back to PNG when WebP encoding is unavailable.
+- **Diagnostics:** Add `?perf=1` to Preview URL for live measured FPS, DPR, draw calls, triangles, and GPU geometry/texture counts. These numbers measure rendered frames, not GPU execution time.
+- **Tests:** `npm run build && npm run test:backend && npm run test:frontend:deploy` cover original asset fingerprints, auto-downscale/recovery, browser features and mobile controls. Run `npm run test:performance` for a 30-second mobile High telemetry report plus repeated Shop open/close counts, written to `test-results/mobile-performance.json`.
 
-Run `npm run build && npm run test:backend && npm run test:frontend:deploy` to validate the performance governor and browser regressions.
-
-## High Mobile GPU Lite (experimental Preview)
-
-The recorded Android test showed 12–20 rendered FPS even at full DPR 2.0, which is not resolved by limiting requests to 30 frames per second. Mobile High now preserves the original fish GLBs, texture pixels and native 2x render scale at rest, but **eliminates the multi-pass Bloom/Vignette EffectComposer** on mobile High and substitutes a cheaper water caustics shader (two periodic waves instead of two 3×3 Voronoi searches plus 3D noise) to reduce GPU work for each pixel. Desktop High continues using the original expensive effects and shader.
-
-When a settings/device dialog obscures the tank, idle 3D render requests are throttled to approximately 10 Hz so the UI has more GPU headroom. When the user actively drags the aquarium, normal interactive frame scheduling takes priority. The original assets and simulated tank population are unchanged. Water glints and glow look somewhat different on mobile compared with original High; this is an intentional visual tradeoff to retain fish detail and interactive usability.
-
-Use `?perf=1` for the diagnostic HUD and optionally `?perf=1&effects=on` to force the old mobile High postprocessor for side-by-side testing. Neither setting guarantees 60 FPS; verify on the actual Android GPU. Do not merge the experiment without user acceptance.
+**Scope and limitations:** This branch does not import `@react-three/drei` or `three-mesh-bvh` into the precompiled source bundle; it integrates a small performance monitor directly with the R3F hooks already embedded in the application. It also does not blindly enable frustum culling on moving fish or convert original PNG textures to KTX2, which would require asset and loader changes. The goal is 60 FPS where the device can sustain it, not a guaranteed 60 FPS on every Android device. Software-rendered Playwright results cannot prove physical GPU performance. Review on a real phone before merging.
