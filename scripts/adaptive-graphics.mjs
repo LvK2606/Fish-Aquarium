@@ -45,12 +45,12 @@ export function createInteractionGovernor({
       if (!Number.isFinite(x) || !Number.isFinite(y)) return;
       pointer = { x, y };
       dragging = false;
-      lastFrame = null; start = null; frames = 0; fps = null;
+      last = null; start = null; frames = 0; fps = null;
     },
     pointerMove(x, y) {
       if (!pointer || !Number.isFinite(x) || !Number.isFinite(y)) return null;
       if (Math.hypot(x - pointer.x, y - pointer.y) >= dragThreshold && !dragging) {
-        dragging = true; lastFrame = null; start = null; frames = 0; fps = null;
+        dragging = true; last = null; start = null; frames = 0; fps = null;
       }
       if (dragging && fps !== null && fps < slowBelow && dpr > floor) {
         dpr = floor;
