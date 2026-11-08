@@ -18,7 +18,7 @@ for(const asset of manifest.files){
   // Pinned Git blob hash for the reviewed hotfix. All other source assets retain
   // their original upstream SHA-256 validation.
   const blobSha=createHash('sha1').update(Buffer.from(`blob ${data.length}${String.fromCharCode(0)}`)).update(data).digest('hex');
-  assert.equal(blobSha,'0029bb5812bdd7bf4c1e846dca23b074e2bd5142','Main frontend bundle differs from the approved performance hotfix');
+  assert.equal(blobSha,'a7bbd2fb95fba55cc301486aad907c00d7868873','Main frontend bundle differs from the approved performance hotfix');
  }else if(asset.path!=='index.html')assert.equal(createHash('sha256').update(original).digest('hex'),asset.sha256,`Changed original asset beyond the two documented font URLs: ${asset.path}`);
  assert(data.length>0,`Empty asset: ${asset.path}`);
  if(extname(asset.path)==='.glb'){

@@ -34,6 +34,8 @@ test('InstancedMeshes in the application have frustum culling enabled',()=>{
   const appCode=code.slice(2000000);
   assert.doesNotMatch(appCode,/\.frustumCulled\s*=\s*(?:!1|false)\b/);
   assert.ok((appCode.match(/\.frustumCulled=!0/g)||[]).length>=12);
+  assert.equal((appCode.match(/frustumCulled:!0/g)||[]).length,5,'Five JSX InstancedMesh props must be enabled');
+  assert.equal((appCode.match(/frustumCulled:!1/g)||[]).length,2,'Only shader-driven Points may bypass culling');
   // Remaining exclusions are Three.js object serialization and a full-screen
   // postprocessing triangle, which must not be culled.
   assert.equal((code.match(/\.frustumCulled=!1/g)||[]).length,2);
