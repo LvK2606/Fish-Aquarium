@@ -4,50 +4,54 @@ import { readFile, access } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { createInteractionGovernor, createRenderCadence, mobileLeafSegments, patchAquariumBundle } from '../scripts/adaptive-graphics.mjs';
 
-test('High remains DPR 2 at 30 FPS idle and does not confuse idle frames with overload', () => {
-  const gov=createInteractionGovernor({max:2,min:1.55});
-  let now=0;
-  for(let i=0;i<220;i++){now+=1000/30;assert.equal(gov.sample(now),null)}
-  assert.equal(gov.getDpr(),2);
+test('High gradually lowers DPR at sustained 30 FPS even when not dragging',()=>{
+  const gov=createInteractionGovernor({max:1.8,min:1,windowMs:500,slowBelow:47,fastAbove:57,settleMs:0});
+  let now=10;
+  for(let i=0;i<130;i++)gov.sample(now+=1000/30);
+  assert.ok(gov.getDpr()<1.8,'slow idle frames must trigger adaptation');
+  assert.ok(gov.getDpr()>=1,'never cross minimum DPR');
   assert.ok(gov.getFps()>27&&gov.getFps()<33);
 });
 
-test('demand renderer halves baseline frame requests but prioritizes drag', () => {
-  const clock=createRenderCadence();
-  let idle=0;
-  for(let i=0;i<120;i++)if(clock.shouldRender(i*1000/60,false))idle++;
-  clock.reset();
-  let moving=0;
-  for(let i=0;i<120;i++)if(clock.shouldRender(i*1000/60,true))moving++;
-  assert.ok(idle>=55&&idle<=62,`expected ~60 idle frames over 2 seconds, got ${idle}`);
-  assert.ok(moving>=115&&moving<=120,`expected ~120 active frames, got ${moving}`);
-  assert.equal(clock.shouldRender(NaN,true),false);
+test('sustained 60 FPS gradually restores quality, without flickering',()=>{
+  const gov=createInteractionGovernor({max:1.75,min:1,windowMs:400,settleMs:0});
+  let now=10;
+  for(let i=0;i<170;i++)gov.sample(now+=1000/30);
+  const low=gov.getDpr();
+  assert.ok(low<1.75);
+  for(let i=0;i<300;i++)gov.sample(now+=1000/60);
+  assert.ok(gov.getDpr()>low);
+  assert.ok(gov.getDpr()<=1.75);
 });
 
-test('only an overloaded drag reduces resolution temporarily, then full detail restores', () => {
-  const gov=createInteractionGovernor({max:2,min:1.55});
-  let now=0;
-  for(let i=0;i<140;i++)gov.sample(now+=1000/30);
-  assert.equal(gov.getDpr(),2);
-  gov.pointerDown(10,10);
-  assert.equal(gov.pointerMove(16,17),null,'tap remains full quality');
-  assert.equal(gov.pointerMove(60,60),null,'drag initially stays full quality');
-  for(let i=0;i<33;i++)gov.sample(now+=1000/29);
-  assert.equal(gov.getDpr(),1.55);
-  assert.equal(gov.pointerUp(),2);
-  assert.equal(gov.getDpr(),2);
+test('60Hz render cadence prioritizes touch and reduces work behind modals',()=>{
+  const cadence=createRenderCadence({idleHz:60,activeHz:60,overlayHz:12});
+  let idle=0,active=0,overlay=0;
+  for(let i=0;i<120;i++)if(cadence.shouldRender(i*1000/60,false))idle++;
+  cadence.reset();
+  for(let i=0;i<120;i++)if(cadence.shouldRender(i*1000/60,true))active++;
+  cadence.reset();
+  for(let i=0;i<120;i++)if(cadence.shouldRender(i*1000/60,false,true))overlay++;
+  assert.ok(idle>=115&&idle<=120,'expected 60Hz idle, got '+idle);
+  assert.ok(active>=115&&active<=120,'expected 60Hz active, got '+active);
+  assert.ok(overlay>=20&&overlay<=27,'expected 12Hz obscured, got '+overlay);
+  assert.equal(cadence.shouldRender(NaN,true),false);
 });
 
-test('responsive gestures keep sharp DPR when device can draw quickly',()=>{
-  const gov=createInteractionGovernor({max:2,min:1.55});
-  let now=0;
-  gov.pointerDown(5,5);gov.pointerMove(50,50);
-  for(let i=0;i<180;i++)assert.equal(gov.sample(now+=1000/60),null);
-  assert.equal(gov.getDpr(),2);
+test('touch release does not force full DPR on an overloaded device',()=>{
+  const gov=createInteractionGovernor({max:1.8,min:1.1,windowMs:450,settleMs:0});
+  let now=10;
+  gov.pointerDown(0,0);
+  gov.pointerMove(45,50);
+  assert.equal(gov.isDragging(),true);
+  for(let i=0;i<130;i++)gov.sample(now+=1000/30);
+  const dpr=gov.getDpr();
+  assert.ok(dpr<1.8);
   assert.equal(gov.pointerUp(),null);
-  gov.sample(now+=3000);
-  for(let i=0;i<120;i++)gov.sample(now+=1000/30);
-  assert.equal(gov.getDpr(),2);
+  assert.equal(gov.getDpr(),dpr);
+  assert.equal(gov.isDragging(),false);
+  gov.reset(now+2000);
+  assert.equal(gov.sample(now+2016),null);
 });
 
 test('procedural high geometry keeps every leaf and only reduces dense tessellation',()=>{
@@ -62,6 +66,13 @@ test('deployment patch keeps all source fish GLBs and original high foliage inst
   const output=patchAquariumBundle(original);
   assert.ok(output.includes('frameloop:t?"never":!i&&__aquaverseMobile()?"demand"'));
   assert.ok(output.includes('const __aquaverseMakeRenderCadence'));
+  assert.ok(output.includes('idleHz:60,activeHz:60,overlayHz:12'));
+  assert.ok(output.includes('function sD(make,dispose=nJ)'));
+  assert.ok(output.includes('toBlob(resolve,"image/webp",.85)'));
+  assert.ok(output.includes('const __aqThumbUrls=new Set'));
+  assert.ok(!output.includes('e.domElement.toDataURL("image/png")'));
+  assert.ok(output.includes('q.computeBoundingSphere()'));
+  assert.ok(output.includes('geo "+mem.geometries+" tex "+mem.textures'));
   assert.ok(output.includes('aquaverse-perf-hud'));
   assert.ok(output.includes('__aquaverseMobileLeafSegments({count:f.length'));
   assert.ok(output.includes('enableDamping:!__aquaverseMobile()'));
