@@ -397,12 +397,13 @@ async function run(){
     await phone.waitForFunction(()=>JSON.parse(localStorage.getItem('aquaverse-prefs')||'{}').quality==='high');
     await phone.waitForTimeout(1200);
     const resolution = await phone.locator('#root canvas').first().evaluate(canvas=>canvas.width/canvas.getBoundingClientRect().width);
-    assert.ok(resolution>=1.85&&resolution<=2.05,`Mobile High must preserve original sharp 2x DPR, got ${resolution}`);
+    assert.ok(resolution>=.98&&resolution<=1.85,`Mobile High adaptive DPR should stay within [1,1.8], got ${resolution}`);
     // Real deploy bundle must expose opt-in performance diagnosis on mobile High.
     const perf=phone.locator('#aquaverse-perf-hud');
     await perf.waitFor({state:'visible',timeout:12000});
-    assert.match(await perf.textContent(),/High GPU Lite/);
+    assert.match(await perf.textContent(),/High Adaptive/);
     assert.match(await perf.textContent(),/triangles/);
+    assert.match(await perf.textContent(),/geo [0-9]+ tex [0-9]+/);
     await phone.locator('.settings-modal').getByRole('button',{name:'Back to the tank',exact:true}).tap();
     await phone.locator('.settings-modal').waitFor({state:'detached'});
     await mobile.close();
