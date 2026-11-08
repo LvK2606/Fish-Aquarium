@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
 import { randomUUID } from 'node:crypto';
 import { createHandler } from '../server/handler.js';
-import { createMemoryStore, createBlobStore, StorageUnavailable } from '../server/storage.js';
+import { createMemoryStore, createBlobStore, StorageUnavailable, StorageConflict } from '../server/storage.js';
 
 const secret = 'test-only-auth-secret-32-characters-at-least';
 async function fixture(options = {}) {
@@ -185,4 +185,20 @@ test('guest showcase reads and repeated telemetry do not rewrite persistent stat
   assert.equal(writes, first);
   assert.equal((await f.request('/play/beat', { method: 'POST', body: { ...heartbeat, milestones: ['first_feed', 'quest_3'] } })).status, 204);
   assert.equal(writes, first + 1);
+});
+
+
+test('Blob adapter normalizes Vercel conflicting-operation errors to StorageConflict', async () => {
+  const sdk = {
+    async put() { const error = new Error('Vercel Blob: The conditional request cannot succeed due to a conflicting operation against this resource.'); error.name = 'BlobError'; throw error; },
+  };
+  const store = createBlobStore({ token: 'test-token', sdk });
+  await assert.rejects(store.write({ probe: true }, 'stale-etag'), StorageConflict);
+  await assert.rejects(store.write({ probe: true }, null), StorageConflict);
+});
+
+test('Blob adapter preserves unknown storage failures', async () => {
+  const sdk = { async put() { throw new Error('Network unreachable'); } };
+  const store = createBlobStore({ token: 'test-token', sdk });
+  await assert.rejects(store.write({ probe: true }, 'any-etag'), /Network unreachable/);
 });

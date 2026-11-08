@@ -112,7 +112,7 @@ async function ready(page,path='/?moi=1&hocviec=0&hoithoai=0&luu=0'){
   await page.goto(new URL(path,base).href,{waitUntil:'domcontentloaded'});
   await page.locator('#root canvas').first().waitFor({state:'visible',timeout:60000});
   await page.waitForFunction(()=>!document.querySelector('.aq-boot:not(.is-done)'),undefined,{timeout:60000});
-  await page.locator('.aq-boot').waitFor({state:'detached',timeout:10000});
+  await page.locator('.aq-boot').waitFor({state:'hidden',timeout:15000});
   assert.equal(await page.title(),'Aqualator');
   assert.ok(await page.locator('canvas').first().evaluate(canvas=>canvas.width>0&&canvas.height>0));
 }
@@ -384,14 +384,25 @@ async function run(){
   });
 
   await check('Mobile: responsive aquarium and touch controls',async()=>{
-    const mobile=await context({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+    const mobile=await context({viewport:{width:390,height:844},deviceScaleFactor:2.5,isMobile:true,hasTouch:true});
     const phone=await mobile.newPage();
-    await ready(phone);
+    await ready(phone,'/?moi=1&hocviec=0&hoithoai=0&luu=0&perf=1');
     await phone.screenshot({path:fileURLToPath(new URL('../test-results/mobile.png',import.meta.url)),timeout:30000});
     assert.ok(await phone.locator('canvas').first().isVisible());
     assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+2),'Mobile page overflows horizontally');
     await phone.getByRole('button',{name:'Settings',exact:true}).tap();
     await phone.locator('.settings-modal').waitFor({state:'visible'});
+    // Exercise real mobile High mode, not only the persisted settings radio.
+    await phone.locator('.settings-modal').getByRole('radio',{name:'High',exact:true}).click();
+    await phone.waitForFunction(()=>JSON.parse(localStorage.getItem('aquaverse-prefs')||'{}').quality==='high');
+    await phone.waitForTimeout(1200);
+    const resolution = await phone.locator('#root canvas').first().evaluate(canvas=>canvas.width/canvas.getBoundingClientRect().width);
+    assert.ok(resolution>=1.85&&resolution<=2.05,`Mobile High must preserve original sharp 2x DPR, got ${resolution}`);
+    // Real deploy bundle must expose opt-in performance diagnosis on mobile High.
+    const perf=phone.locator('#aquaverse-perf-hud');
+    await perf.waitFor({state:'visible',timeout:12000});
+    assert.match(await perf.textContent(),/High GPU Lite/);
+    assert.match(await perf.textContent(),/triangles/);
     await phone.locator('.settings-modal').getByRole('button',{name:'Back to the tank',exact:true}).tap();
     await phone.locator('.settings-modal').waitFor({state:'detached'});
     await mobile.close();

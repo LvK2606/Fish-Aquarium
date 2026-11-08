@@ -53,6 +53,22 @@ Các biến server cần thiết trong Vercel → Project → Settings → Envir
 
 Không đưa giá trị khóa vào Git hoặc chat. Với thay đổi biến môi trường, chọn môi trường production/preview cần dùng rồi redeploy.
 
+## Tối ưu tốc độ tải mà không giảm chất lượng ảnh
+
+Bản nguồn trong `public/` tiếp tục giữ nguyên asset gốc và SHA-256. Lệnh `npm run build` kiểm chứng 588 asset gốc trước, sau đó sao chép sang `dist/` và thử nén lại **chỉ dữ liệu IDAT của PNG** bằng zlib mức cao. Bản nén chỉ được dùng khi thực sự nhỏ hơn. Các scanline giải nén (tương đương pixel, cả kênh alpha) và tất cả chunk metadata PNG còn lại không đổi; GLB, geometry, vật liệu, bundle mô phỏng và animation không bị chỉnh sửa.
+
+Vercel phục vụ `dist/`; chính sách cache dành cho các bundle đã gắn hash dài hạn, còn texture/model/font không gắn hash có thời hạn ngắn hơn để vẫn nhận cập nhật nội dung. Không cache các phản hồi tài khoản/cloud API (backend đã đặt `Cache-Control: no-store`).
+
+```sh
+npm ci
+npm run build                        # Hiện số PNG giảm được và tổng MiB tiết kiệm
+npm run test:backend                 # Bao gồm test PNG giữ nguyên dữ liệu ảnh
+npx playwright install chromium
+CHROMIUM_PATH="$(node -p 'require("playwright").chromium.executablePath()')" npm run test:frontend:deploy
+```
+
+Kiểm thử giao diện trên `dist/` vẫn dùng backend bộ nhớ riêng và kiểm tra mô hình/animation, không ghi sang tài khoản thật. Có thể kiểm tra bản deploy ngay trên máy bằng `SERVE_DEPLOY_OUTPUT=1 npm run dev` sau khi build. `dist/` là sản phẩm build, không đưa vào Git. Nếu file PNG đã được nén tốt, mức tiết kiệm có thể rất nhỏ hoặc bằng không; không nên tuyên bố giảm phần trăm khi chưa có log build thực tế.
+
 ## Bật email sau
 
 Theo lựa chọn hiện tại, mã xác minh email và khôi phục mật khẩu được chuẩn bị nhưng chưa cấu hình gửi thư thật.
@@ -63,3 +79,25 @@ Theo lựa chọn hiện tại, mã xác minh email và khôi phục mật khẩ
 4. Kiểm tra gửi lại thư xác minh và luồng quên mật khẩu trên bản sao.
 
 Khi chưa có dịch vụ email, API báo thiếu cấu hình cho thao tác gửi thư; không trả token khôi phục công khai và không giả vờ đã gửi email.
+
+## GPU-optimized High: sharp image, fewer wasted frames
+
+- **Original sharpness at rest:** mobile High renders at native DPR up to 2x and preserves all original PNG texture pixels, GLB fish models, fish animation and every plant leaf. The normal view is not upscaled from a permanently blurred image.
+- **Demand-scheduled GPU frames:** mobile High requests roughly **30 frames/second** at rest and up to **60 during touch dragging**. Touch events trigger immediate invalidation to improve response. Other game invalidations and the device refresh rate may affect actual FPS.
+- **Only overloaded gestures reduce the number of pixels:** after approximately 450 ms of a demonstrably slow (<41 FPS) drag, a temporary 1.55 DPR render budget becomes available. DPR returns to the original full resolution when the gesture ends. Idle 30 FPS and taps never downscale.
+- **Plant geometry budget:** unusually dense tanks (600+ leaves) use 8 rather than 10 leaf-curve segments on mobile High, retaining all original leaf instances, shading, shapes and selection IDs. Normal-density tanks and desktop High keep 10 segments. Only far moss uses a simpler strand.
+- **Compositor:** mobile High retains Bloom on a lower-resolution intermediate buffer and avoids extra composer MSAA; the main 3D render retains its original full resolution outside slow interactions.
+- **Less redundant processing:** prevent a second invalidation timer in mobile High, pause render requests on hidden tabs, and avoid touch hover raycasts when not editing scenery.
+- **Verify on your device:** append `?perf=1` to the Preview URL to display current DPR, observed frame rate, GPU draw calls, triangle count and drag/idle state. The overlay is entirely opt-in.
+
+Build verification still hashes original assets before patching only the fingerprinted `dist/` bundle. GPU gains are device- and scene-dependent, not a promise of 60 FPS. Test real Android interaction before merging to production.
+
+Run `npm run build && npm run test:backend && npm run test:frontend:deploy` to validate the performance governor and browser regressions.
+
+## High Mobile GPU Lite (experimental Preview)
+
+The recorded Android test showed 12–20 rendered FPS even at full DPR 2.0, which is not resolved by limiting requests to 30 frames per second. Mobile High now preserves the original fish GLBs, texture pixels and native 2x render scale at rest, but **eliminates the multi-pass Bloom/Vignette EffectComposer** on mobile High and substitutes a cheaper water caustics shader (two periodic waves instead of two 3×3 Voronoi searches plus 3D noise) to reduce GPU work for each pixel. Desktop High continues using the original expensive effects and shader.
+
+When a settings/device dialog obscures the tank, idle 3D render requests are throttled to approximately 10 Hz so the UI has more GPU headroom. When the user actively drags the aquarium, normal interactive frame scheduling takes priority. The original assets and simulated tank population are unchanged. Water glints and glow look somewhat different on mobile compared with original High; this is an intentional visual tradeoff to retain fish detail and interactive usability.
+
+Use `?perf=1` for the diagnostic HUD and optionally `?perf=1&effects=on` to force the old mobile High postprocessor for side-by-side testing. Neither setting guarantees 60 FPS; verify on the actual Android GPU. Do not merge the experiment without user acceptance.

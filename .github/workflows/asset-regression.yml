@@ -1,0 +1,35 @@
+name: Fish Aquarium lossless assets and High Adaptive validation
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: fish-aquarium-asset-validation
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Verify originals and build lossless deployment assets
+        run: npm run build
+      - name: Backend, auth, and byte-identical PNG regression tests
+        run: npm run test:backend
+      - name: Install browser
+        run: npx playwright install --with-deps chromium
+      - name: Browser regression against optimized deployment assets
+        run: CHROMIUM_PATH="$(node -p 'require("playwright").chromium.executablePath()')" npm run test:frontend:deploy
