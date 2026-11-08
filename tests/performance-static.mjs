@@ -57,3 +57,47 @@ test('Main aquarium adaptively controls DPR with mobile 1–1.5 bounds',()=>{
   assert.match(bundle,/Math\.max\(t,Math\.round/);
   assert.match(bundle,/Math\.min\(e,Math\.round/);
 });
+
+test('High postprocessing uses zero MSAA and merged color effects',()=>{
+  assert.match(bundle,/u\.jsxs\(jO,\{multisampling:0,mergeMode:"auto",children:\[u\.jsx\(G0e,/);
+  assert.doesNotMatch(bundle,/u\.jsxs\(jO,\{multisampling:4/);
+  assert.match(bundle,/u\.jsx\(q0e,\{offset:\.25,darkness:\.45\}\)/);
+  assert.match(bundle,/intensity:aquaMobileShader\?\.42:\.6/);
+});
+
+test('Mobile High caustics and water avoid expensive multi-octave noise',()=>{
+  assert.match(bundle,/const aquaMobileShader=typeof window/);
+  assert.match(bundle,/aquaFallbackShader=aquaMobileShader/);
+  assert.match(bundle,/GzMobile=`[\s\S]*?float caustics\(vec3 world\)/);
+  assert.match(bundle,/GzFallback=`[\s\S]*?float caustics\(vec3 world\)/);
+  assert.equal(bundle.split('aquaFallbackShader?GzFallback:GzMobile').length-1,3);
+  assert.match(bundle,/for \(int i = 0; i < \$\{aquaMobileShader\?3:5\}; i\+\+\)/);
+  assert.match(bundle,/aquaMobileShader\?"g \+= vec2/);
+});
+
+test('Mobile High uses distance-based plant and moss LOD, 512px background',()=>{
+  assert.match(bundle,/l\.width=i\|\|aquaMobileShader\?512:1024/);
+  assert.match(bundle,/mobilePlantLOD\(h,mobileCamera\.position\)/);
+  assert.match(bundle,/function mobilePlantLOD\(t,eye\)/);
+  assert.match(bundle,/c\.distance>16\?3:c\.distance>13\?2:1/);
+  assert.match(bundle,/d\?4:aquaMobileShader\?6:10/);
+  assert.match(bundle,/mobileMossLod=aquaMobileShader/);
+  assert.match(bundle,/aquaMobileShader\?300:W5e/);
+  assert.match(bundle,/aquaMobileShader\?55:90/);
+});
+
+test('Transparent glass film skips clean overlay and zero-alpha pixels',()=>{
+  assert.match(bundle,/if \(alpha \* uStrength < 0\.012\) discard;/);
+  assert.match(bundle,/group\.visible=yt\.uGlassHaze\.value>0\.004/);
+  assert.match(bundle,/yt\.uGlassCover\.value\*Math\.max/);
+  assert.match(bundle,/transparent:!0,depthWrite:!1/);
+});
+
+test('Mobile caustics variants preserve grain hash dependency',()=>{
+  const variantStart=bundle.indexOf('GzMobile=');
+  const variantEnd=bundle.indexOf(',DZ=',variantStart);
+  const variants=bundle.slice(variantStart,variantEnd);
+  assert.match(variants,/GzMobile=\x60[\s\S]*?vec2 hash22\(vec2 p\)/);
+  assert.match(variants,/GzFallback=\x60[\s\S]*?vec2 hash22\(vec2 p\)/);
+  assert.equal((variants.match(/vec2 hash22\(vec2 p\)/g)||[]).length,2);
+});

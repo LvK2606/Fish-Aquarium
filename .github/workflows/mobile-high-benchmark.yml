@@ -1,0 +1,61 @@
+name: Mobile High FPS A-B benchmark
+on:
+  push:
+    branches:
+      - perf/mobile-high-postfx-shader-lod-20261108
+    paths:
+      - 'public/assets/main-CvOo3B9w.js'
+      - 'tests/benchmark-mobile-high.mjs'
+      - 'tests/performance-static.mjs'
+      - '.github/workflows/mobile-high-benchmark.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.57.0-noble
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check out before baseline at PR 6
+        uses: actions/checkout@v4
+        with:
+          ref: 83c920e1295429e2f6d46bfd06f5680f31abebd3
+          path: baseline
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test:backend
+      - name: Test mobile layout and graphics
+        env:
+          TEST_FILTER: 'Mobile'
+        run: npm run test:frontend
+      - name: Benchmark paired baseline/optimized FPS at 390x844 High
+        run: node tests/benchmark-mobile-high.mjs
+      - name: Publish comparison to run summary
+        if: success()
+        run: |
+          node --input-type=module -e '
+            import {readFileSync,appendFileSync} from "node:fs";
+            const r=JSON.parse(readFileSync("test-results/mobile-high-fps.json"));
+            appendFileSync(process.env.GITHUB_STEP_SUMMARY,
+              "## Mobile High 390×844 (SwiftShader)\n\n"+
+              "| Statistic | Baseline PR6 | Optimized |\n|---|---:|---:|\n"+
+              "| Median rAF-paced FPS | "+r.beforeMedianRafFps+" | "+r.afterMedianRafFps+" |\n"+
+              "| Change | — | "+r.deltaPercent+"% |\n\n"+
+              "**Limitation:** headless software WebGL; not actual Android GPU/display FPS.\n");
+          '
+      - name: Upload FPS samples and comparison screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mobile-high-fps-390x844
+          path: test-results/
+          if-no-files-found: ignore
