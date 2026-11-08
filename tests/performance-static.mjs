@@ -49,7 +49,7 @@ test('InstancedMesh frustum culling is on and dynamic bounds are refreshed',()=>
 test('Main aquarium adaptively controls DPR with mobile 1–1.5 bounds',()=>{
   assert.match(bundle,/function PerformanceMonitor\(/);
   assert.match(bundle,/shopOpen=F\(h=>h\.modal==="shop"\)/);
-  assert.match(bundle,/shopOpen\|\|c\?"demand":"always"/);
+  assert.match(bundle,/t\|\|shopOpen\?"never":c\?"demand":"always"/);
   assert.match(bundle,/function AdaptiveDpr\(/);
   assert.match(bundle,/window\.innerWidth<=767/);
   assert.match(bundle,/dpr:i\?1:\[1,d\]/);
