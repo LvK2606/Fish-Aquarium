@@ -63,6 +63,11 @@ async function take(label,root,index){
   });
   const page=await context.newPage();
   page.on('pageerror',error=>errors.push(error.message));
+  page.on('console',msg=>{
+    if(msg.type()==='error'&&/(WebGLProgram|Shader Error|ERROR:\s*0:|VALIDATE_STATUS)/i.test(msg.text())){
+      errors.push('GLSL compile: '+msg.text().slice(0,400));
+    }
+  });
   try{
     await page.goto(running.url+'/?moi=1&hocviec=0&hoithoai=0&luu=0&bocuc=cong-lua',{waitUntil:'domcontentloaded',timeout:90000});
     await page.locator('#root canvas').first().waitFor({state:'visible',timeout:90000});
