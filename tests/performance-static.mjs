@@ -92,3 +92,12 @@ test('Transparent glass film skips clean overlay and zero-alpha pixels',()=>{
   assert.match(bundle,/yt\.uGlassCover\.value\*Math\.max/);
   assert.match(bundle,/transparent:!0,depthWrite:!1/);
 });
+
+test('Mobile caustics variants preserve grain hash dependency',()=>{
+  const variantStart=bundle.indexOf('GzMobile=');
+  const variantEnd=bundle.indexOf(',DZ=',variantStart);
+  const variants=bundle.slice(variantStart,variantEnd);
+  assert.match(variants,/GzMobile=\x60[\s\S]*?vec2 hash22\(vec2 p\)/);
+  assert.match(variants,/GzFallback=\x60[\s\S]*?vec2 hash22\(vec2 p\)/);
+  assert.equal((variants.match(/vec2 hash22\(vec2 p\)/g)||[]).length,2);
+});
