@@ -5,71 +5,54 @@
  * Build fails closed if a minified source anchor differs.
  */
 export function createInteractionGovernor({
-  max = 2, min = 1.55, windowMs = 450, slowBelow = 41, dragThreshold = 10
-} = {}) {
-  const ceiling = Math.max(1, Math.min(2, Number.isFinite(max) ? max : 2));
-  const floor = Math.max(1, Math.min(ceiling, Number.isFinite(min) ? min : 1.55));
-  let dpr = ceiling;
-  let start = null, last = null, frames = 0, fps = null;
-  let pointer = null, dragging = false;
-
+  max=1.8,min=1,windowMs=650,slowBelow=47,
+  fastAbove=57,downStep=.2,upStep=.1,
+  settleMs=1100,dragThreshold=10
+}={}) {
+  const ceiling=Math.max(1,Math.min(2,Number.isFinite(max)?max:1.8));
+  const floor=Math.max(1,Math.min(ceiling,Number.isFinite(min)?min:1));
+  let dpr=ceiling,start=null,last=null,frames=0,fps=null;
+  let slowWindows=0,fastWindows=0,lastChange=-Infinity;
+  let pointer=null,dragging=false;
+  const resetWindow=now=>{start=now;last=now;frames=0;slowWindows=0;fastWindows=0;fps=null};
   return {
-    getDpr() { return dpr; },
-    getFps() { return fps; },
-    isDragging() { return dragging; },
-    sample(now) {
-      if (!Number.isFinite(now)) return null;
-      // A 30 Hz on-demand scene is intentional. Never downscale just because
-      // idle renders arrive at 30 Hz; only act during a slow, real gesture.
-      if (last !== null && (now - last > 800 || now <= last)) {
-        start = now;
-        frames = 0;
-        fps = null;
-      }
-      last = now;
-      if (start === null) start = now;
+    getDpr(){return dpr},
+    getFps(){return fps},
+    isDragging(){return dragging},
+    reset(now=0){resetWindow(now)},
+    sample(now){
+      if(!Number.isFinite(now))return null;
+      // Tab switches and paused frames must not be interpreted as overload.
+      if(last!==null&&(now-last>750||now<=last))resetWindow(now);
+      if(start===null)start=now;
+      last=now;
       frames++;
-      const elapsed = now - start;
-      if (elapsed >= windowMs) {
-        fps = frames * 1000 / Math.max(1, elapsed);
-        start = now;
-        frames = 0;
+      const elapsed=now-start;
+      if(elapsed<windowMs)return null;
+      fps=Math.max(0,(frames-1)*1000/Math.max(1,elapsed));
+      start=now;frames=1;
+      slowWindows=fps<slowBelow?slowWindows+1:0;
+      fastWindows=fps>fastAbove?fastWindows+1:0;
+      if(now-lastChange<settleMs)return null;
+      if(slowWindows>=2&&dpr>floor){
+        dpr=Math.max(floor,Math.round((dpr-downStep)*100)/100);
+        lastChange=now;slowWindows=fastWindows=0;return dpr;
       }
-      if (dragging && fps !== null && fps < slowBelow && dpr > floor) {
-        dpr = floor;
-        return dpr;
-      }
-      return null;
-    },
-    pointerDown(x, y) {
-      if (!Number.isFinite(x) || !Number.isFinite(y)) return;
-      pointer = { x, y };
-      dragging = false;
-      last = null; start = null; frames = 0; fps = null;
-    },
-    pointerMove(x, y) {
-      if (!pointer || !Number.isFinite(x) || !Number.isFinite(y)) return null;
-      if (Math.hypot(x - pointer.x, y - pointer.y) >= dragThreshold && !dragging) {
-        dragging = true; last = null; start = null; frames = 0; fps = null;
-      }
-      if (dragging && fps !== null && fps < slowBelow && dpr > floor) {
-        dpr = floor;
-        return dpr;
+      if(fastWindows>=3&&dpr<ceiling){
+        dpr=Math.min(ceiling,Math.round((dpr+upStep)*100)/100);
+        lastChange=now;slowWindows=fastWindows=0;return dpr;
       }
       return null;
     },
-    pointerUp() {
-      pointer = null;
-      dragging = false;
-      if (dpr !== ceiling) {
-        dpr = ceiling;
-        return ceiling;
-      }
+    pointerDown(x,y){if(Number.isFinite(x)&&Number.isFinite(y))pointer={x,y};dragging=false},
+    pointerMove(x,y){
+      if(pointer&&Number.isFinite(x)&&Number.isFinite(y)
+        &&Math.hypot(x-pointer.x,y-pointer.y)>=dragThreshold)dragging=true;
       return null;
-    }
+    },
+    pointerUp(){pointer=null;dragging=false;return null}
   };
 }
-
 
 export function createRenderCadence({ idleHz = 30, activeHz = 60, overlayHz = 10 } = {}) {
   let last = -Infinity;
@@ -116,13 +99,15 @@ function __aquaverseMobile(){
 }
 function __aquaverseForceEffects(){return typeof location!=="undefined"&&new URLSearchParams(location.search).get("effects")==="on"}
 function __aquaverseInitialDpr(){
-  // Match the original game's full-res High DPR (up to 2x), never 1.5x.
-  return Math.max(1,Math.min(2,typeof window==="undefined"?2:window.devicePixelRatio||1));
+  const native=Math.max(1,typeof window==="undefined"?2:window.devicePixelRatio||1);
+  const limited=typeof navigator!=="undefined"&&(navigator.deviceMemory&&navigator.deviceMemory<=4||
+    navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4)?1.5:1.8;
+  return Math.max(1,Math.min(native,limited));
 }
 function __AquaverseSharpInteraction(){
   const renderer=zi(s=>s.gl),setDpr=zi(s=>s.setDpr),invalidate=zi(s=>s.invalidate);
   const full=__aquaverseInitialDpr();
-  const governor=B.useMemo(()=>__aquaverseMakeInteractionGovernor({max:full,min:Math.min(full,1.55)}),[full]);
+  const governor=B.useMemo(()=>__aquaverseMakeInteractionGovernor({max:full,min:Math.min(full,1)}),[full]);
   B.useEffect(()=>{
     if(Math.abs(renderer.getPixelRatio()-full)>.02)setDpr(full);
     const canvas=renderer.domElement;
@@ -142,10 +127,7 @@ function __AquaverseSharpInteraction(){
       if(next!==null)setDpr(next);
       if(governor.isDragging())invalidate();
     };
-    const onUp=()=>{
-      const next=governor.pointerUp();
-      if(next!==null)restore=requestAnimationFrame(()=>{restore=0;setDpr(next);invalidate()});
-    };
+    const onUp=()=>{governor.pointerUp();invalidate()};
     canvas.addEventListener("pointerdown",onDown,{passive:true});
     window.addEventListener("pointermove",onMove,{passive:true});
     window.addEventListener("pointerup",onUp,{passive:true});
@@ -160,10 +142,10 @@ function __AquaverseSharpInteraction(){
       if(restore)cancelAnimationFrame(restore);
     };
   },[renderer,setDpr,full,governor,invalidate]);
-  // Request only 30 frames/sec in idle High, but prioritize touch at 60 Hz.
-  // On-demand mode can still draw extra frames when app state invalidates.
+  // Target 60 fps while visible; let DPR adapt down and recover gradually.
+  // Throttle only frames fully obscured by an open modal.
   B.useEffect(()=>{
-    const cadence=__aquaverseMakeRenderCadence({idleHz:30,activeHz:60});
+    const cadence=__aquaverseMakeRenderCadence({idleHz:60,activeHz:60,overlayHz:12});
     let raf=0;
     const frame=now=>{
       if(document.visibilityState==="visible"){
@@ -176,7 +158,7 @@ function __AquaverseSharpInteraction(){
     return()=>cancelAnimationFrame(raf);
   },[invalidate,governor]);
   On(()=>{
-    if(typeof document!=="undefined"&&document.visibilityState!=="visible")return;
+    if(typeof document!=="undefined"&&document.visibilityState!=="visible"){governor.reset(performance.now());return}
     const next=governor.sample(performance.now());
     if(next!==null)setDpr(next);
   });
@@ -191,10 +173,10 @@ function __AquaverseSharpInteraction(){
       borderRadius:"7px",font:"12px/1.4 monospace",pointerEvents:"none"});
     document.body.appendChild(panel);
     const update=()=>{
-      const info=renderer.info.render,rate=governor.getFps();
-      panel.textContent="High GPU Lite | DPR "+renderer.getPixelRatio().toFixed(2)+
+      const info=renderer.info.render,rate=governor.getFps(),mem=renderer.info.memory;
+      panel.textContent="High Adaptive | DPR "+renderer.getPixelRatio().toFixed(2)+
         " | FPS "+(rate===null?"--":Math.round(rate))+
-        " | calls "+info.calls+" | triangles "+info.triangles+
+        " | calls "+info.calls+" | triangles "+info.triangles+" | geo "+mem.geometries+" tex "+mem.textures+
         " | "+(governor.isDragging()?"drag":"idle");
     };
     update();
@@ -256,5 +238,9 @@ export function patchAquariumBundle(source) {
     "):u.jsxs(jO,{multisampling:__aquaverseMobile()?0:4,children:[u.jsx(G0e",
     "):__aquaverseMobile()&&!__aquaverseForceEffects()?null:u.jsxs(jO,{multisampling:__aquaverseMobile()?0:4,children:[u.jsx(G0e",
     'skip full-screen expensive postprocess only for mobile High');
+  result=replaceExactlyOnce(result,
+    'q.frustumCulled=!1,q.userData.clusterIds=f.map(ie=>ie.clusterId),q',
+    'q.frustumCulled=__aquaverseMobile(),__aquaverseMobile()&&(q.computeBoundingSphere(),q.boundingSphere&&(q.boundingSphere.radius*=1.4)),q.userData.clusterIds=f.map(ie=>ie.clusterId),q',
+    'safe static foliage group bounds');
   return result;
 }
