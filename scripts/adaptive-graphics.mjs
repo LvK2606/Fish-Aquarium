@@ -101,8 +101,8 @@ function __AquaverseSharpInteraction(){
       if(e.isPrimary===false)return;
       if(restore)cancelAnimationFrame(restore);
       governor.pointerDown(e.clientX,e.clientY);
-      // A new gesture always begins from full-resolution High.
-      setDpr(governor.getDpr());
+      // Avoid state/renderer reconfiguration on taps already at full DPR.
+      if(Math.abs(renderer.getPixelRatio()-governor.getDpr())>.02)setDpr(governor.getDpr());
     };
     const onMove=e=>{
       if(e.isPrimary===false)return;
