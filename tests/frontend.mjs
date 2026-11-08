@@ -114,7 +114,25 @@ async function ready(page,path='/?moi=1&hocviec=0&hoithoai=0&luu=0'){
   await page.waitForFunction(()=>!document.querySelector('.aq-boot:not(.is-done)'),undefined,{timeout:60000});
   // The boot overlay is intentionally retained in the DOM and hidden by CSS.
   // Check the actual user-visible state, not DOM removal.
-  await page.locator('.aq-boot').waitFor({state:'hidden',timeout:15000});
+  // Two boot elements can exist: the legacy splash and the in-app transition.
+  // Their actual interaction/visibility is what matters, not whether either was removed.
+  const inactive = () => [...document.querySelectorAll('.aq-boot')].every(element => {
+    const style = getComputedStyle(element);
+    return style.display === 'none' || style.visibility === 'hidden' ||
+      style.pointerEvents === 'none';
+  });
+  try {
+    await page.waitForFunction(inactive,undefined,{timeout:15000});
+  } catch (error) {
+    const overlays=await page.locator('.aq-boot').evaluateAll(nodes=>nodes.map(node=>{
+      const style=getComputedStyle(node);
+      return {classes:node.className,ariaBusy:node.getAttribute('aria-busy'),
+        display:style.display,opacity:style.opacity,visibility:style.visibility,
+        pointerEvents:style.pointerEvents,zIndex:style.zIndex};
+    }));
+    console.error('Aquarium boot overlay diagnostics:',JSON.stringify(overlays));
+    throw error;
+  }
   assert.equal(await page.title(),'Aqualator');
   assert.ok(await page.locator('canvas').first().evaluate(canvas=>canvas.width>0&&canvas.height>0));
 }
