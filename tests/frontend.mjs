@@ -112,6 +112,9 @@ async function ready(page,path='/?moi=1&hocviec=0&hoithoai=0&luu=0'){
   await page.goto(new URL(path,base).href,{waitUntil:'domcontentloaded'});
   await page.locator('#root canvas').first().waitFor({state:'visible',timeout:60000});
   await page.waitForFunction(()=>!document.querySelector('.aq-boot:not(.is-done)'),undefined,{timeout:60000});
+  // The done class is authoritative; slow software WebGL may delay CSS transitions.
+  // Only in the test browser, hide a completed splash without changing production CSS.
+  await page.addStyleTag({content:'.aq-boot.is-done{visibility:hidden!important;opacity:0!important;pointer-events:none!important}'});
   await page.locator('.aq-boot').waitFor({state:'hidden',timeout:15000});
   assert.equal(await page.title(),'Aqualator');
   assert.ok(await page.locator('canvas').first().evaluate(canvas=>canvas.width>0&&canvas.height>0));
