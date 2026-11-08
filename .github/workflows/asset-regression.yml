@@ -33,3 +33,6 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Browser regression against optimized deployment assets
         run: CHROMIUM_PATH="$(node -p 'require("playwright").chromium.executablePath()')" npm run test:frontend:deploy
+
+      - name: Profile adaptive mobile High frame rate and Shop memory
+        run: CHROMIUM_PATH="$(node -p 'require("playwright").chromium.executablePath()')" npm run test:performance
